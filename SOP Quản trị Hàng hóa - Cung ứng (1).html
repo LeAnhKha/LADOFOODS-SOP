@@ -1,0 +1,1408 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
+<link rel="icon" href="data:,"/>
+<title>SOP Quản trị Hàng hóa — Cung ứng | Kho HCM01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f6f3; --surface:#ffffff; --surface2:#edf1ed; --surface3:#e6ebe6;
+  --ink:#18211c; --muted:#5e6d64; --line:#d9e0d9;
+  --accent:#0e5a4a; --accent-ink:#ffffff; --gold:#b7791f; --gold-bg:#fdf3d7;
+  --blue:#1f5f8b; --teal:#14907a; --orange:#c75b28; --red:#b42318; --green:#157347;
+  --chart1:#0e5a4a; --chart2:#b7791f; --chart3:#1f5f8b; --chart4:#c75b28; --chart5:#7a9a7e;
+  --radius:16px; --radius-sm:10px;
+  --shadow:0 4px 24px rgba(20,40,30,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#111613; --surface:#1a211d; --surface2:#222b26; --surface3:#2a352f;
+    --ink:#e9f0ea; --muted:#9db0a3; --line:#2e3a33;
+    --accent:#2fb99a; --accent-ink:#0c1f1a; --gold:#e3a93c; --gold-bg:#2e2612;
+    --blue:#5aa0d6; --teal:#3ec9a7; --orange:#e07a4a; --red:#f08080; --green:#4ade9e;
+    --chart1:#3ec9a7; --chart2:#e3a93c; --chart3:#5aa0d6; --chart4:#e07a4a; --chart5:#8fb996;
+    --shadow:0 4px 24px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important} }
+body{margin:0;font-family:"Be Vietnam Pro",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:15.5px}
+a{color:var(--accent);text-decoration:none}
+button,[role="button"],select,input,summary{min-height:40px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px 56px}
+.topbar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.topbar a{font-size:13px;font-weight:600;color:var(--ink);padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.topbar a:hover{border-color:var(--accent);color:var(--accent)}
+.hero{padding:30px 0 8px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent);background:var(--surface);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+h1{font-family:"Fraunces",serif;font-size:clamp(30px,5vw,46px);line-height:1.08;margin:16px 0 12px;letter-spacing:-.02em}
+.lead{font-size:17px;color:var(--muted);max-width:780px;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{font-size:13px;font-weight:600;padding:8px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.chip b{color:var(--accent)}
+.notice{margin-top:20px;background:var(--gold-bg);border:1px solid color-mix(in srgb,var(--gold) 35%,var(--line));border-radius:var(--radius);padding:16px 18px;display:flex;gap:14px}
+.notice strong{color:var(--gold)}
+.notice p{margin:4px 0 0;color:var(--ink);font-size:14.5px}
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:22px}
+@media(max-width:1000px){.kpi-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.kpi label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;display:block}
+.kpi .num{font-size:27px;font-weight:800;letter-spacing:-.03em;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:13px;color:var(--muted)}
+.delta{font-weight:700;font-size:12.5px;padding:2px 7px;border-radius:999px;display:inline-block;margin-top:6px}
+.up{color:var(--green);background:color-mix(in srgb,var(--green) 12%,transparent)}
+.down{color:var(--red);background:color-mix(in srgb,var(--red) 10%,transparent)}
+.neutral{color:var(--muted);background:var(--surface2)}
+section{margin-top:30px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.sec-head h2{font-size:22px;margin:0;letter-spacing:-.02em}
+.sec-head p{margin:4px 0 0;color:var(--muted);font-size:14px;max-width:700px}
+.badge{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);padding:6px 10px;border-radius:999px;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+@media(max-width:860px){.grid2,.grid3{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 6px;font-size:16px}
+.card p.desc{margin:0 0 14px;color:var(--muted);font-size:13.5px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--muted);margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.bar-row{display:grid;grid-template-columns:150px 1fr 64px;gap:10px;align-items:center;margin:10px 0;font-size:13.5px}
+.bar-track{height:10px;background:var(--surface2);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;border-radius:999px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:10px 8px;border-bottom:2px solid var(--line)}
+td{padding:11px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.numr{text-align:right;font-variant-numeric:tabular-nums}
+.pill{font-size:12px;font-weight:700;padding:4px 8px;border-radius:999px;white-space:nowrap;display:inline-block}
+.pill-ok{background:color-mix(in srgb,var(--green) 13%,transparent);color:var(--green)}
+.pill-warn{background:var(--gold-bg);color:var(--gold)}
+.pill-bad{background:color-mix(in srgb,var(--red) 10%,transparent);color:var(--red)}
+.pill-mut{background:var(--surface2);color:var(--muted)}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:1000px){.flow{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.flow{grid-template-columns:1fr}}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.flow .step label{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;display:block}
+.flow .step .v{font-size:23px;font-weight:800;letter-spacing:-.02em;margin:4px 0 2px;font-variant-numeric:tabular-nums}
+.flow .step p{margin:0;font-size:12.5px;color:var(--muted)}
+.progress{height:9px;background:var(--surface2);border-radius:999px;overflow:hidden;margin-top:8px}
+.progress i{display:block;height:100%;background:var(--accent);border-radius:999px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.toolbar input,.toolbar select{flex:1;min-width:170px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px}
+.toolbar label{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;padding:6px 4px}
+.toolbar label input{min-height:auto;width:20px;height:20px;accent-color:var(--accent)}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:1000px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+.step2{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.step2 .n{width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:800;margin-bottom:10px}
+.step2 h3{font-size:15px;margin:0 0 6px}.step2 p{font-size:13.5px;color:var(--muted);margin:0}
+.checklist{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.checklist li{display:flex;gap:10px;align-items:flex-start;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px}
+.checklist li::before{content:"✓";width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:13px;font-weight:800;margin-top:1px}
+.formula{background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:14px}
+.formula code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;display:block;margin-top:6px;color:var(--accent);word-break:break-word}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 16px;margin-bottom:10px}
+details summary{cursor:pointer;font-weight:700;padding:10px 0}
+details p,details li{color:var(--muted);font-size:14px}
+.footer{margin-top:28px;padding:18px;border-radius:var(--radius);background:var(--ink);color:var(--bg)}
+.footer p{margin:0;opacity:.9;font-size:14px}
+.small{font-size:12.5px;color:var(--muted)}
+.svgwrap{width:100%;overflow:hidden}
+svg text{font-family:"Be Vietnam Pro",sans-serif}
+.insight{border-left:4px solid var(--gold);background:var(--gold-bg);padding:12px 14px;border-radius:0 12px 12px 0;font-size:14px;margin-top:14px}
+.insight.red{border-left-color:var(--red);background:color-mix(in srgb,var(--red) 7%,var(--surface))}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.sku-name{font-weight:600}
+.mono{font-variant-numeric:tabular-nums;white-space:nowrap}
+.upload-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:860px){.upload-grid{grid-template-columns:1fr}}
+.upload-steps{margin:0 0 12px;padding-left:20px;font-size:14.5px;display:grid;gap:6px}
+.upload-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);font:inherit;font-size:14.5px;font-weight:700;cursor:pointer;min-height:44px}
+.btn:hover{filter:brightness(1.07)}
+.btn-ghost{background:var(--surface);color:var(--accent)}
+.btn-ghost:hover{border-color:var(--accent);filter:none;background:var(--surface2)}
+.dropzone{border:2px dashed var(--line);border-radius:var(--radius);padding:24px 18px;text-align:center;background:var(--surface2);transition:border-color .15s,background .15s}
+.dropzone.drag{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface2))}
+.dropzone p{margin:8px 0}
+.dropzone .dz-arrow{font-size:30px;line-height:1;color:var(--accent);font-weight:800}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.upload-status{margin-top:12px;border-radius:12px;padding:13px 15px;font-size:14px;border:1px solid var(--line);background:var(--surface2)}
+.upload-status.ok{border-color:color-mix(in srgb,var(--green) 45%,var(--line));background:color-mix(in srgb,var(--green) 8%,var(--surface))}
+.upload-status.err{border-color:color-mix(in srgb,var(--red) 45%,var(--line));background:color-mix(in srgb,var(--red) 7%,var(--surface))}
+.upload-status b{font-variant-numeric:tabular-nums}
+.cell-edit{width:88px;padding:6px 8px;text-align:right;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-size:13.5px;min-height:34px;font-variant-numeric:tabular-nums}
+.cell-edit:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+td .cell-edit{margin:-4px 0}
+@media(max-width:720px){ .opt{display:none} }
+@media(max-width:640px){
+  .card{padding:16px 14px}
+  table{font-size:12.5px}
+  th,td{padding:8px 5px}
+  th{font-size:10.5px;letter-spacing:.02em}
+  .bar-row{grid-template-columns:118px 1fr 52px;font-size:12.5px}
+}
+
+.kpi .guide{margin-top:9px;font-size:12.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:9px;line-height:1.55}
+.kpi .guide b{color:var(--ink)}
+.metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:860px){.metric-grid{grid-template-columns:1fr}}
+.metric{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+.metric h3{margin:0 0 2px;font-size:15.5px}
+.metric .f{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--accent);display:block;margin:5px 0 8px;word-break:break-word}
+.metric p{margin:0 0 6px;font-size:13.5px;color:var(--muted)}
+.metric p:last-child{margin-bottom:0}
+.metric p b{color:var(--ink)}
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:1000px){.steps3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps3{grid-template-columns:1fr}}
+.role-tag{font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent);white-space:nowrap;display:inline-block}
+.storage-box{margin-top:12px;border-radius:12px;padding:13px 15px;font-size:14px;border:1px solid color-mix(in srgb,var(--blue) 40%,var(--line));background:color-mix(in srgb,var(--blue) 6%,var(--surface))}
+.param-box{border:1px solid color-mix(in srgb,var(--accent) 45%,var(--line));background:color-mix(in srgb,var(--accent) 6%,var(--surface));border-radius:12px;padding:16px 18px;margin-bottom:20px}
+.param-box h3{margin:0 0 4px;font-size:16px}
+.param-box p{margin:0;font-size:14px;color:var(--muted)}
+.param-box p b,.param-box p strong{color:var(--ink)}
+.param-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;margin-top:14px;align-items:end}
+@media(max-width:720px){.param-grid{grid-template-columns:1fr}}
+.param-field label{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:6px}
+.param-field input[type="date"]{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;font-weight:600;min-height:44px}
+.param-field input[type="date"]:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.param-current{font-size:14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;min-height:44px;display:flex;align-items:center}
+.param-current b{color:var(--accent);white-space:nowrap}
+.ship-edit{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13.5px;font-weight:600;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 8px 6px 14px}
+.ship-edit input[type="date"]{border:1px solid var(--line);border-radius:999px;background:var(--surface2);color:var(--ink);font:inherit;font-size:13.5px;font-weight:700;padding:6px 10px;min-height:36px}
+.ship-edit input[type="date"]:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="topbar" aria-label="Điều hướng nhanh">
+  <div class="topbar-in">
+    <a href="#sop">SOP</a><a href="#huong-dan">Hướng dẫn sử dụng</a><a href="#cap-nhat">Cập nhật số liệu</a><a href="#tong-quan">Tổng quan</a><a href="#tu-dien">Từ điển chỉ số</a><a href="#luu-tru">Lưu trữ &amp; triển khai nội bộ</a><a href="#canh-bao">Cảnh báo MIN–ROP</a><a href="#dong-hang">Theo dòng hàng</a><a href="#ve-kho">Chuyến về kho</a><a href="#ban-cham">Hàng bán chậm / Clear kho</a><a href="#tra-cuu">Tra cứu SKU</a><a href="#quy-dinh">Quy định tồn kho</a><a href="#viec-can-lam">Việc cần làm</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero" id="tong-quan">
+    <span class="eyebrow">SOP • Quản trị hàng hóa — Cung ứng • Bộ phận Điều phối</span>
+    <h1>SOP Quản trị Hàng hóa — Cung ứng<br>Kho Hồ Chí Minh (HCM01)</h1>
+    <p class="lead">Tài liệu vận hành chuẩn (SOP) kèm dashboard trực tiếp cho kho HCM01: mục đích, vai trò phụ trách, cách cập nhật số liệu, cách đọc từng chỉ số kèm hành động tiếp theo — theo Quy định quản trị hàng tồn kho 1.11.26 của MTV Ladofoods. Số liệu đang hiển thị là kỳ mẫu <span class="js-period">tháng 11/2026</span>: nhu cầu còn lại theo FC, vị trí tồn so với MIN và ROP, chuyến hàng về ngày <span class="js-ship">20/11</span> và danh sách mã còn thiếu phải xử lý tiếp. Ngày về kho ở đây là <b>tham số có thể cập nhật</b> ở mục <a href="#tham-so-ve-kho">Cập nhật số liệu</a> — không phải mốc cố định của SOP.</p>
+    <div class="meta">
+      <span class="chip">Kho áp dụng: <b>HCM01 — Kho hàng hóa Hồ Chí Minh</b></span>
+      <span class="chip">Kỳ: <b id="chip-period">Tháng 11/2026</b></span>
+      <span class="chip">Chốt số liệu: <b id="chip-asof">19/11/2026</b></span>
+      <span class="chip">Ngày về kho (tham số): <b id="chip-ship">20/11/2026</b></span>
+      <span class="chip">Thời gian cung ứng: <b>5 ngày</b></span>
+      <span class="chip">Vai trò chủ trì: <b>Trưởng BP Điều phối</b></span><span class="chip">Dạng tài liệu: <b>SOP + Dashboard trực tiếp</b></span>
+    </div>
+    <div class="notice" role="note">
+      <div style="font-size:22px;line-height:1">◉</div>
+      <div><strong>Cách đọc nhanh trong 30 giây</strong><p>Nhìn 6 chỉ số ở hàng đầu tiên (ý nghĩa và hành động ghi ngay dưới mỗi chỉ số), sau đó xuống mục <b>Cảnh báo MIN–ROP</b> để biết sau chuyến về <span class="js-ship">20/11</span> còn bao nhiêu mã thiếu, mục <b>Hàng bán chậm / Clear kho</b> để biết vốn đang đọng ở chiều ngược lại, và mục <b>Việc cần làm</b> ở cuối trang để chốt hành động. Mọi con số lấy từ file cung ứng — sheet “CUNG ỨNG VỀ KHO HCM T11” và sheet “DASHBOARD CUNG ỨNG T11” — và tính theo đúng công thức của Quy định 1.11.26, không tính lại theo cách khác.</p></div>
+    </div>
+
+    <div class="kpi-grid" id="kpi-grid" aria-label="Chỉ số tổng quan kho HCM01">
+      <article class="kpi"><label>Mã có nhu cầu</label><div class="num">144</div><div class="sub">trên 189 mã trong danh mục kho HCM</div><span class="delta neutral">FC + FCBS + MIN &gt; 0</span><div class="guide"><b>Ý nghĩa:</b> phạm vi thật sự phải quản trị trong kỳ. <b>Hành động:</b> mã không có nhu cầu mà còn tồn thì đưa sang diện hàng bán chậm, không đặt thêm.</div></article>
+      <article class="kpi"><label>Nhu cầu còn lại</label><div class="num">42.623</div><div class="sub">chai / đơn vị — FC − đã xuất + FCBS</div><span class="delta down">Vang Đà Lạt chiếm 46,5%</span></article>
+      <article class="kpi"><label>Tồn khả dụng HCM01</label><div class="num">78.320</div><div class="sub">đã trừ SO / YCCH đang giữ</div><span class="delta neutral">Tồn / nhu cầu: 1,84 lần</span><div class="guide"><b>Ý nghĩa:</b> hàng thật bán được sau khi trừ phần đang giữ cho đơn. <b>Hành động:</b> tồn cao mà vẫn nhiều mã thiếu nghĩa là lệch cơ cấu — đối chiếu ngay mục Cảnh báo MIN–ROP.</div></article>
+      <article class="kpi"><label>Mã cần về kho 20/11</label><div class="num">30</div><div class="sub">chiếm 21% số mã có nhu cầu</div><span class="delta down">Đề xuất công thức: 44.980</span></article>
+      <article class="kpi"><label>Lượng về kho 20/11</label><div class="num">10.960</div><div class="sub">1.925 thùng • tải trọng 18.156 kg</div><span class="delta down">Chỉ bằng 24,4% đề xuất</span></article>
+      <article class="kpi"><label>Đạt sau cung ứng</label><div class="num">54,2%</div><div class="sub">78 mã đạt FC + FCBS + MIN</div><span class="delta down">Còn 43 mã thiếu</span></article>
+    </div>
+  </header>
+  <section id="sop" aria-label="Quy trình vận hành chuẩn">
+    <div class="sec-head">
+      <div><h2>Phần 1 — Quy trình vận hành chuẩn (SOP)</h2><p>Phần này quy định cách vận hành quản trị hàng hóa tại kho HCM01. Phần dashboard ở các mục dưới là công cụ thực hiện SOP này: mọi con số và cảnh báo đều sinh ra từ các công thức và ngưỡng quy định tại đây.</p></div>
+      <span class="badge">Căn cứ: Quy định tồn kho 1.11.26</span>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <h3>Mục đích</h3>
+        <p class="desc" style="margin-bottom:0">Chuẩn hóa cách theo dõi và quyết định cung ứng theo từng SKU tại kho HCM01, nhằm: (1) không để thiếu hàng ở mã chủ lực và mã có nhu cầu đã xác nhận; (2) không để vốn đọng ở hàng bán chậm; (3) mọi quyết định về kho đều truy vết được về FC, MIN và ROP — không quyết theo cảm tính hay theo tổng tồn của kho.</p>
+      </div>
+      <div class="card">
+        <h3>Phạm vi áp dụng</h3>
+        <p class="desc" style="margin-bottom:0">Kho HCM01 (VMHCM01 — Kho hàng hóa Hồ Chí Minh), toàn bộ mã hàng trong danh mục kho (kỳ mẫu tháng 11/2026: 189 mã, 14 dòng hàng). Chu kỳ áp dụng: theo tháng, rà soát theo từng chuyến về kho. Các kho khác áp dụng cùng cấu trúc và công thức khi có FC, MIN, ROP và tồn riêng của kho đó.</p>
+      </div>
+      <div class="card">
+        <h3>Nguyên tắc bắt buộc</h3>
+        <ul class="upload-steps" style="margin-bottom:0">
+          <li>Tính theo <b>từng SKU, từng kho</b> — không dùng tổng tồn để kết luận đủ hay thiếu.</li>
+          <li>Ưu tiên 1: về đủ <b>FC + FCBS</b>, kể cả khi tồn đã trên ROP.</li>
+          <li>Tồn dưới ROP: về đủ <b>FC + FCBS + MIN</b>, làm tròn lên đủ thùng.</li>
+          <li>Hàng bán chậm và hàng gần hết hạn: <b>không đặt thêm chỉ vì dưới ROP</b>.</li>
+          <li>Mọi điều chỉnh ngoài công thức phải có lý do, vai trò phê duyệt và thời hạn.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>Vai trò và trách nhiệm theo chức danh</h3>
+      <p class="desc">Phân công theo chức danh, không gắn với cá nhân cụ thể — người đảm nhiệm chức danh nào thì thực hiện phần việc của chức danh đó.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Chức danh</th><th>Trách nhiệm trong quy trình</th><th>Đầu ra / thời hạn</th></tr></thead>
+        <tbody>
+          <tr><td><span class="role-tag">Trưởng BP Điều phối</span></td><td>Chủ trì rà soát cung ứng; chốt đề xuất lượng về kho theo công thức; trình phê duyệt các ngoại lệ; theo dõi tỷ lệ mã đạt sau cung ứng và danh sách mã thiếu.</td><td>Danh sách chuyến về đã chốt; báo cáo rà soát theo kỳ</td></tr>
+          <tr><td><span class="role-tag">Nhân viên Điều phối</span></td><td>Cập nhật file cung ứng (FC, FCBS, tồn, nhập, xuất, số chốt về kho); tải file lên dashboard; rà soát cảnh báo MIN–ROP và hàng bán chậm; lập danh sách mã cần xử lý.</td><td>File cung ứng đúng cấu trúc; dashboard cập nhật sau mỗi lần chốt chuyến</td></tr>
+          <tr><td><span class="role-tag">Kinh doanh / phụ trách kênh</span></td><td>Cung cấp FC tháng và FC bổ sung (FCBS) có xác nhận; phản hồi khi nhận thông báo mã hết tồn hoặc thiếu sâu để khóa nhận đơn kịp thời.</td><td>FC tháng n+1 gửi trước ngày 25 hằng tháng</td></tr>
+          <tr><td><span class="role-tag">Nhà máy / cung ứng sản xuất</span></td><td>Xác nhận khả năng đáp ứng theo đề xuất công thức: sản lượng, bán thành phẩm, vật tư và ngày hàng về kho.</td><td>Phản hồi khả năng đáp ứng và ngày về cho từng chuyến</td></tr>
+          <tr><td><span class="role-tag">Quản lý phê duyệt</span></td><td>Phê duyệt lượng đặt ngoài công thức, ngoại lệ tồn kho và phương án xử lý hàng bán chậm / clear kho.</td><td>Quyết định phê duyệt kèm lý do và thời hạn áp dụng</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>Chu kỳ vận hành trong một tháng</h3>
+      <div class="steps" style="margin-top:12px">
+        <div class="step2"><div class="n">1</div><h3>Đầu kỳ — nhận FC</h3><p>Nhận FC tháng và FCBS từ Kinh doanh; đối chiếu MIN, ROP theo Quy định 1.11.26 cho từng SKU.</p></div>
+        <div class="step2"><div class="n">2</div><h3>Trong kỳ — theo chuyến về</h3><p>Mỗi lần chốt một chuyến về kho: cập nhật số chốt, đặt lại <b>ngày về kho</b> ở mục Cập nhật số liệu cho đúng chuyến đang xét, tải lại file lên dashboard, đọc lại cảnh báo sau cung ứng. Ngày về kho là tham số của từng chuyến, không cố định theo một ngày trong tháng.</p></div>
+        <div class="step2"><div class="n">3</div><h3>Xử lý cảnh báo</h3><p>Mã mức 1 xử lý theo thứ tự thiếu giảm dần; mã bán chậm nhóm đỏ ngừng về thêm và đối chiếu hạn dùng.</p></div>
+        <div class="step2"><div class="n">4</div><h3>Trước ngày 25 — FC tháng sau</h3><p>Gửi FC tháng n+1 để Nhà máy kịp chuyển đổi bán thành phẩm thành thành phẩm cho kỳ sau.</p></div>
+        <div class="step2"><div class="n">5</div><h3>Cuối kỳ — chốt số</h3><p>Chốt tỷ lệ mã đạt, danh sách mã thiếu chuyển kỳ và danh sách clear; xuất file Excel lưu hồ sơ kỳ.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="huong-dan" aria-label="Hướng dẫn sử dụng dashboard">
+    <div class="sec-head">
+      <div><h2>Phần 2 — Hướng dẫn sử dụng dashboard</h2><p>Dashboard chạy ngay trên trình duyệt, không cần cài đặt. Có hai cách đưa số liệu vào: tải file Excel lên, hoặc sửa số trực tiếp trên bảng SKU. Cả hai cách đều làm toàn bộ chỉ số tính lại ngay lập tức.</p></div>
+      <span class="badge">Không cần cài phần mềm</span>
+    </div>
+    <div class="steps3">
+      <div class="step2"><div class="n">1</div><h3>Chuẩn bị file cung ứng</h3><p>Trong file Excel cung ứng, cập nhật FC, FC bổ sung, tồn, nhập, xuất và số chốt về kho ở sheet “CUNG ỨNG VỀ KHO HCM”. Giữ nguyên tên sheet và cấu trúc cột như file mẫu tháng 11/2026 — dashboard nhận diện dữ liệu theo cấu trúc này.</p></div>
+      <div class="step2"><div class="n">2</div><h3>Kéo thả file vào ô tải lên</h3><p>Xuống mục <a href="#cap-nhat">Cập nhật số liệu</a>, kéo thả file vào ô có viền đứt nét hoặc bấm nút “Chọn file .xlsx / .xls”. File chỉ được đọc ngay trong trình duyệt. Đọc xong, trang cuộn về đầu và hiện thông báo số mã đã đọc, kỳ và ngày chốt số liệu.</p></div>
+      <div class="step2"><div class="n">3</div><h3>Đặt ngày về kho và kiểm tra nhãn nguồn</h3><p>Ngày về kho <b>không cố định</b>: ở mục <a href="#tham-so-ve-kho">Cập nhật số liệu</a>, chọn lại ngày trong ô “Ngày về kho của chuyến đang xét” — khi tải file mới, ngày tự lấy theo tiêu đề cột Về kho trong file; sửa tay tại ô này sẽ ghi đè và được lưu lại. Sau đó kiểm tra nhãn nguồn số liệu ở góc phải mục đó và nhãn lưu trữ bên dưới.</p></div>
+      <div class="step2"><div class="n">4</div><h3>Sửa số trực tiếp khi cần sửa nhanh</h3><p>Ở mục <a href="#tra-cuu">Tra cứu SKU</a>, hai cột <b>Tồn</b> và <b>Về kho</b> là ô nhập liệu: bấm vào ô, gõ số mới, bấm ra ngoài hoặc nhấn Enter. Nhu cầu còn lại, ROP, đề xuất, cảnh báo và mọi biểu đồ tự tính lại ngay — không cần tải lại file.</p></div>
+      <div class="step2"><div class="n">5</div><h3>Đọc dashboard theo đúng thứ tự</h3><p>Đọc lần lượt: 6 chỉ số tổng quan → dòng chảy cung ứng → cảnh báo MIN–ROP → theo dòng hàng → chuyến về kho → hàng bán chậm → việc cần làm. Ý nghĩa và hành động của từng chỉ số có ở <a href="#tu-dien">Từ điển chỉ số</a> và ghi ngay dưới mỗi chỉ số tổng quan.</p></div>
+      <div class="step2"><div class="n">6</div><h3>Lưu hồ sơ và khôi phục khi cần</h3><p>Số liệu đã tải lên hoặc sửa tay được tự lưu trên thiết bị đang dùng (xem mục <a href="#luu-tru">Lưu trữ và triển khai nội bộ</a>). Cần lưu hồ sơ chính thức: bấm “Tải xuống file Excel hiện tại”. Cần quay về số mẫu: bấm “Khôi phục số gốc T11/2026”.</p></div>
+    </div>
+  </section>
+
+
+  <section id="cap-nhat" aria-label="Cập nhật số liệu">
+    <div class="sec-head">
+      <div><h2>Cập nhật số liệu — tải file lên là dashboard chạy theo</h2><p>Khi có file cung ứng tháng mới, chỉ cần tải file lên đây: toàn bộ chỉ số, cảnh báo MIN–ROP, chuyến về kho và hàng bán chậm tự tính lại ngay trên trang, theo đúng công thức trong file gốc và Quy định 1.11.26. Địa chỉ trang không đổi.</p></div>
+      <span class="badge" id="data-source-badge">Đang xem: số liệu gốc tháng 11/2026</span>
+    </div>
+    <div class="card">
+      <div class="param-box" id="tham-so-ve-kho">
+        <h3>Tham số ngày về kho — nhập tay được, không cố định theo ngày 20/11</h3>
+        <p><b>Có cần sửa lại chỗ “về kho 20/11” không? Có — và trang này đã sửa theo cách sau:</b> 20/11/2026 chỉ là ngày của chuyến về trong <b>kỳ mẫu tháng 11/2026</b> (lấy từ tiêu đề cột Về kho của file mẫu), không phải mốc thời gian cố định của SOP. Từ nay, ngày về kho là một <b>tham số của chuyến đang xét</b>: chọn ngày mới ở ô dưới đây là mọi nhãn ngày trên trang — thẻ KPI, dòng chảy cung ứng, cảnh báo MIN–ROP, bảng theo dòng hàng, tiêu đề chuyến về, cột “Về …” và bộ lọc ở Tra cứu SKU — tự đổi theo ngay, không cần tải lại file và không cần sửa lại trang.</p>
+        <div class="param-grid">
+          <div class="param-field">
+            <label for="param-ship-date">Ngày về kho của chuyến đang xét</label>
+            <input type="date" id="param-ship-date" class="ship-date-input" value="2026-11-20">
+          </div>
+          <div class="param-field">
+            <label for="param-asof-date">Ngày chốt số liệu (điểm tính “đã xuất đến…”)</label>
+            <input type="date" id="param-asof-date" value="2026-11-19">
+          </div>
+          <div class="param-current">Đang áp dụng:&nbsp;<b id="param-ship-display">Về 20/11/2026</b></div>
+        </div>
+        <p style="margin-top:12px"><b>Thứ tự ưu tiên của ngày về kho:</b> (1) khi tải file cung ứng mới lên, ngày tự lấy theo tiêu đề cột “Về kho …” trong file — file không ghi ngày thì mặc định là ngày hôm sau ngày chốt số liệu; (2) sửa tay tại ô này (hoặc ô ngày ngay ở mục <a href="#ve-kho">Chuyến về kho</a>) sẽ <b>ghi đè</b> ngày lấy từ file. <b>Lưu ý:</b> đổi ngày chỉ đổi <b>nhãn ngày</b> của chuyến về — chính là lượng ở cột Về kho trong file / cột Về kho sửa tay ở mục Tra cứu SKU — <b>không tự đổi số lượng</b>; lượng về của chuyến mới vẫn sửa ở cột Về kho như thường lệ. Ngày đã sửa được tự lưu trên thiết bị đang dùng cùng bản số liệu, mở lại trang vẫn giữ đúng ngày đó; bấm “Khôi phục số gốc T11/2026” sẽ đưa ngày về lại 20/11/2026 của kỳ mẫu.</p>
+      </div>
+      <div class="upload-grid">
+        <div>
+          <h3 style="margin-top:0">Cách cập nhật — 3 bước trực quan</h3>
+          <ol class="upload-steps">
+            <li><b>Bước 1 — Chuẩn bị file như thường lệ:</b> cập nhật FC, FC bổ sung, tồn, nhập, xuất và số chốt về kho trong sheet “CUNG ỨNG VỀ KHO HCM” — giữ nguyên cấu trúc cột và tên sheet như file tháng 11.</li>
+            <li><b>Bước 2 — Tải file lên</b> ở ô bên cạnh: kéo thả file vào ô viền đứt nét hoặc bấm “Chọn file”. Trang đọc sheet cung ứng và tự tính lại nhu cầu còn lại, MIN–ROP, cảnh báo trước/sau cung ứng, đề xuất theo công thức và phân loại hàng bán chậm.</li>
+            <li><b>Bước 3 — Kiểm tra ngày về kho rồi đọc dashboard như bình thường.</b> Kỳ, ngày chốt số liệu và ngày về kho trên trang tự đổi theo file vừa tải; nếu ngày về trong file chưa đúng với chuyến thực tế, sửa tay ngay tại ô tham số phía trên — ngày sửa tay được ưu tiên hơn ngày trong file. Số liệu vừa tải được tự lưu trên thiết bị đang dùng để lần mở sau không phải tải lại.</li>
+          </ol>
+          <p class="small" style="margin:0">Không cần file mới vẫn sửa nhanh được: trong mục <a href="#tra-cuu">Tra cứu SKU</a>, hai ô <b>Tồn</b> và <b>Về kho</b> gõ số trực tiếp — sửa xong là mọi chỉ số trên trang chạy lại theo. File chỉ được đọc ngay trong trình duyệt, không gửi lên máy chủ; số liệu sau khi tải lên hoặc sửa tay được <b>tự lưu trên chính thiết bị đang dùng</b> (bộ nhớ trình duyệt), nên đóng trang rồi mở lại vẫn thấy đúng số đó. Lưu ý: bản lưu này gắn với từng thiết bị và trình duyệt, chưa đồng bộ giữa các máy — cần bản hồ sơ chính thức thì bấm nút tải xuống Excel bên dưới.</p>
+          <div class="upload-actions">
+            <button class="btn btn-ghost" id="btn-export" type="button">Tải xuống file Excel hiện tại</button>
+            <button class="btn btn-ghost" id="btn-reset" type="button">Khôi phục số gốc T11/2026</button>
+            <button class="btn btn-ghost" id="btn-clear-storage" type="button">Xóa dữ liệu đã lưu trên thiết bị này</button>
+          </div>
+          <div class="storage-box" id="storage-note">Đang kiểm tra dữ liệu đã lưu trên thiết bị này…</div>
+        </div>
+        <div>
+          <div class="dropzone" id="dropzone">
+            <div class="dz-arrow" aria-hidden="true">↑</div>
+            <p><strong>Kéo thả file Excel vào đây</strong></p>
+            <label class="btn" for="file-input">Chọn file .xlsx / .xls</label>
+            <input class="sr-only" id="file-input" type="file" accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+            <p class="small">Đọc sheet “CUNG ỨNG VỀ KHO HCM” — các sheet khác trong file (FC, MIN–ROP, tồn kho) đã được phản ánh sẵn trong sheet này nên không cần tải riêng.</p>
+          </div>
+          <div class="upload-status" id="upload-status" hidden></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Dòng chảy cung ứng tháng 11">
+    <div class="sec-head">
+      <div><h2>Dòng chảy cung ứng tháng 11 — từ FC đến tồn sau chuyến về</h2><p>Năm con số nối nhau thành một câu chuyện: kế hoạch bán bao nhiêu, đã bán bao nhiêu, còn phải lo bao nhiêu và chuyến về <span class="js-ship">20/11</span> bù được bao nhiêu.</p></div>
+      <span class="badge">Đơn vị: chai / ĐVT</span>
+    </div>
+    <div class="flow" id="flow-steps">
+      <div class="step"><label>1 · FC tháng 11 (kho HCM)</label><div class="v">77.931</div><p>Cộng FC bổ sung (FCBS) 10.120 → tổng nhu cầu kế hoạch 88.051.</p></div>
+      <div class="step"><label>2 · Đã xuất đến 19/11</label><div class="v">50.857</div><p>Đã nhập trong tháng 71.114. Xuất đạt 57,8% tổng nhu cầu kế hoạch khi tháng còn 11 ngày.</p></div>
+      <div class="step"><label>3 · Nhu cầu còn lại</label><div class="v">42.623</div><p>FC − xuất + FCBS, tính theo từng SKU và chỉ cộng phần còn dương.</p></div>
+      <div class="step"><label>4 · Về kho ngày 20/11</label><div class="v">10.960</div><p>30 mã, 1.925 thùng, 18.156 kg. Đây là số chốt thực tế ở cột O, không phải số đề xuất.</p></div>
+      <div class="step"><label>5 · Tồn sau cung ứng</label><div class="v">89.280</div><p>Tồn khả dụng 78.320 + hàng về 10.960. Tổng tồn cao nhưng lệch cơ cấu — xem cảnh báo bên dưới.</p></div>
+    </div>
+    <div class="insight" id="flow-insight"><strong>Điểm cần nhớ:</strong> tổng tồn sau cung ứng (89.280) cao hơn tổng MIN (55.930) và ROP (69.463), nhưng vẫn còn 43 mã thiếu. Vấn đề của kho HCM01 tháng này không phải thiếu hàng tổng thể, mà là <strong>lệch cơ cấu</strong>: hàng dồn ở mã chậm, trong khi mã chủ lực Vang Đà Lạt Classic thiếu sâu. Đừng đọc dashboard này bằng con số tổng.</div>
+  </section>
+
+  
+  <section id="tu-dien" aria-label="Từ điển chỉ số">
+    <div class="sec-head">
+      <div><h2>Từ điển chỉ số — ý nghĩa và hành động tiếp theo</h2><p>Mỗi chỉ số trên dashboard đều có công thức, ý nghĩa quản trị và hành động bắt buộc đi kèm. Khi một chỉ số biến động bất thường, hành động ở cột này là bước xử lý đầu tiên trước khi báo cáo lên cấp phê duyệt.</p></div>
+      <span class="badge">12 chỉ số chuẩn</span>
+    </div>
+    <div class="metric-grid"><div class="metric"><h3>1 · Mã có nhu cầu</h3><span class="f">FC + FCBS + MIN &gt; 0</span><p><b>Ý nghĩa:</b> Số mã thật sự phải quản trị trong kỳ trên tổng số mã danh mục. Đây là mẫu số của mọi tỷ lệ đánh giá — kỳ mẫu: 144 trên 189 mã.</p><p><b>Hành động tiếp theo:</b> Mã không có nhu cầu nhưng còn tồn: chuyển sang diện theo dõi hàng bán chậm, không đặt thêm. Mã có nhu cầu mới phát sinh: bổ sung FC và MIN trước khi đề xuất về kho.</p></div><div class="metric"><h3>2 · Nhu cầu còn lại</h3><span class="f">Σ max(FC − đã xuất, 0) + Σ FCBS, tính theo từng SKU</span><p><b>Ý nghĩa:</b> Phần nhu cầu kế hoạch chưa được đáp ứng — áp lực cung ứng thật còn lại của kỳ. Kỳ mẫu: 42.623 đơn vị, trong đó dòng Vang Đà Lạt chiếm 46,5%.</p><p><b>Hành động tiếp theo:</b> Ưu tiên nguồn về cho dòng và mã chiếm tỷ trọng nhu cầu lớn nhất trước. Nếu nhu cầu còn lại không giảm sau nhiều ngày, rà soát lại tốc độ xuất và tính khả thi của FC.</p></div><div class="metric"><h3>3 · Tồn khả dụng</h3><span class="f">Tồn kho thực tế − lượng đang giữ cho đơn SO / YCCH</span><p><b>Ý nghĩa:</b> Lượng hàng thật sự bán được ngay tại kho. So với nhu cầu còn lại cho thấy bức tranh tổng: kỳ mẫu tồn bằng 1,84 lần nhu cầu — nhưng vẫn thiếu ở từng mã cụ thể.</p><p><b>Hành động tiếp theo:</b> Không kết luận “đủ hàng” từ con số tổng. Tồn cao kèm nhiều mã thiếu nghĩa là lệch cơ cấu: đối chiếu ngay với cảnh báo MIN–ROP và danh sách mã thiếu.</p></div><div class="metric"><h3>4 · MIN — tồn kho tối thiểu</h3><span class="f">Tháng 11–3: bằng tiêu thụ tháng 11 năm trước · Tháng 4–10: trung bình tiêu thụ tháng 4–10 năm trước · làm tròn lên đủ thùng</span><p><b>Ý nghĩa:</b> Mức đệm an toàn tối thiểu phải giữ tại kho cho từng SKU. Tồn chạm hoặc dưới MIN là tín hiệu rủi ro mất bán cao nhất.</p><p><b>Hành động tiếp theo:</b> Mã dưới MIN: đưa lên đầu danh sách đề xuất về kho. Mã bán chậm có MIN bằng 0 hoặc rất thấp: giữ nguyên, không tự nâng MIN để tránh đọng vốn.</p></div><div class="metric"><h3>5 · ROP — điểm đặt hàng</h3><span class="f">ROP = (FC tháng ÷ 30) × thời gian cung ứng + MIN · kho HCM01: thời gian cung ứng 5 ngày</span><p><b>Ý nghĩa:</b> Ngưỡng kích hoạt đặt hàng: tồn xuống dưới ROP thì phải xem xét về kho ngay, vì trong thời gian chờ hàng về (5 ngày) kho vẫn tiếp tục xuất theo tốc độ FC.</p><p><b>Hành động tiếp theo:</b> Mã dưới ROP: tính lượng đề xuất theo công thức và chốt chuyến. Cùng một mã ở kho khác sẽ có ROP khác vì thời gian cung ứng khác — không sao chép ROP giữa các kho.</p></div><div class="metric"><h3>6 · Đề xuất theo công thức</h3><span class="f">Thiếu so với FC + FCBS; nếu tồn &lt; ROP thì thiếu so với FC + FCBS + MIN · làm tròn lên đủ thùng</span><p><b>Ý nghĩa:</b> Nhu cầu kỹ thuật cần về để đạt chuẩn cuối kỳ. Kỳ mẫu: 44.980 đơn vị. Đây là con số để đàm phán khả năng đáp ứng, chưa phải số chốt chuyến.</p><p><b>Hành động tiếp theo:</b> Đối chiếu với số chốt về thực tế: phần chênh lệch là việc còn lại của kỳ — phải có chuyến bổ sung, điều chuyển, hoặc quyết định hạ chuẩn kèm lý do được phê duyệt.</p></div><div class="metric"><h3>7 · Lượng về kho (số chốt)</h3><span class="f">Cột số chốt về kho trong file cung ứng — đã làm tròn đủ thùng</span><p><b>Ý nghĩa:</b> Khả năng đáp ứng thực tế của chuyến về. Kỳ mẫu: 10.960 đơn vị, chỉ bằng 24,4% đề xuất công thức — khoảng trống 34.020 đơn vị.</p><p><b>Hành động tiếp theo:</b> Tỷ lệ đáp ứng dưới 50%: chốt ngay chuyến bổ sung cho các mã thiếu sâu nhất, đồng thời thông báo Kinh doanh các mã không có nguồn về để chủ động với khách hàng.</p></div><div class="metric"><h3>8 · Tồn sau cung ứng</h3><span class="f">Tồn khả dụng + lượng về kho đã chốt</span><p><b>Ý nghĩa:</b> Vị thế tồn kho sau khi cộng chuyến về — cơ sở để chấm cảnh báo sau cung ứng và kết luận mã nào đủ bán đến cuối kỳ.</p><p><b>Hành động tiếp theo:</b> Mọi đánh giá “đủ / thiếu” của kỳ phải dựa trên con số này so với FC + FCBS + MIN, không dựa trên tồn hiện tại trước chuyến về.</p></div><div class="metric"><h3>9 · Tỷ lệ mã đạt sau cung ứng</h3><span class="f">Số mã đạt FC + FCBS + MIN ÷ số mã có nhu cầu</span><p><b>Ý nghĩa:</b> Chỉ số sức khỏe tổng của kỳ. Kỳ mẫu: 54,2% (78 trên 144 mã) — hơn 4 trên 10 mã có nhu cầu vẫn chưa đạt chuẩn sau chuyến về.</p><p><b>Hành động tiếp theo:</b> Đặt mục tiêu kéo tỷ lệ này lên sau mỗi chuyến bổ sung. Khi rà soát, luôn mở danh sách mã mức 1 đi kèm — tỷ lệ phần trăm không cho biết mã chủ lực có nằm trong nhóm thiếu hay không.</p></div><div class="metric"><h3>10 · Năm mức cảnh báo MIN–ROP</h3><span class="f">Mức 1: thiếu / dưới MIN · Mức 2: đạt MIN, chưa tới ROP · Mức 3: đạt · Mức 4: đủ FC+FCBS nhưng cuối kỳ dưới MIN · Mức 5: không phát sinh nhu cầu</span><p><b>Ý nghĩa:</b> Ngôn ngữ chung để mọi vai trò đọc cùng một tình trạng. Lưu ý: cảnh báo trước cung ứng so tồn với MIN–ROP; cảnh báo sau cung ứng so tồn sau chuyến về với chuẩn cuối kỳ FC + FCBS + MIN — hai thước đo khác nhau.</p><p><b>Hành động tiếp theo:</b> Xử lý theo thứ tự mức 1 → mức 2 → mức 4; mức 3 không hành động; mức 5 chỉ rà soát khi còn tồn. Không dàn đều nguồn về cho mọi mức — ưu tiên mã chủ lực doanh số trong mức 1.</p></div><div class="metric"><h3>11 · Số ngày bán hết tồn (hàng bán chậm)</h3><span class="f">Tồn sau cung ứng ÷ (đã xuất từ đầu kỳ ÷ số ngày đã qua) · Đỏ: trên 180 ngày · Cam: 90–180 ngày · chỉ xét mã có tồn sau cung ứng từ 100 đơn vị</span><p><b>Ý nghĩa:</b> Thước đo vốn đọng theo tốc độ bán thật. Kỳ mẫu: 41 mã bán chậm giữ 16.698 đơn vị, bằng 18,7% tồn sau cung ứng của kho.</p><p><b>Hành động tiếp theo:</b> Nhóm đỏ: ngừng về thêm, đối chiếu hạn dùng từng mã, chốt phương án clear (combo, quà tặng, kênh đẩy hàng) có hạn chót. Nhóm cam: lập kế hoạch đẩy bán trước, chưa cắt giá ngay. Mọi quyết định clear phải đối chiếu hạn dùng thực tế tại kho.</p></div><div class="metric"><h3>12 · Tồn / nhu cầu theo dòng hàng</h3><span class="f">Tồn khả dụng của dòng ÷ nhu cầu còn lại của dòng</span><p><b>Ý nghĩa:</b> Hệ số bao phủ theo dòng: trên 1 lần là tồn đang nhiều hơn nhu cầu còn lại; dưới 1 lần là dòng có rủi ro thiếu. Kỳ mẫu: Vivazz 0,81 lần và Vivazz Balance 0,67 lần trong khi Sangria tới 6,79 lần.</p><p><b>Hành động tiếp theo:</b> Dòng dưới 1 lần: rà soát từng mã và chốt nguồn về. Dòng cao bất thường: kiểm tra hàng chậm trong dòng trước khi duyệt thêm bất kỳ lượng về nào.</p></div></div>
+  </section>
+
+  <section id="canh-bao">
+    <div class="sec-head">
+      <div><h2>Cảnh báo MIN–ROP: trước và sau chuyến về <span class="js-ship">20/11</span></h2><p>Trước cung ứng, cảnh báo so tồn với MIN và ROP. Sau cung ứng, cảnh báo trả lời câu hỏi khác: tồn sau khi cộng hàng về có đủ FC + FCBS + MIN đến cuối tháng hay không. Vì vậy số mã “mức 1” sau cung ứng cao hơn trước không có nghĩa là chuyến về làm tình hình tệ đi — mà là thước đo đã đổi sang chuẩn cuối tháng.</p></div>
+      <span class="badge" id="warn-badge">189 mã</span>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Số mã theo mức cảnh báo</h3>
+        <p class="desc">Cột xám = trước cung ứng · Cột xanh = sau khi cộng chuyến về <span class="js-ship">20/11</span>.</p>
+        <div class="svgwrap" id="warn-chart" role="img" aria-label="Biểu đồ cột so sánh số mã theo 5 mức cảnh báo trước và sau cung ứng">
+          <svg viewBox="0 0 520 250" width="100%">
+            <line x1="46" y1="205" x2="505" y2="205" stroke="var(--line)" stroke-width="1.5"/>
+            <!-- group 1: 30 -> 43 -->
+            <rect x="62" y="155" width="26" height="50" rx="4" fill="var(--chart5)"/><rect x="90" y="133" width="26" height="72" rx="4" fill="#b42318"/>
+            <text x="75" y="147" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">30</text><text x="103" y="125" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">43</text>
+            <text x="89" y="224" font-size="12" text-anchor="middle" fill="var(--muted)">1 · Gấp / Thiếu</text>
+            <!-- group 2: 7 -> 5 -->
+            <rect x="152" y="193" width="26" height="12" rx="4" fill="var(--chart5)"/><rect x="180" y="197" width="26" height="8" rx="4" fill="var(--chart2)"/>
+            <text x="165" y="185" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">7</text><text x="193" y="189" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">5</text>
+            <text x="179" y="224" font-size="12" text-anchor="middle" fill="var(--muted)">2 · Cần đặt</text>
+            <!-- group 3: 73 -> 78 -->
+            <rect x="242" y="83" width="26" height="122" rx="4" fill="var(--chart5)"/><rect x="270" y="75" width="26" height="130" rx="4" fill="var(--chart1)"/>
+            <text x="255" y="75" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">73</text><text x="283" y="67" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">78</text>
+            <text x="269" y="224" font-size="12" text-anchor="middle" fill="var(--muted)">3 · Đủ / Đạt</text>
+            <!-- group 4: 23 -> 7 -->
+            <rect x="332" y="167" width="26" height="38" rx="4" fill="var(--chart5)"/><rect x="360" y="193" width="26" height="12" rx="4" fill="var(--chart4)"/>
+            <text x="345" y="159" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">23</text><text x="373" y="185" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">7</text>
+            <text x="359" y="224" font-size="12" text-anchor="middle" fill="var(--muted)">4 · Lưu ý</text>
+            <!-- group 5: 56 -> 56 -->
+            <rect x="422" y="112" width="26" height="93" rx="4" fill="var(--chart5)"/><rect x="450" y="112" width="26" height="93" rx="4" fill="var(--muted)"/>
+            <text x="435" y="104" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">56</text><text x="463" y="104" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">56</text>
+            <text x="449" y="224" font-size="12" text-anchor="middle" fill="var(--muted)">5 · Không nhu cầu</text>
+          </svg>
+        </div>
+        <div class="legend"><span><i class="dot" style="background:var(--chart5)"></i>Trước cung ứng</span><span><i class="dot" style="background:var(--chart1)"></i>Sau cung ứng (màu theo mức)</span></div>
+      </div>
+      <div class="card" id="warn-levels-card">
+        <h3>Đọc từng mức thế nào</h3>
+        <p class="desc">Định nghĩa lấy nguyên từ sheet DASHBOARD CUNG ỨNG T11 trong file cung ứng.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Mức</th><th>Trước cung ứng</th><th class="numr">Mã</th><th>Sau cung ứng</th><th class="numr">Mã</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pill pill-bad">1 · Gấp / Thiếu</span></td><td>Tồn &lt; MIN hoặc hết tồn</td><td class="numr"><b>30</b></td><td>Chưa đủ FC+FCBS hoặc dưới MIN</td><td class="numr"><b>43</b></td></tr>
+            <tr><td><span class="pill pill-warn">2 · Cần đặt</span></td><td>Tồn &lt; ROP</td><td class="numr"><b>7</b></td><td>Đạt MIN, chưa tới ROP</td><td class="numr"><b>5</b></td></tr>
+            <tr><td><span class="pill pill-ok">3 · Đủ / Đạt</span></td><td>Đủ, chưa cần đặt</td><td class="numr"><b>73</b></td><td>Đủ FC+FCBS + MIN</td><td class="numr"><b>78</b></td></tr>
+            <tr><td><span class="pill pill-warn">4 · Lưu ý</span></td><td>≥ ROP nhưng &lt; FC+FCBS, vẫn phải về</td><td class="numr"><b>23</b></td><td>Đủ FC+FCBS, cuối tháng &lt; MIN</td><td class="numr"><b>7</b></td></tr>
+            <tr><td><span class="pill pill-mut">5 · Không nhu cầu</span></td><td colspan="2">Không phát sinh nhu cầu trong tháng</td><td colspan="2" class="numr"><b>56</b></td></tr>
+          </tbody>
+        </table></div>
+        <div class="progress" aria-hidden="true"><i id="warn-progress-bar" style="width:54.2%"></i></div>
+        <p class="small" id="warn-progress-note" style="margin:8px 0 0">Tỷ lệ mã đạt sau cung ứng: <b>78 / 144 mã có nhu cầu = 54,2%</b>. Mục tiêu vận hành nên là kéo 43 mã mức 1 xuống bằng chuyến về bổ sung, ưu tiên mã chủ lực doanh số trước — không dàn đều.</p>
+      </div>
+    </div>
+    <div class="insight red" id="warn-insight"><strong>Cảnh báo lớn nhất — hai mã Vang Đà Lạt Classic:</strong> Classic Red 750 ml (R0103018) tồn sau cung ứng 5.906 so với FC + MIN là 27.048 — thiếu 21.142. Classic White 750 ml (R0103041) tồn sau 5.722 so với 21.764 — thiếu 16.042. Chỉ riêng hai mã này, đề xuất công thức đã là 26.412 chai, lớn hơn toàn bộ chuyến về 20/11 cộng lại (10.960). Đây là nút thắt cung ứng số 1 của kho HCM trong nửa cuối tháng 11 và mùa Tết cận kề.</div>
+  </section>
+
+  <section id="dong-hang">
+    <div class="sec-head">
+      <div><h2>Theo dòng hàng — nhu cầu dồn ở đâu, rủi ro nằm ở đâu</h2><p>Phân dòng theo sheet DASHBOARD CUNG ỨNG T11. Vang Đà Lạt một mình giữ gần một nửa nhu cầu còn lại của kho; Vivazz là dòng rủi ro nhất vì nhu cầu lớn nhưng chuyến <span class="js-ship">20/11</span> không về một chai nào.</p></div>
+      <span class="badge" id="dong-badge">14 dòng hàng</span>
+    </div>
+    <div class="card" id="dong-bars-card" style="margin-bottom:14px">
+      <h3>Nhu cầu còn lại theo dòng hàng</h3>
+      <p class="desc">Đơn vị: chai / ĐVT. Chỉ hiện các dòng có nhu cầu còn lại trên 350 để biểu đồ đọc được; chi tiết đủ 14 dòng ở bảng bên dưới.</p>
+      <div class="bar-row"><span>Vang Đà Lạt</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--chart1)"></div></div><b class="numr">19.832</b></div>
+      <div class="bar-row"><span>SP TMĐT</span><div class="bar-track"><div class="bar-fill" style="width:49.4%;background:var(--chart3)"></div></div><b class="numr">9.796</b></div>
+      <div class="bar-row"><span>Vivazz</span><div class="bar-track"><div class="bar-fill" style="width:24.9%;background:var(--chart4)"></div></div><b class="numr">4.935</b></div>
+      <div class="bar-row"><span>Hộp quà</span><div class="bar-track"><div class="bar-fill" style="width:11%;background:var(--chart2)"></div></div><b class="numr">2.173</b></div>
+      <div class="bar-row"><span>Vivazz Balance</span><div class="bar-track"><div class="bar-fill" style="width:8.5%;background:var(--chart4)"></div></div><b class="numr">1.680</b></div>
+      <div class="bar-row"><span>OEM</span><div class="bar-track"><div class="bar-fill" style="width:5.3%;background:var(--chart5)"></div></div><b class="numr">1.051</b></div>
+      <div class="bar-row"><span>Sangria</span><div class="bar-track"><div class="bar-fill" style="width:4.4%;background:var(--chart5)"></div></div><b class="numr">879</b></div>
+      <div class="bar-row"><span>Chateau Dalat</span><div class="bar-track"><div class="bar-fill" style="width:4.1%;background:var(--chart5)"></div></div><b class="numr">812</b></div>
+      <div class="bar-row"><span>Vang nhập khẩu</span><div class="bar-track"><div class="bar-fill" style="width:3.1%;background:var(--chart5)"></div></div><b class="numr">606</b></div>
+      <div class="bar-row"><span>Vang lít</span><div class="bar-track"><div class="bar-fill" style="width:2.1%;background:#b42318"></div></div><b class="numr">408</b></div>
+      <div class="bar-row"><span>Giá rẻ</span><div class="bar-track"><div class="bar-fill" style="width:2%;background:var(--chart5)"></div></div><b class="numr">392</b></div>
+    </div>
+    <div class="card" id="dong-table-card">
+      <div class="table-wrap"><table>
+        <thead><tr><th>Dòng hàng</th><th class="numr">Số mã</th><th class="numr">Nhu cầu còn lại</th><th class="numr">Tồn khả dụng</th><th class="numr" id="th-dong-ve">Về kho 20/11</th><th class="numr">Thùng</th><th class="numr">Mã cần về</th><th class="numr">Gấp (trước)</th><th class="numr">Còn thiếu (sau)</th><th class="numr">Tồn / nhu cầu</th></tr></thead>
+        <tbody>
+          <tr><td><b>Vang Đà Lạt</b></td><td class="numr">26</td><td class="numr"><b>19.832</b></td><td class="numr">35.551</td><td class="numr">7.540</td><td class="numr">1.365</td><td class="numr">9</td><td class="numr">11</td><td class="numr">8</td><td class="numr">1,79×</td></tr>
+          <tr><td>SP TMĐT</td><td class="numr">49</td><td class="numr">9.796</td><td class="numr">11.954</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">1</td><td class="numr">9</td><td class="numr">1,22×</td></tr>
+          <tr><td><b>Vivazz</b></td><td class="numr">8</td><td class="numr"><b>4.935</b></td><td class="numr">3.993</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">5</td><td class="numr">0,81×</td></tr>
+          <tr><td>Hộp quà</td><td class="numr">27</td><td class="numr">2.173</td><td class="numr">4.249</td><td class="numr">1.140</td><td class="numr">190</td><td class="numr">8</td><td class="numr">0</td><td class="numr">0</td><td class="numr">1,96×</td></tr>
+          <tr><td>Vivazz Balance</td><td class="numr">4</td><td class="numr">1.680</td><td class="numr">1.131</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">1</td><td class="numr">3</td><td class="numr">0,67×</td></tr>
+          <tr><td>OEM</td><td class="numr">9</td><td class="numr">1.051</td><td class="numr">1.983</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">4</td><td class="numr">5</td><td class="numr">1,89×</td></tr>
+          <tr><td>Sangria</td><td class="numr">11</td><td class="numr">879</td><td class="numr">5.963</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">6,79×</td></tr>
+          <tr><td>Chateau Dalat</td><td class="numr">14</td><td class="numr">812</td><td class="numr">5.439</td><td class="numr">1.500</td><td class="numr">240</td><td class="numr">8</td><td class="numr">1</td><td class="numr">1</td><td class="numr">6,70×</td></tr>
+          <tr><td>Vang nhập khẩu</td><td class="numr">5</td><td class="numr">606</td><td class="numr">1.397</td><td class="numr">480</td><td class="numr">80</td><td class="numr">2</td><td class="numr">1</td><td class="numr">2</td><td class="numr">2,31×</td></tr>
+          <tr><td><b>Vang lít</b></td><td class="numr">5</td><td class="numr">408</td><td class="numr"><b>0</b></td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">5</td><td class="numr">5</td><td class="numr">0×</td></tr>
+          <tr><td>Giá rẻ</td><td class="numr">6</td><td class="numr">392</td><td class="numr">3.777</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">1</td><td class="numr">1</td><td class="numr">9,64×</td></tr>
+          <tr><td>Giftbox</td><td class="numr">17</td><td class="numr">48</td><td class="numr">2.292</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">3</td><td class="numr">3</td><td class="numr">48,25×</td></tr>
+          <tr><td>Horeca</td><td class="numr">4</td><td class="numr">6</td><td class="numr">452</td><td class="numr">300</td><td class="numr">50</td><td class="numr">3</td><td class="numr">2</td><td class="numr">0</td><td class="numr">75,33×</td></tr>
+          <tr><td>SP riêng Đà Lạt</td><td class="numr">4</td><td class="numr">7</td><td class="numr">139</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">0</td><td class="numr">1</td><td class="numr">19,86×</td></tr>
+          <tr style="background:var(--surface2)"><td><b>Tổng cộng</b></td><td class="numr"><b>189</b></td><td class="numr"><b>42.623</b></td><td class="numr"><b>78.320</b></td><td class="numr"><b>10.960</b></td><td class="numr"><b>1.925</b></td><td class="numr"><b>30</b></td><td class="numr"><b>30</b></td><td class="numr"><b>43</b></td><td class="numr"><b>1,84×</b></td></tr>
+        </tbody>
+      </table></div>
+      <div class="insight" id="dong-insight"><strong>Ba dòng cần quyết ngay:</strong> (1) <b>Vivazz + Vivazz Balance</b> — nhu cầu còn lại 6.615, tồn chỉ 5.124 (0,77×) và chuyến <span class="js-ship">20/11</span> về 0 chai, trong khi đây là dòng đang được đẩy mạnh cho mùa Tết; (2) <b>Vang lít</b> — cả 5 mã hết tồn, 408 chai nhu cầu chưa có nguồn về; (3) <b>SP TMĐT</b> — 9.796 nhu cầu, 9 mã còn thiếu sau cung ứng dù tổng tồn đang dương, cần rà soát theo từng mã thay vì nhìn tổng dòng.</div>
+    </div>
+  </section>
+
+  <section id="ve-kho">
+    <div class="sec-head">
+      <div><h2 id="ve-title">Chuyến về kho HCM ngày 20/11/2026 — 30 mã, 1.925 thùng, 18.156 kg</h2><p>Số ở cột O của sheet cung ứng là số chốt thực tế từng chuyến (đã làm tròn đủ thùng), có thể khác đề xuất công thức ở cột V. Chênh lệch giữa hai cột chính là phần việc còn lại của tháng. Ngày về của chuyến này là tham số — sửa trực tiếp tại ô bên cạnh, không cần quay lại mục Cập nhật số liệu.</p></div>
+      <div style="display:grid;gap:8px;justify-items:end">
+        <span class="badge" id="ve-badge">Chốt 19/11 · Về 20/11</span>
+        <label class="ship-edit">Ngày về kho <input type="date" class="ship-date-input" id="param-ship-date-2" value="2026-11-20" aria-label="Ngày về kho của chuyến đang xét"></label>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card" id="ve-top-card">
+        <h3>10 mã về nhiều nhất (theo số thùng)</h3>
+        <p class="desc">7 vị trí đầu đều thuộc Vang Đà Lạt — chuyến này ưu tiên đúng dòng chủ lực, nhưng mức về vẫn thấp xa đề xuất ở hai mã Classic.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>#</th><th>Mã SP</th><th>Sản phẩm</th><th class="numr">Về (chai)</th><th class="numr">Thùng</th><th>Sau về</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td class="mono">R0103018</td><td>Vang Đà Lạt — Classic Red 750 ml</td><td class="numr">1.560</td><td class="numr"><b>260</b></td><td><span class="pill pill-bad">Vẫn thiếu</span></td></tr>
+            <tr><td>2</td><td class="mono">R0103041</td><td>Vang Đà Lạt — Classic White 750 ml</td><td class="numr">1.560</td><td class="numr"><b>260</b></td><td><span class="pill pill-bad">Dưới MIN</span></td></tr>
+            <tr><td>3</td><td class="mono">R0103024</td><td>Vang Đà Lạt — Classic White hộp 3 lít</td><td class="numr">780</td><td class="numr"><b>195</b></td><td><span class="pill pill-bad">Dưới MIN</span></td></tr>
+            <tr><td>4</td><td class="mono">R0103020</td><td>Vang Đà Lạt — Dankia Red 750 ml</td><td class="numr">780</td><td class="numr"><b>130</b></td><td><span class="pill pill-ok">Đạt</span></td></tr>
+            <tr><td>5</td><td class="mono">R0102027</td><td>Vang Đà Lạt — Export Red 750 ml</td><td class="numr">780</td><td class="numr"><b>130</b></td><td><span class="pill pill-warn">Lưu ý</span></td></tr>
+            <tr><td>6</td><td class="mono">R0102043</td><td>Vang Đà Lạt — Export White 750 ml</td><td class="numr">780</td><td class="numr"><b>130</b></td><td><span class="pill pill-warn">Chưa tới ROP</span></td></tr>
+            <tr><td>7</td><td class="mono">R0102029</td><td>Vang Đà Lạt — Superior Red 750 ml</td><td class="numr">780</td><td class="numr"><b>130</b></td><td><span class="pill pill-ok">Đạt</span></td></tr>
+            <tr><td>8</td><td class="mono">R0103022</td><td>Vang Đà Lạt — Classic Red hộp 3 lít</td><td class="numr">260</td><td class="numr"><b>65</b></td><td><span class="pill pill-warn">Chưa tới ROP</span></td></tr>
+            <tr><td>9</td><td class="mono">R0102033</td><td>Vang Đà Lạt — Export Red hộp 3 lít</td><td class="numr">260</td><td class="numr"><b>65</b></td><td><span class="pill pill-bad">Dưới MIN</span></td></tr>
+            <tr><td>10</td><td class="mono">R0101070</td><td>Chateau Dalat Special — Cabernet Sauvignon 750 ml</td><td class="numr">300</td><td class="numr"><b>50</b></td><td><span class="pill pill-ok">Đạt</span></td></tr>
+          </tbody>
+        </table></div>
+        <p class="small">20 mã còn lại trong chuyến: Chateau Dalat Special Merlot (50 thùng), Monte Maule Cabernet Sauvignon và Merlot (40 thùng/mã), nhóm Estate / Heritage và Signature / Sauvignon Blanc (20–30 thùng/mã), Harrington Horeca và Vang mật ong 375 ml. Tra cứu đủ 30 mã bằng bộ lọc “Chỉ mã có hàng về 20/11” ở mục Tra cứu SKU.</p>
+      </div>
+      <div class="card" id="ve-gap-card">
+        <h3>Đề xuất công thức vs số chốt về — khoảng trống 34.020 chai</h3>
+        <p class="desc">Cột V (đề xuất theo công thức: đủ FC + FCBS, và đủ thêm MIN khi tồn dưới ROP) là nhu cầu kỹ thuật. Cột O là khả năng đáp ứng thực tế của chuyến 20/11.</p>
+        <div class="bar-row"><span>Đề xuất công thức</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--chart3)"></div></div><b class="numr">44.980</b></div>
+        <div class="bar-row"><span>Chốt về 20/11</span><div class="bar-track"><div class="bar-fill" style="width:24.4%;background:var(--chart1)"></div></div><b class="numr">10.960</b></div>
+        <div class="bar-row"><span>Chưa có chuyến về</span><div class="bar-track"><div class="bar-fill" style="width:75.6%;background:#b42318"></div></div><b class="numr">34.020</b></div>
+        <p style="font-size:14px">Trong phần chưa về có <b>41 mã đã có số đề xuất lớn hơn 0 nhưng lượng về bằng 0</b>, tổng đề xuất 10.034 chai — lớn nhất là Vivazz Kombucha Chanh dây (1.200, tồn bằng 0), Vang nổ Sparkling White (858), Vivazz Kombucha Nguyên bản (792), Classic Red 375 ml (600) và Harrington Cabernet Sauvignon (540).</p>
+        <div class="insight red"><strong>15 mã đã hết tồn nhưng vẫn còn nhu cầu</strong> — gồm Vang Non Tươi White (240) và Red (160), Vang Diplomatic Merlot (453,5), Vang Caliber Gold Label (328), Kombucha Chanh dây (nhu cầu 1.200) và Balance Chanh dây (540). Các mã này không chờ được đến chu kỳ rà soát tháng: mỗi ngày chậm là một ngày mất bán.</div>
+      </div>
+    </div>
+
+    <div class="card" id="shortage-card" style="margin-top:14px">
+      <h3>10 mã thiếu nhiều nhất sau cung ứng (so với FC + FCBS + MIN)</h3>
+      <p class="desc">Đây là danh sách ưu tiên cho chuyến về bổ sung. Mức thiếu tính bằng FC + FCBS + MIN trừ tồn sau cung ứng.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Mã SP</th><th>Sản phẩm</th><th>Dòng</th><th class="numr">FC + FCBS</th><th class="numr">MIN</th><th class="numr">Tồn sau CU</th><th class="numr">Còn thiếu</th><th>Trạng thái</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">R0103018</td><td class="sku-name">Vang Đà Lạt — Classic Red 750 ml</td><td>Vang Đà Lạt</td><td class="numr">13.800</td><td class="numr">13.248</td><td class="numr">5.906</td><td class="numr"><b>21.142</b></td><td><span class="pill pill-bad">Thiếu FC+FCBS</span></td></tr>
+          <tr><td class="mono">R0103041</td><td class="sku-name">Vang Đà Lạt — Classic White 750 ml</td><td>Vang Đà Lạt</td><td class="numr">11.834</td><td class="numr">9.930</td><td class="numr">5.722</td><td class="numr"><b>16.042</b></td><td><span class="pill pill-bad">Dưới MIN</span></td></tr>
+          <tr><td class="mono">R0103024</td><td class="sku-name">Vang Đà Lạt — Classic White hộp 3 lít</td><td>Vang Đà Lạt</td><td class="numr">2.388</td><td class="numr">2.300</td><td class="numr">1.554</td><td class="numr"><b>3.134</b></td><td><span class="pill pill-bad">Dưới MIN</span></td></tr>
+          <tr><td class="mono">R0105002</td><td class="sku-name">Vang nổ Chateau Dalat — Sparkling White 750 ml</td><td>Chateau Dalat</td><td class="numr">2.266</td><td class="numr">1.890</td><td class="numr">1.035</td><td class="numr"><b>3.121</b></td><td><span class="pill pill-bad">Dưới MIN</span></td></tr>
+          <tr><td class="mono">R0103021</td><td class="sku-name">Vang Đà Lạt — Classic Red 375 ml</td><td>Vang Đà Lạt</td><td class="numr">1.268</td><td class="numr">1.536</td><td class="numr">1.375</td><td class="numr"><b>1.429</b></td><td><span class="pill pill-bad">Dưới MIN</span></td></tr>
+          <tr><td class="mono">R0106069</td><td class="sku-name">Vivazz trà Kombucha — Nguyên bản 330 ml</td><td>Vivazz mở rộng</td><td class="numr">2.080</td><td class="numr">0</td><td class="numr">699</td><td class="numr"><b>1.381</b></td><td><span class="pill pill-bad">Thiếu FC+FCBS</span></td></tr>
+          <tr><td class="mono">R0106032</td><td class="sku-name">Vivazz có ga — Nho đỏ 720 ml</td><td>Vivazz</td><td class="numr">2.218</td><td class="numr">60</td><td class="numr">1.005</td><td class="numr"><b>1.273</b></td><td><span class="pill pill-bad">Thiếu FC+FCBS</span></td></tr>
+          <tr><td class="mono">R0106071</td><td class="sku-name">Vivazz trà Kombucha — Chanh dây 330 ml</td><td>Vivazz mở rộng</td><td class="numr">1.200</td><td class="numr">0</td><td class="numr">0</td><td class="numr"><b>1.200</b></td><td><span class="pill pill-bad">Hết tồn</span></td></tr>
+          <tr><td class="mono">R0102033</td><td class="sku-name">Vang Đà Lạt — Export Red hộp 3 lít</td><td>Vang Đà Lạt</td><td class="numr">778</td><td class="numr">812</td><td class="numr">468</td><td class="numr"><b>1.122</b></td><td><span class="pill pill-bad">Dưới MIN</span></td></tr>
+          <tr><td class="mono">R0106061</td><td class="sku-name">Vivazz Zero Sparkling Grape — Shiraz 330 ml</td><td>Vivazz mở rộng</td><td class="numr">1.720</td><td class="numr">0</td><td class="numr">861</td><td class="numr"><b>859</b></td><td><span class="pill pill-bad">Thiếu FC+FCBS</span></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section id="ban-cham">
+    <div class="sec-head">
+      <div><h2>Hàng bán chậm — cảnh báo cần clear kho</h2><p>Mặt trái của cảnh báo thiếu hàng: trong khi 43 mã thiếu sâu thì một phần vốn của kho đang đọng ở những mã phải mất nhiều tháng mới bán hết theo tốc độ hiện tại. Mục này xếp hạng lại toàn bộ 189 mã theo tốc độ bán, để có danh sách clear tách bạch với danh sách đặt hàng.</p></div>
+      <span class="badge" id="slow-badge">41 mã · 16.698 chai</span>
+    </div>
+    <div class="formula" style="margin-bottom:14px"><b>Thước đo dùng trên trang này — số ngày bán hết tồn</b><code>Số ngày tồn = Tồn sau cung ứng ÷ (Đã xuất từ <span id="slow-formula">01–19/11 ÷ 19 ngày</span>)</code><p class="small" style="margin:8px 0 0"><b>Đỏ — Cần clear:</b> tồn đủ bán trên 180 ngày (mã chưa xuất chai nào trong tháng mặc định thuộc nhóm này). <b>Cam — Bán chậm:</b> tồn đủ bán 90–180 ngày. Chỉ xét mã có tồn sau cung ứng từ 100 chai trở lên để danh sách tập trung vào nơi vốn đọng thật. Đây là ngoại lệ “hàng bán chậm” trong Quy định tồn kho: nhóm này <b>không đặt thêm chỉ vì dưới ROP</b>, và mọi quyết định clear phải đối chiếu thêm hạn dùng thực tế — dữ liệu hạn dùng không có trong file tháng 11.</p></div>
+    <div class="grid3" id="slow-kpis" style="margin-bottom:14px">
+      <article class="kpi"><label>Đỏ — Cần clear</label><div class="num">25 mã</div><div class="sub">8.732 chai tồn sau cung ứng, đủ bán trên 180 ngày theo tốc độ xuất hiện tại</div><span class="delta down">Ưu tiên xử lý trước</span></article>
+      <article class="kpi"><label>Cam — Bán chậm</label><div class="num">16 mã</div><div class="sub">7.966 chai, đủ bán 90–180 ngày — cần kế hoạch đẩy bán, chưa cần cắt giá ngay</div><span class="delta neutral">Theo dõi và đẩy bán</span></article>
+      <article class="kpi"><label>Chưa xuất chai nào trong T11</label><div class="num">25 mã</div><div class="sub">1.721 chai tồn đang nằm yên sau 19 ngày đầu tháng, ở mọi mức tồn</div><span class="delta down">Hàng không xoay — cần quyết đầu ra</span></article>
+    </div>
+    <div class="grid2">
+      <div class="card" id="slow-red-card">
+        <h3>Nhóm đỏ — 12 mã cần clear lớn nhất</h3>
+        <p class="desc">Xếp theo tồn sau cung ứng giảm dần. “Đã xuất” là lượng xuất từ 01–19/11/2026.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Mã SP</th><th>Sản phẩm</th><th class="numr">Tồn sau CU</th><th class="numr">Đã xuất T11</th><th class="numr">Tồn đủ bán</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">R0101205</td><td class="sku-name">Chateau Dalat — Olong Secret 750 ml</td><td class="numr"><b>1.450</b></td><td class="numr">74</td><td class="numr"><b>372 ngày</b></td></tr>
+            <tr><td class="mono">R0106039</td><td class="sku-name">Vivazz Sangria light — White 750 ml</td><td class="numr"><b>984</b></td><td class="numr">81</td><td class="numr"><b>231 ngày</b></td></tr>
+            <tr><td class="mono">R0106030</td><td class="sku-name">Vivazz sparkling juice — Dâu tây 275 ml</td><td class="numr"><b>400</b></td><td class="numr">20</td><td class="numr"><b>380 ngày</b></td></tr>
+            <tr><td class="mono">R0106035</td><td class="sku-name">Vivazz sparkling juice — Việt quất 275 ml</td><td class="numr"><b>399</b></td><td class="numr">20</td><td class="numr"><b>379 ngày</b></td></tr>
+            <tr><td class="mono">R0103052</td><td class="sku-name">Vancaster — Vang đỏ Classic 750 ml (TMĐT)</td><td class="numr"><b>377</b></td><td class="numr">36</td><td class="numr"><b>199 ngày</b></td></tr>
+            <tr><td class="mono">R0101177</td><td class="sku-name">Chateau Dalat Heritage — Merlot 750 ml</td><td class="numr"><b>363</b></td><td class="numr">33</td><td class="numr"><b>209 ngày</b></td></tr>
+            <tr><td class="mono">R0101173</td><td class="sku-name">Chateau Dalat Estate — Shiraz 750 ml</td><td class="numr"><b>347</b></td><td class="numr">33</td><td class="numr"><b>200 ngày</b></td></tr>
+            <tr><td class="mono">R0101174</td><td class="sku-name">Chateau Dalat Estate — Merlot 750 ml</td><td class="numr"><b>343</b></td><td class="numr">27</td><td class="numr"><b>241 ngày</b></td></tr>
+            <tr><td class="mono">R0106044</td><td class="sku-name">Vivazz sparkling juice — Nho đỏ 275 ml</td><td class="numr"><b>332</b></td><td class="numr">32</td><td class="numr"><b>197 ngày</b></td></tr>
+            <tr><td class="mono">R0101168</td><td class="sku-name">Chateau Dalat Cuvée — Shiraz 750 ml</td><td class="numr"><b>325</b></td><td class="numr">6</td><td class="numr"><b>1.029 ngày</b></td></tr>
+            <tr><td class="mono">R0107082</td><td class="sku-name">Bộ hộp quà Đồng Hành Bền Vững IV</td><td class="numr"><b>322</b></td><td class="numr">1</td><td class="numr"><b>6.118 ngày</b></td></tr>
+            <tr><td class="mono">R0106036</td><td class="sku-name">Vivazz sparkling juice — Đào 275 ml</td><td class="numr"><b>321</b></td><td class="numr">20</td><td class="numr"><b>305 ngày</b></td></tr>
+          </tbody>
+        </table></div>
+        <p class="small" style="margin:10px 0 0">13 mã đỏ còn lại (tồn 107–314 chai): Reserva Sauvignon Blanc 314, Heritage Shiraz 294, Heritage Honey Wine 272, hộp quà Đồng Hành Bền Vững II (260) và III (252), Mã Vận Khai Hoa 234, Premium hộp 3 lít 216, Vancaster trắng 213, Special Shiraz 201, ROMA 1989 181, Noble Sauvignon Blanc 114, Đồng Hành Bền Vững I 111, Phúc Lộc Hòa Ca II 107. Trong số này, Mã Vận Khai Hoa, Vancaster trắng, ROMA 1989 và Noble Sauvignon Blanc <b>chưa xuất được chai nào</b> trong tháng 11. Xem đủ 25 mã ở mục Tra cứu SKU với bộ lọc “Chỉ hàng bán chậm / cần clear”.</p>
+      </div>
+      <div>
+        <div class="card" id="slow-orange-card" style="margin-bottom:14px">
+          <h3>Nhóm cam — bán chậm, cần đẩy bán</h3>
+          <p class="desc">Tồn đủ bán 90–180 ngày. Mã đứng đầu nhóm là trường hợp đặc biệt: Diamond Red không có FC tháng 11 nhưng đang giữ tồn lớn nhất trong nhóm hàng chậm.</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Mã SP</th><th>Sản phẩm</th><th class="numr">Tồn sau CU</th><th class="numr">Tồn đủ bán</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">R0104026</td><td class="sku-name">Vang Diamond — Red Label 750 ml</td><td class="numr"><b>1.944</b></td><td class="numr"><b>110 ngày</b></td></tr>
+              <tr><td class="mono">R0104007</td><td class="sku-name">Rượu Memory — Đà Lạt 750 ml</td><td class="numr"><b>1.363</b></td><td class="numr"><b>118 ngày</b></td></tr>
+              <tr><td class="mono">R0101073</td><td class="sku-name">Chateau Dalat Tradition — Cabernet Sauvignon 750 ml</td><td class="numr"><b>547</b></td><td class="numr"><b>139 ngày</b></td></tr>
+              <tr><td class="mono">R0101113</td><td class="sku-name">Chateau Dalat Apec Collection — Red 375 ml</td><td class="numr"><b>459</b></td><td class="numr"><b>100 ngày</b></td></tr>
+              <tr><td class="mono">R0102035</td><td class="sku-name">Vang Đà Lạt Superior — Red hộp 3 lít</td><td class="numr"><b>447</b></td><td class="numr"><b>95 ngày</b></td></tr>
+              <tr><td class="mono">R0101074</td><td class="sku-name">Chateau Dalat Tradition — Merlot 750 ml</td><td class="numr"><b>430</b></td><td class="numr"><b>101 ngày</b></td></tr>
+              <tr><td class="mono">R0106080</td><td class="sku-name">Vivazz Sangria — Mật ong 330 ml</td><td class="numr"><b>423</b></td><td class="numr"><b>149 ngày</b></td></tr>
+              <tr><td class="mono">R0106082</td><td class="sku-name">Vivazz Sangria — Chanh dây 330 ml</td><td class="numr"><b>411</b></td><td class="numr"><b>118 ngày</b></td></tr>
+              <tr><td class="mono">R0101129</td><td class="sku-name">Chateau Dalat Single Edition — Shiraz 750 ml</td><td class="numr"><b>360</b></td><td class="numr"><b>109 ngày</b></td></tr>
+              <tr><td class="mono">R0101204</td><td class="sku-name">Chateau Dalat — Moka Essence 750 ml</td><td class="numr"><b>281</b></td><td class="numr"><b>140 ngày</b></td></tr>
+            </tbody>
+          </table></div>
+          <p class="small" style="margin:10px 0 0">6 mã cam còn lại: Heritage Cabernet Sauvignon 251, Estate Cabernet Sauvignon 250, Heritage Rose 299, hộp 2 chai Moka &amp; Olong 281, Vang mật ong 750 ml 113, APEC 14 375 ml 107.</p>
+        </div>
+        <div class="card" id="slow-lines-card">
+          <h3>Tồn chậm dồn ở dòng hàng nào</h3>
+          <p class="desc">Tổng tồn của 41 mã đỏ + cam theo dòng hàng (chai). Giftbox và Hộp quà là hai dòng đọng nặng nhất: lần lượt 88% và 74% tồn của dòng nằm ở hàng chậm.</p>
+          <div class="bar-row"><span>Hộp quà / Estate</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#b42318"></div></div><b class="numr">3.997</b></div>
+          <div class="bar-row"><span>Vang Đà Lạt</span><div class="bar-track"><div class="bar-fill" style="width:53.4%;background:var(--chart4)"></div></div><b class="numr">2.133</b></div>
+          <div class="bar-row"><span>Giftbox</span><div class="bar-track"><div class="bar-fill" style="width:50.3%;background:#b42318"></div></div><b class="numr">2.012</b></div>
+          <div class="bar-row"><span>Giá rẻ (Diamond)</span><div class="bar-track"><div class="bar-fill" style="width:48.6%;background:var(--chart4)"></div></div><b class="numr">1.944</b></div>
+          <div class="bar-row"><span>Chateau Dalat</span><div class="bar-track"><div class="bar-fill" style="width:44.9%;background:var(--chart4)"></div></div><b class="numr">1.796</b></div>
+          <div class="bar-row"><span>Vivazz</span><div class="bar-track"><div class="bar-fill" style="width:36.3%;background:var(--chart4)"></div></div><b class="numr">1.452</b></div>
+          <div class="bar-row"><span>Vivazz mở rộng</span><div class="bar-track"><div class="bar-fill" style="width:26.7%;background:var(--chart4)"></div></div><b class="numr">1.068</b></div>
+          <div class="bar-row"><span>Sangria</span><div class="bar-track"><div class="bar-fill" style="width:24.6%;background:var(--chart4)"></div></div><b class="numr">984</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="insight red" id="slow-insight"><strong>Ba điểm phải quyết trước khi chốt FC tháng 12:</strong> (1) <b>Nhóm Estate / Heritage của Chateau Dalat</b> — 5 mã đang tồn đủ bán 200–345 ngày nhưng mỗi mã vẫn treo FCBS 240 chai chưa xuất tương xứng (mới xuất 15–33 chai): hoặc xác nhận FCBS còn hiệu lực và có chương trình bán cụ thể, hoặc chuyển sang danh sách clear, không để hai trạng thái cùng tồn tại. (2) <b>Vivazz 275 ml ba vị dâu tây, việt quất, đào</b> — FC tháng 372–390 chai/mã nhưng 19 ngày mới xuất 20 chai/mã: FC này không còn khả thi, cần hạ kỳ vọng và chốt kênh đẩy hàng thay vì chờ cuối tháng. (3) <b>Hộp quà và Giftbox mùa cũ</b> — nhiều mã cả tháng chỉ xuất 1 chai (Đồng Hành Bền Vững II, III, IV; Phúc Lộc Hòa Ca II): đây là hàng mùa vụ đã qua chu kỳ, nên gắn vào combo Tết hoặc chương trình quà tặng có hạn chót rõ ràng, tránh để qua Tết thành tồn chết.</div>
+  </section>
+
+  <section id="tra-cuu">
+    <div class="sec-head">
+      <div><h2>Tra cứu SKU — toàn bộ 189 mã kho HCM01</h2><p>Gõ mã hoặc tên sản phẩm, lọc theo dòng hàng và mức cảnh báo sau cung ứng. Dùng khi Kinh doanh hỏi một mã cụ thể: có đủ bán đến cuối tháng không, chuyến <span class="js-ship">20/11</span> có về không, còn thiếu bao nhiêu. Mã thuộc nhóm bán chậm / cần clear có thêm nhãn cam hoặc đỏ ngay dưới mức cảnh báo.</p></div>
+      <span class="badge" id="sku-count">189 mã</span>
+    </div>
+    <div class="card">
+      <div class="toolbar">
+        <input id="q" type="search" placeholder="Tìm theo mã SP hoặc tên sản phẩm…" aria-label="Tìm SKU">
+        <select id="f-dong" aria-label="Lọc theo dòng hàng"><option value="">Tất cả dòng hàng</option></select>
+        <select id="f-warn" aria-label="Lọc theo cảnh báo sau cung ứng">
+          <option value="">Tất cả cảnh báo sau cung ứng</option>
+          <option value="1">Mức 1 — Thiếu / dưới MIN</option>
+          <option value="2">Mức 2 — Đạt MIN, chưa tới ROP</option>
+          <option value="3">Mức 3 — Đạt</option>
+          <option value="4">Mức 4 — Lưu ý cuối tháng</option>
+          <option value="5">Mức 5 — Không phát sinh nhu cầu</option>
+        </select>
+        <label><input type="checkbox" id="f-ve"> <span id="f-ve-label">Chỉ mã có hàng về 20/11</span></label>
+        <label><input type="checkbox" id="f-act"> Chỉ mã cần hành động (mức 1, 2, 4)</label>
+        <label><input type="checkbox" id="f-slow"> Chỉ hàng bán chậm / cần clear (tồn đủ bán trên 90 ngày)</label>
+      </div>
+      <div class="table-wrap" style="max-height:640px;overflow-y:auto">
+        <table>
+          <thead><tr><th>Mã SP</th><th>Sản phẩm</th><th class="opt">Dòng</th><th class="numr opt">FC</th><th class="numr opt">FCBS</th><th class="numr opt">MIN</th><th class="numr opt">ROP</th><th class="numr">Tồn</th><th class="numr opt">Đã xuất</th><th class="numr">Nhu cầu còn lại</th><th class="numr" id="th-ve">Về 20/11</th><th class="numr opt">Tồn sau CU</th><th>Cảnh báo sau CU</th></tr></thead>
+          <tbody id="sku-body"></tbody>
+        </table>
+      </div>
+      <p class="small" id="sku-note" style="margin:10px 0 0"></p>
+      <p class="small" id="sku-source-note" style="margin:6px 0 0">Lưu ý đối chiếu: cộng dồn nhu cầu còn lại theo từng SKU ở sheet “CUNG ỨNG VỀ KHO HCM T11” được 42.309,5, trong khi tổng quản trị ở sheet “DASHBOARD CUNG ỨNG T11” là 42.623 — chênh 313,5 do sheet tổng hợp phân nhóm lại một số mã (Hộp quà, TMĐT, Vivazz mở rộng). Trang này dùng 42.623 làm con số quản trị chính; khi rà soát từng mã, lấy số của chính mã đó ở bảng này.</p>
+    </div>
+  </section>
+
+  <section id="quy-dinh">
+    <div class="sec-head">
+      <div><h2>Quy định tồn kho 1.11.26 — cách mọi con số trên trang này được tính</h2><p>MTV quản trị tồn kho chỉ theo hai mốc: MIN và ROP. Nhà máy ưu tiên quản lý bán thành phẩm; MTV thực hiện theo FC tháng n+1 để kịp thời gian sản xuất và chuyển kho nội bộ.</p></div>
+      <span class="badge">Quy định MTV Ladofoods</span>
+    </div>
+    <div class="grid3">
+      <div class="formula"><b>Tồn kho tối thiểu (MIN)</b><code>Tháng 4–10: trung bình tiêu thụ tháng 4–10 năm trước<br>Tháng 11–3: bằng lượng tiêu thụ tháng 11 năm trước</code><p class="small" style="margin:8px 0 0">Tính riêng từng SKU, làm tròn lên đủ thùng lưu kho. Tháng 11/2026 này, MIN của kho HCM lấy theo tiêu thụ tháng 11/2025.</p></div>
+      <div class="formula"><b>Điểm đặt hàng (ROP)</b><code>ROP = (FC tháng ÷ 30) × Thời gian cung ứng + MIN</code><p class="small" style="margin:8px 0 0">Kho HCM01: thời gian cung ứng 5 ngày. Khi tồn sau cam kết thấp hơn ROP, phải xem xét tái đặt hàng ngay.</p></div>
+      <div class="formula"><b>Nhu cầu còn lại và lượng về</b><code>Nhu cầu còn lại = FC − đã xuất + FCBS<br>Ưu tiên 1: về đủ FC + FCBS, kể cả khi tồn ≥ ROP<br>Tồn &lt; ROP: về đủ FC + FCBS + MIN</code><p class="small" style="margin:8px 0 0">Lượng về làm tròn lên đủ thùng theo quy cách. Tồn khả dụng đã trừ đơn SO / YCCH đang giữ.</p></div>
+    </div>
+    <div class="grid2" style="margin-top:14px">
+      <div class="card">
+        <h3>Phân nhóm áp dụng</h3>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Nhóm</th><th>Nguyên tắc</th><th>Rà soát</th></tr></thead>
+          <tbody>
+            <tr><td><b>A — Bán chạy / chủ lực</b></td><td>Tính MIN và ROP đầy đủ theo từng SKU, kênh và kho; ưu tiên theo dõi nguy cơ thiếu hàng.</td><td>Hằng tháng</td></tr>
+            <tr><td><b>B — Bán chậm</b></td><td>Không đặt hàng chỉ vì tồn thấp; đối chiếu FC tháng, hạn dùng và nhu cầu đã xác nhận trước khi đề xuất.</td><td>Hằng tháng</td></tr>
+            <tr><td><b>C — Hàng mới / mùa vụ</b></td><td>Chưa đủ lịch sử thì dùng kế hoạch bán được phê duyệt; rà soát lại MIN, ROP sau khi có dữ liệu thực tế. Lô đầu dùng 60% dự báo ra mắt.</td><td>Sau 2–3 tháng</td></tr>
+          </tbody>
+        </table></div>
+        <p class="small">Ngoại lệ bắt buộc kiểm tra trước khi đặt: hàng gần hết hạn (không đặt thêm chỉ vì dưới ROP), hàng bán chậm (MIN bằng 0 hoặc rất thấp), hàng gia công theo hợp đồng (tách nhu cầu hợp đồng khỏi nhu cầu bán thường). Mọi điều chỉnh ngoài công thức phải có lý do, người duyệt và thời hạn.</p>
+      </div>
+      <div class="card">
+        <h3>Ví dụ trong quy định — vì sao phải tính theo từng kho</h3>
+        <p class="desc">Cùng một mã Vang Đà Lạt Strongwine 750 ml, FC tháng 3.000 chai ở cả hai kho, MIN 1.500 — nhưng thời gian cung ứng khác nhau nên ROP và quyết định khác nhau:</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th></th><th class="numr">Hồ Chí Minh</th><th class="numr">Hà Nội</th></tr></thead>
+          <tbody>
+            <tr><td>Thời gian cung ứng</td><td class="numr">4 ngày</td><td class="numr">18 ngày</td></tr>
+            <tr><td>ROP</td><td class="numr">1.900</td><td class="numr">3.300</td></tr>
+            <tr><td>Tồn sau cam kết</td><td class="numr">1.700</td><td class="numr">2.700</td></tr>
+            <tr><td>Thiếu so với ROP</td><td class="numr">200</td><td class="numr">600</td></tr>
+          </tbody>
+        </table></div>
+        <p class="small">Đây là ví dụ nguyên văn trong Quy định, với giả định thời gian cung ứng tại thời điểm soạn quy định (HCM 4 ngày, Hà Nội 18 ngày) — khác với 5 ngày đang áp dụng cho kho HCM01 trong tháng 11/2026 ở trang này. Điểm cần giữ là nguyên tắc: cùng một SKU nhưng khác kho thì ROP khác nhau, nên dashboard này tính riêng cho kho HCM01 trước. Khi nhân bản sang kho Hà Nội hoặc kho khác, giữ nguyên cấu trúc và công thức — chỉ thay FC, MIN, thời gian cung ứng và tồn của kho đó.</p>
+      </div>
+    </div>
+    <h3 style="margin:22px 0 12px;font-size:17px">Quy trình ra quyết định đặt hàng — 5 bước</h3>
+    <div class="steps">
+      <div class="step2"><div class="n">1</div><h3>Cập nhật dữ liệu</h3><p>FC tháng, tồn hiện có, hàng đang về, đơn cam kết, hạn dùng và thời gian cung ứng theo từng kho.</p></div>
+      <div class="step2"><div class="n">2</div><h3>Hệ thống tính</h3><p>Nhu cầu/ngày, MIN, ROP, tồn sau cam kết và trạng thái cảnh báo cho từng SKU.</p></div>
+      <div class="step2"><div class="n">3</div><h3>Kiểm tra ngoại lệ</h3><p>Nếu tồn sau cam kết &lt; ROP: rà soát gần hết hạn, bán chậm, mùa vụ, hợp đồng và sự cố cung ứng.</p></div>
+      <div class="step2"><div class="n">4</div><h3>Xác định lượng đặt</h3><p>MTV chốt lượng đề nghị theo FC tháng và nhu cầu thực tế; quản lý phê duyệt hoặc điều chỉnh kèm lý do.</p></div>
+      <div class="step2"><div class="n">5</div><h3>Phát hành và theo dõi</h3><p>Ra đơn mua / sản xuất sau phê duyệt, theo dõi ngày hàng về đến khi nhập kho.</p></div>
+    </div>
+  </section>
+
+  
+  <section id="luu-tru" aria-label="Lưu trữ dữ liệu và triển khai app nội bộ">
+    <div class="sec-head">
+      <div><h2>Lưu trữ dữ liệu và triển khai thành app nội bộ</h2><p>Hai câu hỏi vận hành thường gặp: số liệu tải lên có được lưu lại không, và trang này có đưa lên tên miền, host riêng để dùng như một app nội bộ được không. Cả hai đều làm được — theo đúng cơ chế ghi dưới đây.</p></div>
+      <span class="badge">Vận hành hệ thống</span>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <h3>1 · Dữ liệu được lưu ngay trên thiết bị</h3>
+        <p class="desc">Không cần tải lại file sau mỗi lần mở trang.</p>
+        <ul class="upload-steps" style="margin-bottom:0">
+          <li>Mỗi lần <b>tải file lên</b>, <b>sửa số trực tiếp</b> hoặc <b>đổi ngày về kho / ngày chốt số liệu</b> ở mục Cập nhật số liệu, trang tự lưu bản mới nhất — gồm cả hai ngày tham số đó — vào bộ nhớ của trình duyệt trên chính thiết bị đang dùng (localStorage).</li>
+          <li>Đóng trang rồi mở lại trên cùng thiết bị, cùng trình duyệt: dashboard hiển thị đúng bản số liệu đã lưu — không phải tải lại file.</li>
+          <li>Bản lưu gắn với <b>từng thiết bị và từng trình duyệt</b>: chưa đồng bộ giữa máy tính và điện thoại, giữa các máy khác nhau. Xóa dữ liệu duyệt web hoặc đổi trình duyệt là mất bản lưu.</li>
+          <li>Dữ liệu không được gửi lên máy chủ nào trong quá trình sử dụng.</li>
+          <li>Quản lý bản lưu ở mục <a href="#cap-nhat">Cập nhật số liệu</a>: “Xóa dữ liệu đã lưu trên thiết bị này” để gỡ bản lưu; “Khôi phục số gốc T11/2026” để quay về số mẫu tháng 11/2026. Hồ sơ chính thức của kỳ vẫn là file Excel tải xuống.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>2 · Đưa lên tên miền và host riêng</h3>
+        <p class="desc">Trang là một file HTML tĩnh duy nhất — host nào cũng chạy được, không cần cài cơ sở dữ liệu.</p>
+        <ol class="upload-steps" style="margin-bottom:0">
+          <li><b>Tải file trang:</b> bấm nút “Tải file HTML của trang này” ở cuối mục này — file tải xuống chính là file đưa lên host.</li>
+          <li><b>Tạo tên miền con</b> trên tên miền sẵn có, ví dụ một subdomain dành cho nội bộ, và trỏ về host.</li>
+          <li><b>Tải file lên host</b> qua trang quản trị host hoặc FTP, đặt trong thư mục web của subdomain (thường là public_html), đổi tên thành index.html.</li>
+          <li><b>Bật HTTPS</b> bằng chứng chỉ miễn phí của host để địa chỉ hiển thị ổ khóa an toàn.</li>
+          <li><b>Hạn chế truy cập nội bộ:</b> đặt mật khẩu cho thư mục trên host, hoặc chỉ cho phép dải IP văn phòng / truy cập qua VPN. Đây là bước bắt buộc vì trang chứa số liệu kinh doanh.</li>
+          <li><b>Kiểm tra</b> trên cả máy tính và điện thoại sau khi tải lên; cập nhật phiên bản mới bằng cách tải lại file index.html đè lên bản cũ.</li>
+        </ol>
+        <div class="upload-actions">
+          <button class="btn btn-ghost" id="btn-download-html" type="button">Tải file HTML của trang này</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>3 · Khi muốn dữ liệu dùng chung cho cả đội</h3>
+        <p class="desc">Bản hiện tại lưu theo thiết bị. Muốn nhiều người cùng xem một bộ số liệu, cần thêm một lớp lưu trữ tập trung.</p>
+        <ul class="upload-steps" style="margin-bottom:0">
+          <li>Bổ sung một <b>backend nhỏ trên chính host sẵn có</b>: một API đơn giản kèm cơ sở dữ liệu (host thông thường đã hỗ trợ sẵn PHP và MySQL) để lưu số liệu tập trung thay cho bộ nhớ trình duyệt.</li>
+          <li>Thêm <b>đăng nhập theo chức danh</b>: vai trò Điều phối được sửa số; vai trò Kinh doanh và quản lý chỉ xem — đúng phân quyền trong SOP.</li>
+          <li>Ghi <b>nhật ký thay đổi</b>: ai sửa, sửa mã nào, lúc nào — phục vụ đối chiếu cuối kỳ.</li>
+          <li>Phần giao diện và công thức tính của trang giữ nguyên; khi có backend, chỉ thay điểm lưu dữ liệu từ thiết bị sang máy chủ.</li>
+          <li>Trước khi có backend, quy ước tạm thời: một đầu mối Điều phối giữ file Excel chuẩn của kỳ và là nguồn số liệu duy nhất để đối chiếu.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="viec-can-lam">
+    <div class="sec-head">
+      <div><h2>Việc cần làm — theo vai trò chủ trì: Trưởng BP Điều phối</h2><p>Suy ra trực tiếp từ số liệu tháng 11 ở trên. Mỗi việc gắn với một con số cụ thể để rà soát lại được ở kỳ cập nhật sau.</p></div>
+      <span class="badge">Ưu tiên theo rủi ro mất bán</span>
+    </div>
+    <div class="grid2" id="tasks-wrap">
+      <div class="card">
+        <h3>Trong tuần này (trước 25/11)</h3>
+        <ul class="checklist">
+          <li><span><b>Chốt chuyến về bổ sung cho 2 mã Classic 750 ml</b> — thiếu tổng 37.184 chai so với FC + MIN; trình rõ khả năng đáp ứng của Nhà máy và ngày về, không để dồn sang tháng 12 khi nhu cầu Tết tăng.</span></li>
+          <li><span><b>Quyết nguồn về cho Vivazz</b> — Vivazz 720 ml, Kombucha, Zero và Balance còn thiếu tổng khoảng 6.600 chai nhu cầu, chuyến <span class="js-ship">20/11</span> về 0; đối chiếu tiến độ hàng Vivazz 330 ml với Nhà máy trước khi Marketing đẩy bán.</span></li>
+          <li><span><b>Xử lý 15 mã hết tồn còn nhu cầu</b> — ưu tiên Diplomatic Merlot (453,5), Caliber Gold Label (328) và Vang Non Tươi (400): hoặc chốt ngày về, hoặc thông báo sớm cho Kinh doanh để khóa nhận đơn.</span></li>
+          <li><span><b>Xác nhận FCBS của nhóm Estate / Heritage Chateau Dalat còn hiệu lực không</b> — 5 mã đang treo FCBS 240 chai/mã nhưng mới xuất 15–33 chai, tồn đủ bán 200–345 ngày; nếu FCBS không còn hiệu lực thì chuyển ngay sang danh sách clear ở mục Hàng bán chậm.</span></li>
+          <li><span><b>Gửi FC tháng 12 (FC n+1) trước ngày 25/11</b> theo quy định — đây là cơ sở để Nhà máy chuyển đổi bán thành phẩm thành thành phẩm cho cao điểm Tết.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Trong tháng 11 và chuẩn bị tháng 12</h3>
+        <ul class="checklist">
+          <li><span><b>Rà soát 41 mã có đề xuất nhưng chưa có chuyến về</b> (10.034 chai) — phân loại dứt điểm: chờ sản xuất, chờ vật tư, hay nhu cầu không còn hiệu lực để gỡ cảnh báo giả.</span></li>
+          <li><span><b>Rà soát SP TMĐT theo từng mã</b> — 9 mã còn thiếu sau cung ứng trong khi tồn tổng dòng vẫn dương 11.954; kiểm tra lệch cơ cấu giữa các mã TMĐT trước mùa sale cuối năm.</span></li>
+          <li><span><b>Chốt phương án clear cho 41 mã bán chậm (16.698 chai — 18,7% tồn sau cung ứng)</b> — ngừng về thêm toàn bộ 25 mã nhóm đỏ, đối chiếu hạn dùng từng mã trước khi quyết, ưu tiên đẩy qua TMĐT, showroom và combo quà Tết; hộp quà mùa cũ gắn hạn chót xử lý trước Tết, không để qua Tết thành tồn chết.</span></li>
+          <li><span><b>Quyết đầu ra cho 25 mã chưa xuất chai nào trong tháng 11</b> (1.721 chai tồn) — mỗi mã hoặc gắn vào một chương trình bán cụ thể có người phụ trách, hoặc đưa vào danh sách clear; không để sang tháng 12 mà vẫn không có chủ sở hữu.</span></li>
+          <li><span><b>Cập nhật dashboard theo chu kỳ chuyến về</b> — mỗi lần chốt một chuyến, thay số ở cột O và đọc lại cảnh báo sau cung ứng; mục tiêu kéo tỷ lệ mã đạt từ 54,2% lên trước khi chốt số cuối tháng.</span></li>
+        </ul>
+      </div>
+    </div>
+    <details>
+      <summary>Nguồn số liệu và giới hạn của trang này</summary>
+      <p>Nguồn: file “FC_T11_26 — CUNG ỨNG – TỒN KHO MIN – ROP – QDM.xlsx” của Bộ phận Điều phối, gồm sheet “CUNG ỨNG VỀ KHO HCM T11” (189 mã SKU kho HCM), sheet “DASHBOARD CUNG ỨNG T11” (tổng hợp và phân dòng), sheet “TỒN KHO HCM01” (tồn khả dụng đã trừ SO/YCCH đang giữ) và sheet “QUY ĐỊNH TỒN KHO 1.11.26”. Số liệu kỳ mẫu chốt tại ngày 19/11/2026; chuyến về trong file mẫu ghi ngày 20/11/2026 là số đã chốt trong file đó, chưa phải số nhập kho thực tế. Trên trang, ngày về kho là tham số sửa được tại mục Cập nhật số liệu — đổi ngày không làm thay đổi nguồn gốc số liệu của kỳ mẫu này.</p>
+      <p>Trang tự tính lại khi nạp file mới: dùng mục “Cập nhật số liệu” ở đầu trang để tải file cung ứng tháng mới (giữ nguyên cấu trúc sheet “CUNG ỨNG VỀ KHO HCM”), hoặc sửa trực tiếp ô Tồn và ô Về kho trong mục Tra cứu SKU. Dữ liệu chỉ xử lý trong trình duyệt và được tự lưu trên thiết bị đang dùng (không lưu trên máy chủ, chưa đồng bộ giữa các thiết bị) — mở lại trang trên cùng thiết bị sẽ thấy đúng số đã tải hoặc đã sửa; hồ sơ chính thức vẫn là file Excel tải xuống. Phạm vi hiện tại chỉ gồm kho HCM01; các kho khác áp dụng cùng cấu trúc khi có FC, MIN, ROP và tồn riêng của kho đó. Mã chưa có trong sheet tồn kho được tính tồn bằng 0 theo đúng cách tính trong file.</p>
+      <p>Phân loại “bán chậm / cần clear” ở mục Hàng bán chậm không có sẵn trong file — trang này suy ra từ hai cột có sẵn của file là tồn sau cung ứng và lượng đã xuất từ 01–19/11, theo công thức số ngày bán hết tồn ghi ngay trong mục đó. File không chứa dữ liệu hạn dùng và giá vốn, nên trang không kết luận về mức giảm giá hay giá trị vốn đọng; quyết định clear từng mã phải đối chiếu hạn dùng thực tế tại kho.</p>
+    </details>
+  </section>
+
+  <footer class="footer">
+    <p><b>SOP Quản trị Hàng hóa — Cung ứng · Kho HCM01 · Kỳ mẫu tháng 11/2026.</b> Tài liệu vận hành của Bộ phận Điều phối theo Quy định quản trị hàng tồn kho 1.11.26 của MTV Ladofoods. Cập nhật gần nhất: <span id="footer-updated">19/11/2026</span>.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+var DONG_LABEL = {"CD":"Chateau Dalat","VDL":"Vang Đà Lạt","Sangria":"Sangria","Vivazz":"Vivazz","VangNK":"Vang nhập khẩu","Hộp quà":"Hộp quà / Estate","Giftbox":"Giftbox","HRC":"Horeca","V.LÍT":"Vang lít / Non tươi","SPR DL":"SP riêng Đà Lạt","GIÁ RẺ":"Giá rẻ","OEM":"OEM","TMDT":"TMĐT","VMO":"Vang mật ong","":"Vivazz mở rộng / khác"};
+/* Cấu trúc mỗi SKU: [0 mã, 1 tên, 2 dòng, 3 FC, 4 FCBS, 5 MIN, 6 ROP, 7 tồn, 8 đã xuất, 9 nhu cầu còn lại,
+   10 về kho, 11 thùng, 12 tồn sau cung ứng, 13 đề xuất (CT), 14 cảnh báo trước, 15 cảnh báo sau,
+   16 đã nhập, 17 quy cách, 18 tải trọng/thùng, 19 tải trọng chuyến] */
+var SKUS = [["R0101094", "Vang Chateau Dalat- Signature - Shiraz- hộp 1 chai 750 ml", "CD", 73, 0, 30, 48, 70, 87, 0, 180, 30, 250, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 13.1, 393], ["R0101070", "Vang Chateau Dalat - Special - Cabernet Sauvignon - red wine - 750 ml", "CD", 383, 0, 228, 294, 336, 261, 122, 300, 50, 636, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 300, 6, 9.5, 475], ["R0101055", "Vang Chateau Dalat - Special - Merlot - red wine - 750 ml", "CD", 356, 0, 240, 300, 365, 297, 59, 300, 50, 665, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 300, 6, 9.6, 480], ["R0101109", "Vang Chateau Dalat- Special- Sauvignon Blanc - 750 ml", "CD", 129, 0, 192, 216, 370, 561, 0, 180, 30, 550, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 690, 6, 8.2, 245.99999999999997], ["R0101073", "Vang Chateau Dalat - Tradition - Cabernet Sauvignon - Red wine - 750 ml", "CD", 242, 0, 174, 216, 367, 75, 167, 180, 30, 547, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 240, 6, 9.7, 291], ["R0101074", "Vang Chateau Dalat - Tradition - Merlot - Red wine - 750 ml", "CD", 152, 0, 102, 132, 430, 81, 71, 0, 0, 430, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 180, 6, 9.7, 0], ["R0101159", "Chateau Dalat - Single Edition - Sauvignon Blanc - 750 ml", "CD", 119, 0, 144, 168, 222, 132, 0, 120, 20, 342, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 120, 6, 8.2, 164], ["R0101129", "Chateau Dalat - Single Edition - Shiraz - 750 ml", "CD", 164, 0, 138, 168, 240, 63, 101, 120, 20, 360, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 190], ["R0101130", "Chateau Dalat Selection red wine 750ml", "CD", 104, 0, 18, 36, 101, 39, 65, 0, 0, 101, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 0], ["R0101113", "Vang Chateau DaLat - Apec Collection - Red Wine - 375 ml", "CD", 92.5, 0, 48, 72, 459, 87, 5.5, 0, 0, 459, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 360, 12, 11.2, 0], ["R0105001", "Vang nổ Chateau Dalat - Sparkling red wine - 750 ml", "CD", 1370, 0, 864, 1098, 1288, 1227, 143, 0, 0, 1288, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 1200, 6, 9.2, 0], ["R0105002", "Vang nổ Chateau Dalat - Sparkling white wine - 750 ml", "CD", 2266, 0, 1890, 2268, 1035, 2523, 0, 0, 0, 1035, 858, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - DƯỚI MIN sau cung ứng", 2400, 6, 9.2, 0], ["R0101117", "Ladofoods - Sweet Honey wine - Vang mật ong 750 ml", "VMO", 99, 0, 36, 54, 113, 21, 78, 0, 0, 113, 0, "3 - ĐỦ: chưa cần đặt", "4 - LƯU Ý: đủ FC+FCBS, cuối tháng < MIN", 30, 6, 8.2, 0], ["R0101140", "Ladofoods - Sweet Honey wine - Vang mật ong 375 ml", "VMO", 63.5, 0, 36, 48, 43, 63, 0.5, 120, 10, 163, 0, "2 - CẦN ĐẶT: dưới ROP", "3 - ĐẠT: đủ FC+FCBS + MIN", 24, 12, 11.2, 112], ["R0102030", "Vang Đà lạt - Premium - Red wine - 750 ml", "VDL", 362, 0, 420, 486, 341, 273, 89, 0, 0, 341, 168, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - DƯỚI MIN sau cung ứng", 300, 6, 8.2, 0], ["R0101103", "Vang Excellence - Red wine - 750 ml", "VDL", 1052, 0, 1050, 1230, 1206, 483, 569, 0, 0, 1206, 414, "2 - CẦN ĐẶT: dưới ROP", "2 - Đạt MIN, chưa tới ROP", 780, 6, 9.5, 0], ["R0101007", "Vang Excellence - White wine - 750 ml", "VDL", 599, 0, 576, 678, 1302, 309, 290, 0, 0, 1302, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 780, 6, 9.7, 0], ["R0101136", "Vang Đà lạt Classic Special - red wine - 750 ml", "VDL", 360, 0, 438, 498, 1239, 276, 84, 0, 0, 1239, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 780, 6, 9.5, 0], ["R0102040", "Vang Đà lạt - Strong - Red wine - 750 ml", "VDL", 1052, 0, 792, 972, 1605, 612, 440, 0, 0, 1605, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 780, 6, 9.5, 0], ["R0102029", "Vang Đà lạt - Superior - Red wine - 750 ml", "VDL", 894, 0, 996, 1146, 1513, 684, 210, 780, 130, 2293, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 780, 6, 8.2, 1066], ["R0102043", "Vang Đà lạt - Export - White wine - 750 ml", "VDL", 4320, 0, 3210, 3930, 3084, 2604, 1716, 780, 130, 3864, 1842, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "2 - Đạt MIN, chưa tới ROP", 2340, 6, 8.2, 1066], ["R0102027", "Vang Đà lạt - Export - red wine - 750 ml", "VDL", 3692, 0, 3462, 4080, 3396, 2064, 1628, 780, 130, 4176, 1698, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "4 - LƯU Ý: đủ FC+FCBS, cuối tháng < MIN", 2340, 6, 8.2, 1066], ["R0103041", "Vang Đà lạt - Classic - White wine - 750 ml", "VDL", 11834, 0, 9930, 11904, 4162, 6738, 5096, 1560, 260, 5722, 10866, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - DƯỚI MIN sau cung ứng", 9360, 6, 8.2, 2132], ["R0103018", "Vang Đà lạt - Classic - red wine - 750 ml", "VDL", 13800, 0, 13248, 15552, 4346, 7158, 6642, 1560, 260, 5906, 15546, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 7800, 6, 8.2, 2132], ["R0103035", "Vang Đà lạt - Sweet wine - 750 ml", "VDL", 120, 0, 204, 228, 345, 156, 0, 0, 0, 345, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 180, 6, 8.2, 0], ["R0103051", "Vang Camella - Sweet wine - 750 ml", "VDL", 3.5, 0, 0, 6, 5, 6, 0, 0, 0, 5, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.6, 0], ["R0103020", "Vang Đà lạt - Dankia - red wine - 750 ml", "VDL", 2148, 0, 1182, 1542, 2228, 1776, 372, 780, 130, 3008, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 2460, 6, 8.2, 1066], ["R0101013", "Vang APEC 14 - 375 ml", "VDL", 65.5, 0, 60, 72, 107, 15, 50.5, 0, 0, 107, 0, "3 - ĐỦ: chưa cần đặt", "4 - LƯU Ý: đủ FC+FCBS, cuối tháng < MIN", 0, 12, 11.2, 0], ["R0102034", "Vang Đà lạt - Superior - Red wine - 375 ml", "VDL", 626, 0, 780, 888, 1622, 441, 185, 0, 0, 1622, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 1200, 12, 9.4, 0], ["R0103021", "Vang Đà lạt - Classic - red wine - 375 ml", "VDL", 1268, 0, 1536, 1752, 1375, 831, 437, 0, 0, 1375, 600, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - DƯỚI MIN sau cung ứng", 1320, 12, 9.4, 0], ["R0103023", "Vang Đà lạt - Classic - White wine - 375 ml", "VDL", 854, 0, 1152, 1296, 1603, 951, 0, 0, 0, 1603, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 1200, 12, 9.4, 0], ["R0103034", "Vang Đà lạt - Classic - red wine - 1.5 lít", "VDL", 30, 0, 8, 16, 0, 0, 30, 0, 0, 0, 40, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 4, 10.4, 0], ["R0102036", "Vang Đà lạt - Premium - Red wine - hộp 3 lít", "VDL", 36, 0, 12, 20, 216, 22, 14, 0, 0, 216, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 120, 4, 13.2, 0], ["R0102037", "Vang Đà lạt - Strong - Red wine - hộp 3 lít", "VDL", 486, 0, 400, 484, 321, 378, 108, 0, 0, 321, 188, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - DƯỚI MIN sau cung ứng", 520, 4, 13.2, 0], ["R0102035", "Vang Đà lạt - Superior - Red wine - hộp 3 lít", "VDL", 129.5, 0, 112, 136, 447, 89, 40.5, 0, 0, 447, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 260, 4, 13.2, 0], ["R0102033", "Vang Đà lạt - Export - red wine - hộp 3 lít", "VDL", 777.5, 0, 812, 944, 208, 358, 419.5, 260, 65, 468, 1024, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - DƯỚI MIN sau cung ứng", 520, 4, 13.2, 858], ["R0103022", "Vang Đà lạt - Classic - red wine - hộp 3 lít", "VDL", 1910, 0, 1276, 1596, 1168, 1620, 290, 260, 65, 1428, 400, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "2 - Đạt MIN, chưa tới ROP", 1820, 4, 13.2, 858], ["R0103024", "Vang Đà lạt - Classic - White wine - hộp 3 lít", "VDL", 2388, 0, 2300, 2700, 774, 1636, 752, 780, 195, 1554, 2280, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - DƯỚI MIN sau cung ứng", 4560, 4, 13.2, 2574], ["R0104001", "Rượu chát Đà Lạt 750 ml", "VDL", 681.5, 0, 696, 816, 1575, 513, 168.5, 0, 0, 1575, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 1500, 12, 16, 0], ["R0104007", "Rượu Memory - Đà Lạt - 750 ml", "VDL", 420, 0, 432, 504, 1363, 219, 201, 0, 0, 1363, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 780, 12, 16, 0], ["R0108016", "Vang Vivazz Sangria Red 750 ml", "Sangria", 1038, 0, 918, 1092, 1074, 651, 387, 0, 0, 1074, 234, "2 - CẦN ĐẶT: dưới ROP", "2 - Đạt MIN, chưa tới ROP", 780, 6, 8.2, 0], ["R0108017", "Vang Vivazz Sangria White 750 ml", "Sangria", 808, 0, 672, 810, 1058, 507, 301, 0, 0, 1058, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 780, 6, 8.2, 0], ["R0106038", "Vivazz Sangria light - Red - Nước trái cây lên men - 750 ml", "Sangria", 105, 0, 216, 234, 262, 69, 36, 0, 0, 262, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 8.2, 0], ["R0106037", "Vivazz Sangria light - Rose - Nước trái cây lên men - 750 ml", "Sangria", 56, 0, 60, 72, 646, 639, 0, 0, 0, 646, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 600, 6, 8.2, 0], ["R0106039", "Vivazz Sangria light - White - Nước trái cây lên men - 750 ml", "Sangria", 98.5, 0, 150, 168, 984, 81, 17.5, 0, 0, 984, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 8.2, 0], ["R0106053", "Vivazz Sangria light - nước nho đỏ lên men - 275 ml", "Sangria", 362, 0, 348, 420, 437, 324, 38, 0, 0, 437, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 240, 12, 6.6, 0], ["R0106050", "Vivazz Sangria light - nước nho lên men hương đào - 275 ml", "Sangria", 401.5, 0, 420, 492, 530, 399, 2.5, 0, 0, 530, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 480, 12, 6.6, 0], ["R0106052", "Vivazz Sangria light - nước nho lên men hương việt quất - 275 ml", "Sangria", 195.5, 0, 60, 96, 593, 348, 0, 0, 0, 593, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 624, 12, 6.6, 0], ["R0106051", "Vivazz Sangria light - nước nho lên men hương chanh dây - 275 ml", "Sangria", 384.5, 0, 300, 372, 319, 288, 96.5, 0, 0, 319, 84, "2 - CẦN ĐẶT: dưới ROP", "2 - Đạt MIN, chưa tới ROP", 216, 12, 6.6, 0], ["R0108014", "Vang Nouvo Sangria Red 187 ml", "Sangria", 12, 0, 0, 24, 24, 18, 0, 0, 0, 24, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 24, 8.2, 0], ["R0108015", "Vang Nouvo Sangria White 187 ml", "Sangria", 12, 0, 0, 24, 36, 18, 0, 0, 0, 36, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 24, 8.2, 0], ["R0106031", "Nước trái cây có ga VIVAZZ - táo đỏ - 720 ml", "Vivazz", 1260, 0, 72, 282, 861, 348, 912, 0, 0, 861, 54, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 300, 6, 9.8, 0], ["R0106032", "Nước trái cây có ga VIVAZZ - Nho đỏ - 720 ml", "Vivazz", 2217.5, 0, 60, 432, 1005, 762, 1455.5, 0, 0, 1005, 456, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 1200, 6, 9.8, 0], ["R0106042", "Nước trái cây có ga VIVAZZ - Nho xanh - 720 ml", "Vivazz", 1396, 0, 60, 294, 614, 336, 1060, 0, 0, 614, 450, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 300, 6, 9.8, 0], ["R0106044", "Vivazz sparkling juice - Nước nho đỏ có ga - 275 ml", "Vivazz", 355, 0, 0, 60, 332, 32, 323, 0, 0, 332, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 100, 20, 11, 0], ["R0106036", "Vivazz sparkling juice - Nước nho có ga hương đào - 275 ml", "Vivazz", 381.5, 0, 0, 80, 321, 20, 361.5, 0, 0, 321, 60, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 0, 20, 11, 0], ["R0106030", "Vivazz sparkling juice - Nước nho có ga hương dâu tây - 275 ml", "Vivazz", 372, 0, 0, 80, 400, 20, 352, 0, 0, 400, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 20, 11, 0], ["R0106035", "Vivazz sparkling juice - Nước nho có ga hương việt quất - 275 ml", "Vivazz", 390.5, 0, 0, 80, 399, 20, 370.5, 0, 0, 399, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 20, 11, 0], ["R0106020", "Vivazz -Nước Nho Đỏ - Red Grapes - 250 ml", "OEM", 180, 0, 0, 40, 61, 80, 100, 0, 0, 61, 40, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 0, 20, 9.3, 0], ["R0101137", "Rượu vang đỏ HARRINGTON - Cabernet Sauvignon - 750 ml", "VangNK", 162, 0, 1458, 1488, 919, 201, 0, 0, 0, 919, 540, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - DƯỚI MIN sau cung ứng", 780, 6, 8.2, 0], ["R0101138", "Rượu vang đỏ HARRINGTON - Merlot 750ml", "VangNK", 108.5, 0, 90, 114, 267, 123, 0, 0, 0, 267, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 306, 6, 8.2, 0], ["R0101149", "Rượu vang đỏ Hill Harrington - Shiraz - 750 ml", "VangNK", 54, 0, 6, 18, 94, 45, 9, 0, 0, 94, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 8.2, 0], ["R0101163", "Rượu vang - Monte Maule Cabernet Sauvignon - 750 ml", "VangNK", 99, 300, 66, 84, 70, 96, 303, 240, 40, 310, 300, "2 - CẦN ĐẶT: dưới ROP", "4 - LƯU Ý: đủ FC+FCBS, cuối tháng < MIN", 96, 6, 9.5, 380], ["R0101162", "Rượu vang - Monte Maule Merlot - 750 ml", "VangNK", 72, 294, 42, 54, 47, 96, 294, 240, 40, 287, 294, "2 - CẦN ĐẶT: dưới ROP", "1 - THIẾU: chưa đủ FC+FCBS", 90, 6, 9.5, 380], ["R0107079", "Bộ hộp quà Đồng Hành Bền Vững I", "Hộp quà", 3, 0, 0, 3, 111, 1, 2, 0, 0, 111, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 3, 9.9, 0], ["R0107080", "Bộ hộp quà Đồng Hành Bền Vững II", "Hộp quà", 4.5, 0, 0, 3, 260, 1, 3.5, 0, 0, 260, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 3, 9.9, 0], ["R0107081", "Bộ hộp quà Đồng Hành Bền Vững III", "Hộp quà", 1, 0, 0, 3, 252, 1, 0, 0, 0, 252, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 3, 9.9, 0], ["R0107082", "Bộ hộp quà Đồng Hành Bền Vững IV", "Hộp quà", 0, 0, 0, 0, 322, 1, 0, 0, 0, 322, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 3, 9.9, 0], ["R0107083", "Bộ hộp quà Gắn Kết Song Hành", "Hộp quà", 7, 0, 12, 15, 209, 399, 0, 0, 0, 209, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 246, 3, 14.8, 0], ["R0107084", "Bộ hộp quà Phúc Lộc Hòa Ca I", "Hộp quà", 0, 0, 18, 18, 153, 505, 0, 0, 0, 153, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 3, 17.4, 0], ["R0107085", "Bộ hộp quà Phúc Lộc Hòa Ca II", "Hộp quà", 0, 0, 0, 0, 107, 1, 0, 0, 0, 107, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 3, 17.4, 0], ["R0107086", "Bộ hộp quà Tứ Quý An Khang", "Hộp quà", 0, 0, 0, 0, 16, 2, 0, 0, 0, 16, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 1, 8.8, 0], ["R0107087", "Bộ hộp quà Lục Hợp Phú Quý", "Hộp quà", 0, 0, 0, 0, 2, 3, 0, 0, 0, 2, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 1, 11, 0], ["R0101165", "Chateau Dalat Signature Limided Edition - Vang Shiraz - 750 ml", "Hộp quà", 7.5, 0, 0, 6, 6, 6, 1.5, 0, 0, 6, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 0], ["R0101166", "Chateau Dalat Signature - Vang Merlot - 750 ml", "Hộp quà", 4, 0, 0, 6, 12, 6, 0, 0, 0, 12, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.5, 0], ["R0101167", "Chateau Dalat Signature - Vang Cabernet Sauvignon - 750 ml", "Hộp quà", 10, 0, 0, 6, 12, 6, 4, 0, 0, 12, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 0], ["R0101168", "Chateau Dalat Cuvée - Vang  Shiraz - 750 ml", "Hộp quà", 7.5, 0, 0, 6, 325, 6, 1.5, 0, 0, 325, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 0], ["R0101169", "Chateau Dalat Special - Vang Shiraz - 750 ml", "Hộp quà", 0, 0, 0, 0, 201, 6, 0, 0, 0, 201, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 65, 6, 9.5, 0], ["R0101170", "Chateau Dalat Sweet Red Wine - Vang đỏ ngọt - 750 ml", "Hộp quà", 6, 0, 6, 12, 93, 12, 0, 0, 0, 93, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 65, 6, 9.5, 0], ["R0101171", "Chateau Dalat Light - Vang Sauvignon Blanc - 750 ml", "Hộp quà", 0, 0, 12, 12, 220, 132, 0, 0, 0, 220, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 172, 6, 9.5, 0], ["R0106048", "Vivazz Sangria Light Pink - Nước trái cây lên men - 750 ml", "Hộp quà", 3.5, 0, 30, 36, 165, 138, 0, 0, 0, 165, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 172, 6, 9.5, 0], ["R0101172", "Chateau Dalat DemiSec Red Wine - Vang đỏ ngọt - 750 ml", "Hộp quà", 3.5, 0, 12, 18, 202, 132, 0, 0, 0, 202, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 172, 6, 9.5, 0], ["R0101173", "Chateau Dalat Estate - Vang Shiraz - 750 ml", "Hộp quà", 26, 240, 30, 36, 227, 33, 240, 120, 20, 347, 18, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 190], ["R0101174", "Chateau Dalat Estate - Vang Merlot - 750 ml", "Hộp quà", 12, 240, 36, 42, 163, 27, 240, 180, 30, 343, 78, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 285], ["R0101175", "Chateau Dalat Estate - Vang Cabernet Sauvignon - 750 ml", "Hộp quà", 15.5, 240, 30, 36, 70, 33, 240, 180, 30, 250, 174, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "4 - LƯU Ý: đủ FC+FCBS, cuối tháng < MIN", 0, 6, 9.5, 285], ["R0101179", "Chateau Dalat Heritage - Vang Sauvignon Blanc - 750 ml", "Hộp quà", 38, 240, 168, 180, 182, 147, 240, 120, 20, 302, 60, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "4 - LƯU Ý: đủ FC+FCBS, cuối tháng < MIN", 144, 6, 9.5, 190], ["R0101176", "Chateau Dalat Heritage - Vang Shiraz - 750 ml", "Hộp quà", 14, 240, 0, 6, 294, 27, 240, 0, 0, 294, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 0], ["R0101177", "Chateau Dalat Heritage - Vang Merlot - 750 ml", "Hộp quà", 14, 240, 30, 36, 243, 33, 240, 120, 20, 363, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 190], ["R0101178", "Chateau Dalat Heritage - Vang Cabernet Sauvignon - 750 ml", "Hộp quà", 18, 240, 36, 42, 71, 27, 240, 180, 30, 251, 174, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "4 - LƯU Ý: đủ FC+FCBS, cuối tháng < MIN", 0, 6, 9.5, 285], ["R0101180", "Chateau Dalat Heritage - Honey Wine - Vang mật ong - 750 ml", "Hộp quà", 6, 240, 0, 6, 152, 15, 240, 120, 20, 272, 90, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 190], ["R0101181", "Chateau Dalat - Vang Heritage Rose - 750 ml", "Hộp quà", 20, 240, 0, 6, 179, 39, 240, 120, 20, 299, 66, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 190], ["C0103108", "Bộ quà tặng 02 chai vang Long Phụng 750ml", "Giftbox", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 1, 0, 0], ["R0104024", "Rượu Prosperity Dragon - 750 ml", "Giftbox", 20, 0, 0, 4, 0, 0, 20, 0, 0, 0, 20, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 4, 6.5, 0], ["R0104025", "Rượu Peaceful Phoenix - 750 ml", "Giftbox", 20, 0, 0, 4, 0, 0, 20, 0, 0, 0, 20, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 4, 6.5, 0], ["R0107009", "Hộp 2 chai VĐL Apec 375ml", "Giftbox", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 12.5, 0], ["R0107029", "Vang Đà lạt - Export - red wine - pháo gỗ 1.5 lít", "Giftbox", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 1, 3.5, 0], ["R0107072", "Kệ ngựa Classic Special Red 1.5L", "Giftbox", 3.5, 0, 0, 1, 4, 7, 0, 0, 0, 4, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 4, 1, 3.5, 0], ["R0107073", "Kệ gỗ Classic Special Red 1.5L", "Giftbox", 0, 0, 0, 0, 4, 6, 0, 0, 0, 4, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 1, 3.5, 0], ["R0107074", "Xe pháo 375ml", "Giftbox", 3.5, 0, 0, 1, 25, 1, 2.5, 0, 0, 25, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 1, 1.7, 0], ["R0107022", "Vang Đà lạt - Classic - red wine - trống gỗ 3 lít", "Giftbox", 3.5, 0, 0, 1, 11, 4, 0, 0, 0, 11, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 1, 5.4, 0], ["R0107078", "Hộp Vang Đà lạt Classic Special - red wine 1.45 lít", "Giftbox", 1, 0, 4, 8, 0, 0, 1, 0, 0, 0, 8, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 4, 10.3, 0], ["R0101204", "Chateau Dalat - Moka Essence - Rượu vang tinh túy Moka - 750 ml", "Giftbox", 18, 0, 168, 174, 281, 38, 0, 0, 0, 281, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 7.9, 0], ["R0101205", "Chateau Dalat - Olong Seret - Rượu vang bí ẩn Olong - 750 ml", "Giftbox", 15.5, 0, 162, 168, 1450, 74, 0, 0, 0, 1450, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 7.9, 0], ["R0101204", "Hộp 2 chai Moka Essense & Olong Secret", "Giftbox", 0, 0, 0, 0, 281, 38, 0, 0, 0, 281, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 1, 0, 0], ["R0107099", "Kệ Chiến Mã Lam Sắc 750", "Giftbox", 0, 0, 0, 0, 64, 0, 0, 0, 0, 64, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 1, 3.5, 0], ["R0107100", "Kệ Chiến Mã Hoàng Kim 750", "Giftbox", 0, 0, 0, 0, 76, 0, 0, 0, 0, 76, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 1, 3.5, 0], ["R0107097", "Kệ Chiến Mã Lam Sắc 750", "Giftbox", 3.5, 0, 0, 1, 4, 1, 2.5, 0, 0, 4, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 1, 3.5, 0], ["R0107098", "Kệ Chiến Mã Hoàng Kim 750", "Giftbox", 3.5, 0, 0, 1, 92, 2, 1.5, 0, 0, 92, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 1, 3.5, 0], ["R0101142", "Vang Chateau Dalat- Reserva - Sauvignon Blanc - 750 ml", "HRC", 0, 0, 0, 0, 314, 6, 0, 0, 0, 314, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 8.2, 0], ["R0101145", "Vang Chateau Dalat- Reserva - Merlot - 750 ml", "HRC", 59, 0, 0, 12, 6, 66, 0, 120, 20, 126, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 8.2, 164], ["R0101144", "Rượu vang đỏ HRC Harrington - Cabernet Sauvignon - 750 ml", "HRC", 0, 0, 84, 84, 66, 114, 0, 90, 15, 156, 18, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "3 - ĐẠT: đủ FC+FCBS + MIN", 156, 6, 8.6, 129], ["R0101143", "Rượu vang đỏ HRC Harrington - Merlot - 750 ml", "HRC", 0, 6, 78, 78, 66, 120, 6, 90, 15, 156, 18, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "3 - ĐẠT: đủ FC+FCBS + MIN", 156, 6, 8.6, 129], ["R0101153", "Chateau Dalat - Single Edition - Sauvignon Blanc", "V.LÍT", 2, 0, 0, 10, 0, 0, 2, 0, 0, 0, 10, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 10, 12.6, 0], ["R0101154", "Vang Chateau Dalat - Special - Cabernet Sauvignon - red wine", "V.LÍT", 2, 0, 0, 10, 0, 0, 2, 0, 0, 0, 10, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 10, 12.6, 0], ["R0101161", "Chateau Dalat - Single Edition - Shiraz", "V.LÍT", 4, 0, 0, 10, 0, 0, 4, 0, 0, 0, 10, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 10, 12.6, 0], ["R0110005", "Vang Non Tươi - White", "V.LÍT", 240, 0, 0, 40, 0, 0, 240, 0, 0, 0, 240, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 5, 6.6, 0], ["R0110006", "Vang Non Tươi - Red", "V.LÍT", 160, 0, 0, 30, 0, 0, 160, 0, 0, 0, 160, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 5, 6.6, 0], ["R0101131", "Chateau Dalat - Single Edition - Shiraz - 187 ml", "SPR DL", 6, 0, 0, 12, 36, 48, 0, 0, 0, 36, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 4.5, 0], ["R0101132", "Chateau Dalat - Single Edition - Sauvignon Blanc - 187 ml", "SPR DL", 0, 0, 0, 0, 84, 36, 0, 0, 0, 84, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 4.5, 0], ["R0107075", "Hộp 4 chai 187 ml (Edition trắng đỏ, Nouvo Sangria trắng đỏ)", "SPR DL", 10, 0, 0, 6, 5, 3, 7, 0, 0, 5, 6, "2 - CẦN ĐẶT: dưới ROP", "1 - THIẾU: chưa đủ FC+FCBS", 0, 6, 9.8, 0], ["R0107076", "Hộp 2 chai 187 ml (Edition trắng đỏ)", "SPR DL", 10, 0, 0, 12, 14, 10, 0, 0, 0, 14, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 9.8, 0], ["R0104026", "Vang Diamond - Red Label - 750 ml", "GIÁ RẺ", 0, 0, 0, 0, 1944, 336, 0, 0, 0, 1944, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 2280, 12, 19.2, 0], ["R0104027", "Vang Diamond - Gold Label - 750 ml", "GIÁ RẺ", 0, 0, 0, 0, 990, 336, 0, 0, 0, 990, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 1320, 12, 19.2, 0], ["R0104029", "Vang Dalata - 750 ml", "GIÁ RẺ", 372, 0, 204, 276, 15, 516, 0, 0, 0, 15, 192, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - DƯỚI MIN sau cung ứng", 336, 12, 19.2, 0], ["R0106045", "Grape Valley - Red Grape - Nước trái cây có ga nho đỏ - 750 ml", "GIÁ RẺ", 314, 0, 0, 54, 240, 78, 236, 0, 0, 240, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 180, 6, 9.8, 0], ["R0106046", "Grape Valley - Red Apple - Nước trái cây có ga hương táo đỏ - 750 ml", "GIÁ RẺ", 182, 0, 0, 36, 306, 96, 86, 0, 0, 306, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 180, 6, 9.8, 0], ["R0106047", "Grape Valley - Passion Juice - Nước trái cây có ga hương chanh leo - 750 ml", "GIÁ RẺ", 166, 0, 0, 30, 282, 96, 70, 0, 0, 282, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 180, 6, 9.8, 0], ["R0101139", "Vang Diplomatic - Cabernet Sauvignon - 750 ml", "OEM", 554, 0, 12, 108, 182, 318, 236, 0, 0, 182, 54, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 450, 6, 8.2, 0], ["R0101141", "Vang Diplomatic - Merlot  - 750 ml", "OEM", 453.5, 0, 0, 78, 0, 0, 453.5, 0, 0, 0, 456, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 6, 8.2, 0], ["R0108018", "Vang Aroma House - Red Sangria -750 ml", "OEM", 0, 0, 180, 180, 240, 360, 0, 0, 0, 240, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 8.2, 0], ["R0108019", "Vang Aroma House - White Sangria - 750 ml", "OEM", 0, 0, 240, 240, 1380, 420, 0, 0, 0, 1380, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 8.2, 0], ["R0104002", "Vang ROMA 1989 - 750 ml", "OEM", 0, 0, 72, 72, 181, 0, 0, 0, 0, 181, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 12, 16, 0], ["R0106041", "Nước nho đỏ có ga - Sparkling Grape  Red Juice - Coop Select - 750 ml", "OEM", 30, 0, 0, 6, 0, 0, 30, 0, 0, 0, 30, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 6, 9.8, 0], ["R0104018", "Vang Caliber - Blue Label - 750 ml", "OEM", 3.5, 0, 0, 12, 0, 0, 3.5, 0, 0, 0, 12, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 12, 16, 0], ["R0104020", "Vang Caliber - Gold Label - 750 ml", "OEM", 328, 0, 0, 60, 0, 0, 328, 0, 0, 0, 336, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 12, 16, 0], ["R0104019", "Vang Caliber - Red Label - 750 ml", "OEM", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 16, 0], ["R0103045", "Vang DaLat Essence - Red Wine - 750 ml", "TMDT", 0, 0, 0, 0, 60, 18, 0, 0, 0, 60, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 8.2, 0], ["R0103046", "Vang DaLat Essence - Red Wine - 375 ml", "TMDT", 0, 0, 0, 0, 60, 24, 0, 0, 0, 60, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 9.4, 0], ["R0103047", "Vang DaLat Essence - Red Wine - hộp 3 lít", "TMDT", 43.5, 0, 0, 8, 16, 44, 0, 0, 0, 16, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 4, 13.2, 0], ["R0103048", "Vang DaLat Essence - White Wine - 750 ml", "TMDT", 0, 0, 0, 0, 72, 0, 0, 0, 0, 72, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 8.2, 0], ["R0103049", "Vang DaLat Essence - White Wine - 375 ml", "TMDT", 0, 0, 0, 0, 37, 24, 0, 0, 0, 37, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 9.4, 0], ["R0103050", "Vang DaLat Essence - White Wine - hộp 3 lít", "TMDT", 26, 0, 0, 8, 20, 24, 2, 0, 0, 20, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 4, 13.2, 0], ["R0101194", "Chateau DaLat - Celler - Vang Cabernet Sauvignon - 750 ml", "TMDT", 0, 0, 0, 0, 24, 0, 0, 0, 0, 24, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.7, 0], ["R0101193", "Chateau DaLat - Celler - Vang Merlot - 750 ml", "TMDT", 0, 0, 0, 0, 18, 0, 0, 0, 0, 18, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.7, 0], ["R0105010", "Chateau Đà Lạt - Sparkling Red wine - Vang sủi bọt 750 ml", "TMDT", 30, 0, 0, 6, 60, 24, 6, 0, 0, 60, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.2, 0], ["R0105011", "Chateau Đà Lạt - Sparkling White wine - Vang sủi bọt 750 ml", "TMDT", 30, 0, 0, 6, 24, 24, 6, 0, 0, 24, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.2, 0], ["R0101190", "Chateau DaLat - Collection – Vang APEC 25th – Red Wine - 375 ml", "TMDT", 0, 0, 0, 0, 108, 24, 0, 0, 0, 108, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 11.2, 0], ["R0102049", "Vang ĐàLạt Legacy Red White 750ml", "TMDT", 0, 0, 0, 0, 36, 0, 0, 0, 0, 36, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 8.2, 0], ["R0101198", "Vang Chateau Dalat Noble Sauvignon Blanc 750 ml", "TMDT", 0, 0, 0, 0, 114, 0, 0, 0, 0, 114, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 8.2, 0], ["R0101200", "Vang Chateau Dalat Noble Cabernet Sauvignon Ladofoods 750ml", "TMDT", 0, 0, 0, 0, 24, 0, 0, 0, 0, 24, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.6, 0], ["R0101199", "Chateau Dalat - Noble - Vang Merlot - 750 ml", "TMDT", 0, 0, 0, 0, 6, 0, 0, 0, 0, 6, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.6, 0], ["R0102052", "Chateau Dalat - Vang đỏ Fortune Blossom - Red Label - 750 ml", "TMDT", 0, 0, 0, 0, 90, 6, 0, 0, 0, 90, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.5, 0], ["R0102053", "Chateau Dalat - Vang đỏ Fortune Blossom - Gold Label - 750 ml", "TMDT", 0, 0, 0, 0, 66, 0, 0, 0, 0, 66, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.5, 0], ["R0101064", "Chateau DaLat - Wine of The Cellar - Rose Wine - 375 ml", "TMDT", 0, 0, 0, 0, 60, 0, 0, 0, 0, 60, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 11.2, 0], ["R0101065", "Chateau DaLat - Wine of The Cellar - Sweet Red Wine - 375 ml", "TMDT", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 11.2, 0], ["R0101066", "Chateau DaLat - Wine of The Cellar - Red Wine - 375 ml", "TMDT", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 11.2, 0], ["R0101133", "Chateau Dalat - Single Edition - Shiraz - 375 ml", "TMDT", 0, 0, 0, 0, 58, 0, 0, 0, 0, 58, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 11.2, 0], ["R0101134", "Chateau Dalat - Single Edition - Sauvignon Blanc - 375 ml", "TMDT", 0, 0, 0, 0, 58, 0, 0, 0, 0, 58, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 12, 11.2, 0], ["R0102046", "Vang Đàlạt - Tradition - Red Wine - 750 ml", "TMDT", 0, 0, 0, 0, 18, 0, 0, 0, 0, 18, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 8.2, 0], ["R0102048", "Vang Đà lạt - Tradition - White Wine - 750 ml", "TMDT", 0, 0, 0, 0, 18, 0, 0, 0, 0, 18, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 8.2, 0], ["R0103052", "Vancaster -Vang đỏ- Classic 750 ml", "TMDT", 30, 0, 12, 18, 377, 36, 0, 0, 0, 377, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 0], ["R0103054", "Vancaster -Vang trắng- Classic 750 ml", "TMDT", 0, 0, 12, 12, 213, 0, 0, 0, 0, 213, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 6, 9.5, 0], ["R0102044", "Vancaster -Vang đỏ- Stella 750 ml", "TMDT", 0, 0, 0, 0, 55, 0, 0, 0, 0, 55, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.5, 0], ["R0103053", "Vancaster -Vang đỏ- Classic hộp 3 lít", "TMDT", 60, 0, 16, 28, 67, 12, 48, 0, 0, 67, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 20, 4, 13.2, 0], ["R0103055", "Vancaster -Vang trắng- Classic hộp 3 lít", "TMDT", 60, 0, 8, 20, 93, 8, 52, 0, 0, 93, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 4, 13.2, 0], ["R0103056", "Vancaster -Vang đỏ- Sweet Wine 750 ml", "TMDT", 0, 0, 0, 0, 30, 0, 0, 0, 0, 30, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.6, 0], ["R0102045", "Vang Dalat Rouge- Dalat Rouge 750 ml", "TMDT", 0, 0, 0, 0, 86, 0, 0, 0, 0, 86, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.5, 0], ["R0102050", "Vang Dalat Rouge- Dalat Rouge 375 ml", "TMDT", 0, 0, 36, 36, 58, 0, 0, 0, 0, 58, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 0, 12, 9.4, 0], ["R0107103", "Mã Vận Khai Hoa", "", 0, 0, 0, 0, 234, 0, 0, 0, 0, 234, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 7, 22, 0], ["R0107104", "Mã Phi Xuân Vinh", "", 0, 0, 0, 0, 96, 0, 0, 0, 0, 96, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 7, 32, 0], ["R0107105", "Đại Cát Tường Lộ", "", 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 26, 0], ["R0101213", "Vang đỏ Majestic Horse - Mã phong vinh - 750 ml", "", 0, 0, 0, 0, 47, 6, 0, 0, 0, 47, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 9.5, 0], ["R0101214", "Vang trắng Spring Stallion - Xuân Mã - 750 ml", "", 0, 0, 0, 0, 54, 0, 0, 0, 0, 54, 0, "5 - Không phát sinh nhu cầu", "5 - Không phát sinh nhu cầu", 0, 6, 8.2, 0], ["R0106060", "Vivazz Zero Sparkling Grape- Nước nho có ga Sauvignon Blanc - 330 ml", "", 600, 1000, 0, 108, 1113, 312, 1288, 0, 0, 1113, 180, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 600, 12, 7.6, 0], ["R0106061", "Vivazz Zero Sparkling Grape- Nước nho có ga Shiraz - 330 ml", "", 720, 1000, 0, 120, 861, 396, 1324, 0, 0, 861, 468, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 600, 12, 7.6, 0], ["R0106062", "Vivazz Zero Sparkling Grape- Nước nho có ga Muscat - 330 ml", "", 720, 1000, 0, 120, 945, 336, 1384, 0, 0, 945, 444, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 600, 12, 7.6, 0], ["R0106079", "Vivazz Sangria - Nước nho lên men - vị Đào - 330 ml", "", 540, 0, 0, 96, 267, 66, 474, 0, 0, 267, 216, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 0, 12, 7.6, 0], ["R0106080", "Vivazz Sangria - Nước nho lên men - vị Mật ong - 330 ml", "", 540, 0, 0, 96, 423, 54, 486, 0, 0, 423, 72, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 0, 12, 7.6, 0], ["R0106081", "Vivazz Sangria - Nước nho đỏ lên men  - 330 ml", "", 540, 0, 0, 96, 207, 78, 462, 0, 0, 207, 264, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 0, 12, 7.6, 0], ["R0106082", "Vivazz Sangria - Nước nho lên men - vị Chanh dây - 330 ml", "", 540, 0, 0, 96, 411, 66, 474, 0, 0, 411, 72, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 0, 12, 7.6, 0], ["R0106069", "Vivazz trà Kombucha - Nguyên bản - 330 ml", "", 600, 1480, 0, 108, 699, 654, 1480, 0, 0, 699, 792, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 960, 12, 7.6, 0], ["R0106070", "Vivazz trà Kombucha - Đào - 330 ml", "", 720, 0, 0, 120, 1515, 714, 6, 0, 0, 1515, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 1920, 12, 7.6, 0], ["R0106071", "Vivazz trà Kombucha - Chanh dây - 330 ml", "", 720, 480, 0, 120, 0, 0, 1200, 0, 0, 0, 1200, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 12, 7.6, 0], ["R0106072", "Vivazz trà Kombucha - Dâu tằm - 330 ml", "", 720, 480, 0, 120, 1515, 642, 558, 0, 0, 1515, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 1920, 12, 7.6, 0], ["R0106073", "Vivazz trà Kombucha - Habicus - 330 ml", "", 720, 480, 0, 120, 1539, 654, 546, 0, 0, 1539, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 1920, 12, 7.6, 0], ["R0106074", "Vivazz Balance - Nước trái cây có chất xơ và lợi khuẩn - vị Atiso - 330 ml", "", 180, 360, 0, 36, 357, 192, 360, 0, 0, 357, 12, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 360, 12, 7.6, 0], ["R0106076", "Vivazz Balance - Nước trái cây có chất xơ và lợi khuẩn - vị Dâu tằm - 330 ml", "", 180, 360, 0, 36, 405, 144, 396, 0, 0, 405, 0, "3 - ĐỦ: chưa cần đặt", "3 - ĐẠT: đủ FC+FCBS + MIN", 360, 12, 7.6, 0], ["R0106077", "Vivazz Balance - Nước trái cây có chất xơ và lợi khuẩn - vị Đào - 330 ml", "", 180, 360, 0, 36, 369, 156, 384, 0, 0, 369, 24, "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về", "1 - THIẾU: chưa đủ FC+FCBS", 360, 12, 7.6, 0], ["R0106078", "Vivazz Balance - Nước trái cây có chất xơ và lợi khuẩn - vị Chanh dây - 330 ml", "", 180, 360, 0, 36, 0, 0, 540, 0, 0, 0, 540, "1 - ĐẶT GẤP: dưới MIN / hết tồn", "1 - THIẾU: chưa đủ FC+FCBS", 0, 12, 7.6, 0]];
+var DEFAULT_META = {period:"Tháng 11/2026", periodLow:"tháng 11/2026", periodTag:"T11", month:11, year:2026, asof:"19/11/2026", asofShort:"19/11", asofDay:19, asofISO:"2026-11-19", daysInMonth:30, shipShort:"20/11", shipFull:"20/11/2026", shipISO:"2026-11-20", leadTime:5, source:"số liệu gốc tháng 11/2026", isDefault:true, edited:false};
+function pad2(n){ return (n<10?"0":"")+n; }
+function isoFromDate(d){ return d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate()); }
+function dateFromISO(iso){ if(!iso) return null; var p = String(iso).split("-"); if(p.length!==3) return null; var d = new Date(+p[0], +p[1]-1, +p[2]); return isNaN(d)? null : d; }
+function fullFromDate(d){ return pad2(d.getDate())+"/"+pad2(d.getMonth()+1)+"/"+d.getFullYear(); }
+function shortFromDate(d){ return d.getDate()+"/"+(d.getMonth()+1); }
+function isoFromFull(full){ if(!full) return ""; var m = String(full).match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/); if(!m) return ""; return m[3]+"-"+pad2(+m[2])+"-"+pad2(+m[1]); }
+function ensureMetaISO(){
+  if(!META.shipISO) META.shipISO = isoFromFull(META.shipFull);
+  if(!META.asofISO) META.asofISO = isoFromFull(META.asof);
+  var sd = dateFromISO(META.shipISO);
+  if(sd){ META.shipFull = fullFromDate(sd); META.shipShort = shortFromDate(sd); }
+  var ad = dateFromISO(META.asofISO);
+  if(ad){ META.asof = fullFromDate(ad); META.asofShort = shortFromDate(ad); META.asofDay = ad.getDate(); }
+}
+var META = JSON.parse(JSON.stringify(DEFAULT_META));
+var DEFAULT_SKUS = JSON.parse(JSON.stringify(SKUS));
+var LS_KEY = "sop-cung-ung-hcm01-v1";
+var LS_LOADED = false;
+function lsSave(){
+  try{
+    if(META.isDefault && !META.edited) return;
+    localStorage.setItem(LS_KEY, JSON.stringify({savedAt:new Date().toISOString(), skus:SKUS, meta:META}));
+  }catch(e){}
+  updateStorageNote();
+}
+function lsLoad(){
+  try{
+    var raw = localStorage.getItem(LS_KEY);
+    if(!raw) return false;
+    var d = JSON.parse(raw);
+    if(!d || !Array.isArray(d.skus) || d.skus.length<20 || !d.meta) return false;
+    var ok = d.skus.every(function(r){ return Array.isArray(r) && r.length>=20; });
+    if(!ok) return false;
+    SKUS = d.skus;
+    META = Object.assign(JSON.parse(JSON.stringify(DEFAULT_META)), d.meta);
+    if(!d.meta.shipISO) META.shipISO = isoFromFull(META.shipFull);
+    if(!d.meta.asofISO) META.asofISO = isoFromFull(META.asof);
+    LS_LOADED = true;
+    return true;
+  }catch(e){ return false; }
+}
+function lsClear(){ try{ localStorage.removeItem(LS_KEY); }catch(e){} }
+function updateStorageNote(){
+  var el = document.getElementById("storage-note");
+  if(!el) return;
+  try{
+    var raw = localStorage.getItem(LS_KEY);
+    if(raw){
+      var d = JSON.parse(raw);
+      var t = d.savedAt ? new Date(d.savedAt) : null;
+      el.innerHTML = "<b>Đã lưu trên thiết bị này</b> — bản số liệu hiện tại (" + esc(META.source || META.period) + ")" + (t && !isNaN(t) ? ", lưu lúc " + t.toLocaleString("vi-VN") : "") + ". Mở lại trang trên thiết bị này sẽ thấy đúng số đã lưu, không cần tải lại file. Bản lưu chưa đồng bộ sang thiết bị khác.";
+    } else {
+      el.innerHTML = "<b>Chưa có bản lưu tùy chỉnh trên thiết bị này</b> — đang hiển thị số gốc tháng 11/2026. Ngay khi tải file lên hoặc sửa số trực tiếp, trang sẽ tự lưu bản mới nhất trên thiết bị này.";
+    }
+  }catch(e){
+    el.textContent = "Trình duyệt hiện không cho lưu dữ liệu trên thiết bị này (có thể đang ở chế độ riêng tư) — số liệu chỉ xem được trong lần mở trang hiện tại, hãy tải xuống file Excel để giữ lại.";
+  }
+}
+
+var TASKS_HTML0 = "";
+function fmt(n){ if(n===null||n===undefined||n===""||isNaN(n)) return "—"; var v = Math.round(n*10)/10; return v.toLocaleString("vi-VN"); }
+function fmt2(n){ if(n===null||n===undefined||isNaN(n)) return "—"; return (Math.round(n*100)/100).toLocaleString("vi-VN",{minimumFractionDigits:0,maximumFractionDigits:2}); }
+function fmtPct(n){ return (Math.round(n*10)/10).toLocaleString("vi-VN") + "%"; }
+function esc(t){ return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function lvl(w){ if(!w) return "5"; var c = w.charAt(0); return ("12345".indexOf(c)>=0)? c : "5"; }
+function pillClass(l){ return l==="3" ? "pill-ok" : (l==="1" ? "pill-bad" : (l==="5" ? "pill-mut" : "pill-warn")); }
+function shortWarn(w){ if(!w) return "Không phát sinh nhu cầu"; return w.replace(/^\d+\s*-\s*/,""); }
+function ceil6(x){ return Math.ceil(Math.round(x*1e6)/1e6 - 1e-9); }
+function derive(s){
+  var fc=+s[3]||0, fcbs=+s[4]||0, mn=+s[5]||0, ton=+s[7]||0, xuat=+s[8]||0, ve=+s[10]||0;
+  var qc=+s[17]||1; if(qc<=0) qc=1;
+  var nhu = Math.max(fc-xuat,0)+fcbs;
+  var rop = ceil6((fc/30*META.leadTime+mn)/qc)*qc;
+  var raw = Math.max(0, nhu-ton);
+  if(ton<rop) raw = Math.max(raw, nhu+mn-ton);
+  var dx = raw>0 ? ceil6(raw/qc)*qc : 0;
+  var ts = ton+ve;
+  var wB, wA;
+  if(nhu+mn===0) wB = "5 - Không phát sinh nhu cầu";
+  else if(ton<mn || (ton<=0 && nhu>0)) wB = "1 - ĐẶT GẤP: dưới MIN / hết tồn";
+  else if(ton<rop) wB = "2 - CẦN ĐẶT: dưới ROP";
+  else if(ton<nhu) wB = "4 - LƯU Ý: ≥ ROP nhưng < FC+FCBS, vẫn phải về";
+  else wB = "3 - ĐỦ: chưa cần đặt";
+  if(nhu+mn===0) wA = "5 - Không phát sinh nhu cầu";
+  else if(ts<nhu) wA = "1 - THIẾU: chưa đủ FC+FCBS";
+  else if(ts<mn) wA = "1 - DƯỚI MIN sau cung ứng";
+  else if(ts<rop) wA = "2 - Đạt MIN, chưa tới ROP";
+  else if(ts<nhu+mn) wA = "4 - LƯU Ý: đủ FC+FCBS, cuối tháng < MIN";
+  else wA = "3 - ĐẠT: đủ FC+FCBS + MIN";
+  s[6]=rop; s[9]=nhu; s[11]= ve>0 ? ve/qc : 0; s[12]=ts; s[13]=dx; s[14]=wB; s[15]=wA; s[19]= (ve>0 ? ve/qc : 0) * (+s[18]||0);
+  return s;
+}
+function slowInfo(s){
+  if(!(s[12]>=100)) return null;
+  if(!(s[8]>0)) return {cls:"pill-bad", red:true, cov:null, label:"Cần clear · chưa xuất trong " + META.periodTag};
+  var cov = s[12]/(s[8]/META.asofDay);
+  if(cov>180) return {cls:"pill-bad", red:true, cov:cov, label:"Cần clear · tồn ~"+fmt(cov)+" ngày"};
+  if(cov>90) return {cls:"pill-warn", red:false, cov:cov, label:"Bán chậm · tồn ~"+fmt(cov)+" ngày"};
+  return null;
+}
+function computeStats(){
+  var st = {total:SKUS.length, maCoNhuCau:0, nhu:0, ton:0, ve:0, thung:0, kg:0, dx:0, fc:0, fcbs:0, nhap:0, xuat:0, min:0, rop:0, tonSau:0, maCanVe:0,
+    cntB:{"1":0,"2":0,"3":0,"4":0,"5":0}, cntA:{"1":0,"2":0,"3":0,"4":0,"5":0}, groups:{}, groupList:[],
+    reds:[], oranges:[], zeroOut:[], zeroOutTon:0, noVeProposed:[], outStock:[], shortage:[], veTop:[]};
+  SKUS.forEach(function(s){
+    st.fc+=+s[3]||0; st.fcbs+=+s[4]||0; st.min+=+s[5]||0; st.rop+=+s[6]||0; st.ton+=+s[7]||0; st.nhap+=+s[16]||0; st.xuat+=+s[8]||0;
+    st.nhu+=+s[9]||0; st.ve+=+s[10]||0; st.thung+=+s[11]||0; st.kg+=+s[19]||0; st.tonSau+=+s[12]||0; st.dx+=+s[13]||0;
+    if((+s[3]||0)+(+s[4]||0)+(+s[5]||0)>0) st.maCoNhuCau++;
+    if(s[10]>0){ st.maCanVe++; st.veTop.push(s); }
+    st.cntB[lvl(s[14])]++; st.cntA[lvl(s[15])]++;
+    var g = st.groups[s[2]];
+    if(!g){ g = st.groups[s[2]] = {key:s[2], label:DONG_LABEL[s[2]]||s[2], count:0, nhu:0, ton:0, ve:0, thung:0, canVe:0, gapB:0, thieuA:0, slowTon:0}; }
+    g.count++; g.nhu+=+s[9]||0; g.ton+=+s[7]||0; g.ve+=+s[10]||0; g.thung+=+s[11]||0;
+    if(s[10]>0) g.canVe++;
+    if(lvl(s[14])==="1") g.gapB++;
+    if(lvl(s[15])==="1") g.thieuA++;
+    var si = slowInfo(s);
+    if(si){ if(si.red) st.reds.push(s); else st.oranges.push(s); g.slowTon+=+s[12]||0; }
+    if(!(s[8]>0) && s[12]>0){ st.zeroOut.push(s); st.zeroOutTon+=+s[12]||0; }
+    if(s[13]>0 && !(s[10]>0)) st.noVeProposed.push(s);
+    if(!(s[7]>0) && s[9]>0) st.outStock.push(s);
+    if(lvl(s[15])==="1"){ var sh = (+s[3]||0)+(+s[4]||0)+(+s[5]||0)-(+s[12]||0); if(sh>0) st.shortage.push({s:s, sh:sh}); }
+  });
+  st.groupList = Object.keys(st.groups).map(function(k){ return st.groups[k]; });
+  st.reds.sort(function(a,b){ return b[12]-a[12]; });
+  st.oranges.sort(function(a,b){ return b[12]-a[12]; });
+  st.noVeProposed.sort(function(a,b){ return b[13]-a[13]; });
+  st.outStock.sort(function(a,b){ return b[9]-a[9]; });
+  st.shortage.sort(function(a,b){ return b.sh-a.sh; });
+  st.veTop.sort(function(a,b){ return (b[11]-a[11]) || (b[10]-a[10]); });
+  st.dat = st.cntA["3"]; st.thieu = st.cntA["1"];
+  st.datPct = st.maCoNhuCau>0 ? st.dat/st.maCoNhuCau*100 : 0;
+  st.slowTon = st.reds.reduce(function(a,s){return a+s[12];},0) + st.oranges.reduce(function(a,s){return a+s[12];},0);
+  st.slowCount = st.reds.length + st.oranges.length;
+  return st;
+}
+function syncDateInputs(){
+  document.querySelectorAll(".ship-date-input").forEach(function(el){ if(document.activeElement!==el && META.shipISO) el.value = META.shipISO; });
+  var ai = document.getElementById("param-asof-date");
+  if(ai && document.activeElement!==ai && META.asofISO) ai.value = META.asofISO;
+  var pd = document.getElementById("param-ship-display");
+  if(pd) pd.textContent = "Về " + META.shipFull;
+  var cs = document.getElementById("chip-ship");
+  if(cs) cs.textContent = META.shipFull;
+  var td = document.getElementById("th-dong-ve");
+  if(td) td.textContent = "Về kho " + META.shipShort;
+}
+function renderMeta(st){
+  ensureMetaISO();
+  document.getElementById("chip-period").textContent = META.period;
+  document.getElementById("chip-asof").textContent = META.asof;
+  syncDateInputs();
+  document.getElementById("footer-updated").textContent = META.asof;
+  document.querySelectorAll(".js-period").forEach(function(el){ el.textContent = META.periodLow; });
+  document.querySelectorAll(".js-ship").forEach(function(el){ el.textContent = META.shipShort; });
+  document.getElementById("warn-badge").textContent = st.total + " mã";
+  document.getElementById("dong-badge").textContent = st.groupList.length + " dòng hàng";
+  document.getElementById("ve-badge").textContent = "Chốt " + META.asofShort + " · Về " + META.shipShort;
+  document.getElementById("ve-title").textContent = "Chuyến về kho HCM ngày " + META.shipFull + " — " + st.maCanVe + " mã, " + fmt(st.thung) + " thùng, " + fmt(st.kg) + " kg";
+  document.getElementById("th-ve").textContent = "Về " + META.shipShort;
+  document.getElementById("f-ve-label").textContent = "Chỉ mã có hàng về " + META.shipShort;
+  document.getElementById("slow-badge").textContent = st.slowCount + " mã · " + fmt(st.slowTon) + " chai";
+  document.getElementById("slow-formula").textContent = "01–" + META.asofShort + " ÷ " + META.asofDay + " ngày";
+  document.getElementById("data-source-badge").textContent = META.isDefault ? (META.edited ? "Đang xem: số liệu gốc T11/2026 — đã sửa tay trên trang" : "Đang xem: số liệu gốc tháng 11/2026") : ("Đang xem: " + META.source);
+}
+function renderKPIs(st){
+  var topG = st.groupList.slice().sort(function(a,b){ return b.nhu-a.nhu; })[0];
+  var topShare = (topG && st.nhu>0) ? topG.nhu/st.nhu*100 : 0;
+  var dxPct = st.dx>0 ? st.ve/st.dx*100 : 0;
+  var html =
+  '<article class="kpi"><label>Mã có nhu cầu</label><div class="num">'+fmt(st.maCoNhuCau)+'</div><div class="sub">trên '+fmt(st.total)+' mã trong danh mục kho HCM</div><span class="delta neutral">FC + FCBS + MIN &gt; 0</span><div class="guide"><b>Ý nghĩa:</b> phạm vi thật sự phải quản trị trong kỳ. <b>Hành động:</b> mã không có nhu cầu mà còn tồn thì đưa sang diện hàng bán chậm, không đặt thêm.</div></article>'+
+  '<article class="kpi"><label>Nhu cầu còn lại</label><div class="num">'+fmt(st.nhu)+'</div><div class="sub">chai / đơn vị — FC − đã xuất + FCBS</div><span class="delta down">'+(topG? esc(topG.label) : '')+' chiếm '+fmtPct(topShare)+'</span><div class="guide"><b>Ý nghĩa:</b> áp lực cung ứng còn lại của kỳ, tính theo từng SKU. <b>Hành động:</b> ưu tiên nguồn về cho dòng chiếm tỷ trọng lớn nhất trước.</div></article>'+
+  '<article class="kpi"><label>Tồn khả dụng HCM01</label><div class="num">'+fmt(st.ton)+'</div><div class="sub">đã trừ SO / YCCH đang giữ</div><span class="delta neutral">Tồn / nhu cầu: '+fmt2(st.nhu>0? st.ton/st.nhu : 0)+' lần</span><div class="guide"><b>Ý nghĩa:</b> hàng thật bán được sau khi trừ phần đang giữ cho đơn. <b>Hành động:</b> tồn cao mà vẫn nhiều mã thiếu nghĩa là lệch cơ cấu — đối chiếu ngay mục Cảnh báo MIN–ROP.</div></article>'+
+  '<article class="kpi"><label>Mã cần về kho '+META.shipShort+'</label><div class="num">'+fmt(st.maCanVe)+'</div><div class="sub">chiếm '+(st.maCoNhuCau>0? fmtPct(st.maCanVe/st.maCoNhuCau*100):'—')+' số mã có nhu cầu</div><span class="delta down">Đề xuất công thức: '+fmt(st.dx)+'</span><div class="guide"><b>Ý nghĩa:</b> số mã chuyến về kỳ này phải bù. <b>Hành động:</b> đối chiếu với đề xuất công thức để biết chuyến về phủ được bao nhiêu phần nhu cầu kỹ thuật.</div></article>'+
+  '<article class="kpi"><label>Lượng về kho '+META.shipShort+'</label><div class="num">'+fmt(st.ve)+'</div><div class="sub">'+fmt(st.thung)+' thùng • tải trọng '+fmt(st.kg)+' kg</div><span class="delta down">Chỉ bằng '+fmtPct(dxPct)+' đề xuất</span><div class="guide"><b>Ý nghĩa:</b> khả năng đáp ứng thực tế của chuyến về so với nhu cầu kỹ thuật. <b>Hành động:</b> đáp ứng dưới 50% đề xuất thì chốt ngay chuyến bổ sung cho mã thiếu sâu nhất.</div></article>'+
+  '<article class="kpi"><label>Đạt sau cung ứng</label><div class="num">'+fmtPct(st.datPct)+'</div><div class="sub">'+fmt(st.dat)+' mã đạt FC + FCBS + MIN</div><span class="delta '+(st.thieu>0?'down':'up')+'">Còn '+fmt(st.thieu)+' mã thiếu</span><div class="guide"><b>Ý nghĩa:</b> tỷ lệ mã đủ FC + FCBS + MIN đến cuối kỳ — chỉ số sức khỏe của kỳ. <b>Hành động:</b> xử lý danh sách mức 1 theo thứ tự thiếu giảm dần sau mỗi chuyến về.</div></article>';
+  document.getElementById("kpi-grid").innerHTML = html;
+}
+function renderFlow(st){
+  var plan = st.fc + st.fcbs;
+  var xuatPct = plan>0 ? st.xuat/plan*100 : 0;
+  var daysLeft = Math.max(META.daysInMonth - META.asofDay, 0);
+  var html =
+  '<div class="step"><label>1 · FC '+META.periodLow+' (kho HCM)</label><div class="v">'+fmt(st.fc)+'</div><p>Cộng FC bổ sung (FCBS) '+fmt(st.fcbs)+' → tổng nhu cầu kế hoạch '+fmt(plan)+'.</p></div>'+
+  '<div class="step"><label>2 · Đã xuất đến '+META.asofShort+'</label><div class="v">'+fmt(st.xuat)+'</div><p>Đã nhập trong tháng '+fmt(st.nhap)+'. Xuất đạt '+fmtPct(xuatPct)+' tổng nhu cầu kế hoạch khi tháng còn '+daysLeft+' ngày.</p></div>'+
+  '<div class="step"><label>3 · Nhu cầu còn lại</label><div class="v">'+fmt(st.nhu)+'</div><p>FC − xuất + FCBS, tính theo từng SKU và chỉ cộng phần còn dương.</p></div>'+
+  '<div class="step"><label>4 · Về kho ngày '+META.shipShort+'</label><div class="v">'+fmt(st.ve)+'</div><p>'+fmt(st.maCanVe)+' mã, '+fmt(st.thung)+' thùng, '+fmt(st.kg)+' kg. Đây là số chốt thực tế ở cột O, không phải số đề xuất.</p></div>'+
+  '<div class="step"><label>5 · Tồn sau cung ứng</label><div class="v">'+fmt(st.tonSau)+'</div><p>Tồn khả dụng '+fmt(st.ton)+' + hàng về '+fmt(st.ve)+'. Tổng tồn cao nhưng lệch cơ cấu — xem cảnh báo bên dưới.</p></div>';
+  document.getElementById("flow-steps").innerHTML = html;
+  document.getElementById("flow-insight").innerHTML = "<strong>Điểm cần nhớ:</strong> tổng tồn sau cung ứng ("+fmt(st.tonSau)+") "+(st.tonSau>=st.min?"cao hơn":"thấp hơn")+" tổng MIN ("+fmt(st.min)+") và "+(st.tonSau>=st.rop?"cao hơn":"thấp hơn")+" ROP ("+fmt(st.rop)+"), nhưng vẫn còn "+fmt(st.thieu)+" mã thiếu. Vấn đề của kho HCM01 kỳ này không phải thiếu hàng tổng thể, mà là <strong>lệch cơ cấu</strong>: hàng dồn ở mã chậm, trong khi mã chủ lực thiếu sâu. Đừng đọc dashboard này bằng con số tổng.";
+}
+function renderWarn(st){
+  var labels = ["1 · Gấp / Thiếu","2 · Cần đặt","3 · Đủ / Đạt","4 · Lưu ý","5 · Không nhu cầu"];
+  var afterColors = ["var(--red)","var(--chart2)","var(--chart1)","var(--chart4)","var(--muted)"];
+  var maxV = 1;
+  ["1","2","3","4","5"].forEach(function(k){ maxV = Math.max(maxV, st.cntB[k], st.cntA[k]); });
+  var svg = '<svg viewBox="0 0 520 250" width="100%"><line x1="46" y1="205" x2="505" y2="205" stroke="var(--line)" stroke-width="1.5"/>';
+  for(var i=0;i<5;i++){
+    var k = String(i+1), x = 62 + i*90;
+    var hb = st.cntB[k]/maxV*130, ha = st.cntA[k]/maxV*130;
+    svg += '<rect x="'+x+'" y="'+(205-hb)+'" width="26" height="'+hb+'" rx="4" fill="var(--chart5)"/>';
+    svg += '<rect x="'+(x+28)+'" y="'+(205-ha)+'" width="26" height="'+ha+'" rx="4" fill="'+afterColors[i]+'"/>';
+    svg += '<text x="'+(x+13)+'" y="'+(197-hb)+'" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">'+st.cntB[k]+'</text>';
+    svg += '<text x="'+(x+41)+'" y="'+(197-ha)+'" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">'+st.cntA[k]+'</text>';
+    svg += '<text x="'+(x+27)+'" y="224" font-size="12" text-anchor="middle" fill="var(--muted)">'+labels[i]+'</text>';
+  }
+  svg += '</svg>';
+  document.getElementById("warn-chart").innerHTML = svg;
+  var tb = document.querySelector("#warn-levels-card tbody");
+  if(tb){
+    tb.innerHTML =
+    '<tr><td><span class="pill pill-bad">1 · Gấp / Thiếu</span></td><td>Tồn &lt; MIN hoặc hết tồn</td><td class="numr"><b>'+st.cntB["1"]+'</b></td><td>Chưa đủ FC+FCBS hoặc dưới MIN</td><td class="numr"><b>'+st.cntA["1"]+'</b></td></tr>'+
+    '<tr><td><span class="pill pill-warn">2 · Cần đặt</span></td><td>Tồn &lt; ROP</td><td class="numr"><b>'+st.cntB["2"]+'</b></td><td>Đạt MIN, chưa tới ROP</td><td class="numr"><b>'+st.cntA["2"]+'</b></td></tr>'+
+    '<tr><td><span class="pill pill-ok">3 · Đủ / Đạt</span></td><td>Đủ, chưa cần đặt</td><td class="numr"><b>'+st.cntB["3"]+'</b></td><td>Đủ FC+FCBS + MIN</td><td class="numr"><b>'+st.cntA["3"]+'</b></td></tr>'+
+    '<tr><td><span class="pill pill-warn">4 · Lưu ý</span></td><td>≥ ROP nhưng &lt; FC+FCBS, vẫn phải về</td><td class="numr"><b>'+st.cntB["4"]+'</b></td><td>Đủ FC+FCBS, cuối tháng &lt; MIN</td><td class="numr"><b>'+st.cntA["4"]+'</b></td></tr>'+
+    '<tr><td><span class="pill pill-mut">5 · Không nhu cầu</span></td><td colspan="2">Không phát sinh nhu cầu trong tháng</td><td colspan="2" class="numr"><b>'+st.cntA["5"]+'</b></td></tr>';
+  }
+  document.getElementById("warn-progress-bar").style.width = st.datPct + "%";
+  document.getElementById("warn-progress-note").innerHTML = 'Tỷ lệ mã đạt sau cung ứng: <b>'+fmt(st.dat)+' / '+fmt(st.maCoNhuCau)+' mã có nhu cầu = '+fmtPct(st.datPct)+'</b>. Mục tiêu vận hành nên là kéo '+fmt(st.thieu)+' mã mức 1 xuống bằng chuyến về bổ sung, ưu tiên mã chủ lực doanh số trước — không dàn đều.';
+  var top = st.shortage.slice(0,2);
+  if(top.length){
+    var parts = top.map(function(t){ var s=t.s; return esc(s[1])+" ("+s[0]+") tồn sau cung ứng "+fmt(s[12])+" so với FC + MIN là "+fmt((+s[3]||0)+(+s[4]||0)+(+s[5]||0))+" — thiếu "+fmt(t.sh); });
+    var sumTop = top.reduce(function(a,t){ return a+t.sh; },0);
+    document.getElementById("warn-insight").innerHTML = "<strong>Cảnh báo lớn nhất — "+(top.length===2?"hai mã thiếu sâu nhất":"mã thiếu sâu nhất")+":</strong> "+parts.join(". ")+"."+(top.length===2? " Chỉ riêng hai mã này đã thiếu "+fmt(sumTop)+" chai so với mục tiêu FC + FCBS + MIN — đây là nút thắt cung ứng số 1 của kho HCM kỳ này và mùa Tết cận kề." : "");
+  } else {
+    document.getElementById("warn-insight").innerHTML = "<strong>Không còn mã nào thiếu so với FC + FCBS + MIN sau cung ứng.</strong> Toàn bộ mã có nhu cầu đều đạt mục tiêu cuối tháng.";
+  }
+}
+function renderDong(st){
+  var sorted = st.groupList.slice().sort(function(a,b){ return b.nhu-a.nhu; });
+  var bars = sorted.filter(function(g){ return g.nhu>350; }).slice(0,11);
+  var maxN = bars.length? bars[0].nhu : 1;
+  var barColors = ["var(--chart1)","var(--chart3)","var(--chart4)","var(--chart2)","var(--chart4)","var(--chart5)","var(--chart5)","var(--chart5)","var(--chart5)","var(--red)","var(--chart5)"];
+  var bh = '<h3>Nhu cầu còn lại theo dòng hàng</h3><p class="desc">Đơn vị: chai / ĐVT. Chỉ hiện các dòng có nhu cầu còn lại trên 350 để biểu đồ đọc được; chi tiết đủ '+st.groupList.length+' dòng ở bảng bên dưới.</p>';
+  bars.forEach(function(g,i){
+    bh += '<div class="bar-row"><span>'+esc(g.label)+'</span><div class="bar-track"><div class="bar-fill" style="width:'+(g.nhu/maxN*100).toFixed(1)+'%;background:'+barColors[i%barColors.length]+'"></div></div><b class="numr">'+fmt(g.nhu)+'</b></div>';
+  });
+  document.getElementById("dong-bars-card").innerHTML = bh;
+  var tb = document.querySelector("#dong-table-card tbody");
+  if(tb){
+    var rows = sorted.map(function(g){
+      return '<tr><td><b>'+esc(g.label)+'</b></td><td class="numr">'+fmt(g.count)+'</td><td class="numr"><b>'+fmt(g.nhu)+'</b></td><td class="numr">'+fmt(g.ton)+'</td><td class="numr">'+fmt(g.ve)+'</td><td class="numr">'+fmt(g.thung)+'</td><td class="numr">'+fmt(g.canVe)+'</td><td class="numr">'+fmt(g.gapB)+'</td><td class="numr">'+fmt(g.thieuA)+'</td><td class="numr">'+(g.nhu>0? fmt2(g.ton/g.nhu)+'×' : '—')+'</td></tr>';
+    }).join("");
+    rows += '<tr style="background:var(--surface2)"><td><b>Tổng cộng</b></td><td class="numr"><b>'+fmt(st.total)+'</b></td><td class="numr"><b>'+fmt(st.nhu)+'</b></td><td class="numr"><b>'+fmt(st.ton)+'</b></td><td class="numr"><b>'+fmt(st.ve)+'</b></td><td class="numr"><b>'+fmt(st.thung)+'</b></td><td class="numr"><b>'+fmt(st.maCanVe)+'</b></td><td class="numr"><b>'+fmt(st.cntB["1"])+'</b></td><td class="numr"><b>'+fmt(st.cntA["1"])+'</b></td><td class="numr"><b>'+(st.nhu>0? fmt2(st.ton/st.nhu)+'×':'—')+'</b></td></tr>';
+    tb.innerHTML = rows;
+  }
+  var picks = [];
+  var lowRatio = sorted.filter(function(g){ return g.nhu>=300 && g.ton/g.nhu<1; }).sort(function(a,b){ return (a.ton/a.nhu)-(b.ton/b.nhu); });
+  if(lowRatio.length) picks.push("<b>"+esc(lowRatio[0].label)+"</b> — nhu cầu còn lại "+fmt(lowRatio[0].nhu)+", tồn chỉ "+fmt(lowRatio[0].ton)+" ("+fmt2(lowRatio[0].ton/lowRatio[0].nhu)+"×) và chuyến "+META.shipShort+" về "+fmt(lowRatio[0].ve)+" chai");
+  var zeroG = sorted.filter(function(g){ return g.ton===0 && g.nhu>0; });
+  if(zeroG.length) picks.push("<b>"+esc(zeroG[0].label)+"</b> — hết tồn toàn dòng, "+fmt(zeroG[0].nhu)+" chai nhu cầu chưa có nguồn về, cả "+fmt(zeroG[0].thieuA)+" mã còn thiếu sau cung ứng");
+  var mostShort = sorted.filter(function(g){ return g.thieuA>0; }).sort(function(a,b){ return b.thieuA-a.thieuA; });
+  if(mostShort.length && (!lowRatio.length || mostShort[0].key!==lowRatio[0].key)) picks.push("<b>"+esc(mostShort[0].label)+"</b> — "+fmt(mostShort[0].thieuA)+" mã còn thiếu sau cung ứng dù tổng tồn dòng đang "+fmt(mostShort[0].ton)+"; cần rà soát theo từng mã thay vì nhìn tổng dòng");
+  document.getElementById("dong-insight").innerHTML = picks.length? ("<strong>Các dòng cần quyết ngay:</strong> " + picks.map(function(p,i){ return "("+(i+1)+") "+p; }).join("; ") + ".") : "<strong>Không có dòng hàng nào tồn dưới nhu cầu.</strong> Cơ cấu tồn hiện cân bằng theo dòng.";
+}
+function renderVe(st){
+  var topCard = document.getElementById("ve-top-card");
+  var top10 = st.veTop.slice(0,10);
+  var th = '<h3>10 mã về nhiều nhất (theo số thùng)</h3><p class="desc">Chuyến '+META.shipShort+' gồm '+fmt(st.maCanVe)+' mã. Danh sách dưới đây xếp theo số thùng giảm dần; cột “Sau về” là cảnh báo sau cung ứng của chính mã đó.</p><div class="table-wrap"><table><thead><tr><th>#</th><th>Mã SP</th><th>Sản phẩm</th><th class="numr">Về (chai)</th><th class="numr">Thùng</th><th>Sau về</th></tr></thead><tbody>';
+  top10.forEach(function(s,i){
+    var l = lvl(s[15]);
+    th += '<tr><td>'+(i+1)+'</td><td class="mono">'+esc(s[0])+'</td><td>'+esc(s[1])+'</td><td class="numr">'+fmt(s[10])+'</td><td class="numr"><b>'+fmt(s[11])+'</b></td><td><span class="pill '+pillClass(l)+'">'+esc(shortWarn(s[15]))+'</span></td></tr>';
+  });
+  th += '</tbody></table></div>';
+  var rest = st.veTop.slice(10);
+  if(rest.length){
+    th += '<p class="small" style="margin:10px 0 0">'+rest.length+' mã còn lại trong chuyến: '+rest.map(function(s){ return esc(s[1])+" ("+fmt(s[11])+" thùng)"; }).join(", ")+'. Tra cứu đủ '+fmt(st.maCanVe)+' mã bằng bộ lọc “Chỉ mã có hàng về '+META.shipShort+'” ở mục Tra cứu SKU.</p>';
+  }
+  topCard.innerHTML = th;
+  var gap = st.dx - st.ve;
+  var gapCard = document.getElementById("ve-gap-card");
+  var gh = '<h3>Đề xuất công thức vs số chốt về — khoảng trống '+fmt(gap)+' chai</h3><p class="desc">Cột V (đề xuất theo công thức: đủ FC + FCBS, và đủ thêm MIN khi tồn dưới ROP) là nhu cầu kỹ thuật. Cột O là khả năng đáp ứng thực tế của chuyến '+META.shipShort+'.</p>';
+  gh += '<div class="bar-row"><span>Đề xuất công thức</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--chart3)"></div></div><b class="numr">'+fmt(st.dx)+'</b></div>';
+  gh += '<div class="bar-row"><span>Chốt về '+META.shipShort+'</span><div class="bar-track"><div class="bar-fill" style="width:'+(st.dx>0? (st.ve/st.dx*100).toFixed(1):0)+'%;background:var(--chart1)"></div></div><b class="numr">'+fmt(st.ve)+'</b></div>';
+  gh += '<div class="bar-row"><span>Chưa có chuyến về</span><div class="bar-track"><div class="bar-fill" style="width:'+(st.dx>0? (Math.max(gap,0)/st.dx*100).toFixed(1):0)+'%;background:var(--red)"></div></div><b class="numr">'+fmt(Math.max(gap,0))+'</b></div>';
+  var nvTotal = st.noVeProposed.reduce(function(a,s){ return a+s[13]; },0);
+  if(st.noVeProposed.length){
+    gh += '<p style="font-size:14px">Trong phần chưa về có <b>'+fmt(st.noVeProposed.length)+' mã đã có số đề xuất lớn hơn 0 nhưng lượng về bằng 0</b>, tổng đề xuất '+fmt(nvTotal)+' chai — lớn nhất là '+st.noVeProposed.slice(0,5).map(function(s){ return esc(s[1])+" ("+fmt(s[13])+")"; }).join(", ")+'.</p>';
+  }
+  if(st.outStock.length){
+    gh += '<div class="insight red"><strong>'+fmt(st.outStock.length)+' mã đã hết tồn nhưng vẫn còn nhu cầu</strong> — gồm '+st.outStock.slice(0,6).map(function(s){ return esc(s[1])+" (nhu cầu "+fmt(s[9])+")"; }).join(", ")+'. Các mã này không chờ được đến chu kỳ rà soát tháng: mỗi ngày chậm là một ngày mất bán.</div>';
+  }
+  gapCard.innerHTML = gh;
+  var sc = document.querySelector("#shortage-card tbody");
+  if(sc){
+    if(st.shortage.length){
+      sc.innerHTML = st.shortage.slice(0,10).map(function(t){
+        var s = t.s, l = lvl(s[15]);
+        return '<tr><td class="mono">'+esc(s[0])+'</td><td class="sku-name">'+esc(s[1])+'</td><td>'+esc(DONG_LABEL[s[2]]||s[2])+'</td><td class="numr">'+fmt((+s[3]||0)+(+s[4]||0))+'</td><td class="numr">'+fmt(s[5])+'</td><td class="numr">'+fmt(s[12])+'</td><td class="numr"><b>'+fmt(t.sh)+'</b></td><td><span class="pill '+pillClass(l)+'">'+esc(shortWarn(s[15]))+'</span></td></tr>';
+      }).join("");
+    } else {
+      sc.innerHTML = '<tr><td colspan="8">Không còn mã nào thiếu sau cung ứng.</td></tr>';
+    }
+  }
+}
+function covText(s){
+  var si = slowInfo(s);
+  if(!si) return "—";
+  if(si.cov===null) return "Chưa xuất";
+  return fmt(si.cov)+" ngày";
+}
+function renderSlow(st){
+  document.getElementById("slow-kpis").innerHTML =
+  '<article class="kpi"><label>Đỏ — Cần clear</label><div class="num">'+fmt(st.reds.length)+' mã</div><div class="sub">'+fmt(st.reds.reduce(function(a,s){return a+s[12];},0))+' chai tồn sau cung ứng, đủ bán trên 180 ngày theo tốc độ xuất hiện tại</div><span class="delta down">Ưu tiên xử lý trước</span></article>'+
+  '<article class="kpi"><label>Cam — Bán chậm</label><div class="num">'+fmt(st.oranges.length)+' mã</div><div class="sub">'+fmt(st.oranges.reduce(function(a,s){return a+s[12];},0))+' chai, đủ bán 90–180 ngày — cần kế hoạch đẩy bán, chưa cần cắt giá ngay</div><span class="delta neutral">Theo dõi và đẩy bán</span></article>'+
+  '<article class="kpi"><label>Chưa xuất chai nào trong '+META.periodTag+'</label><div class="num">'+fmt(st.zeroOut.length)+' mã</div><div class="sub">'+fmt(st.zeroOutTon)+' chai tồn đang nằm yên sau '+META.asofDay+' ngày đầu tháng, ở mọi mức tồn</div><span class="delta down">Hàng không xoay — cần quyết đầu ra</span></article>';
+  var rc = document.getElementById("slow-red-card");
+  var rh = '<h3>Nhóm đỏ — 12 mã cần clear lớn nhất</h3><p class="desc">Xếp theo tồn sau cung ứng giảm dần. “Đã xuất” là lượng xuất từ đầu tháng đến '+META.asofShort+'.</p><div class="table-wrap"><table><thead><tr><th>Mã SP</th><th>Sản phẩm</th><th class="numr">Tồn sau CU</th><th class="numr">Đã xuất '+META.periodTag+'</th><th class="numr">Tồn đủ bán</th></tr></thead><tbody>';
+  st.reds.slice(0,12).forEach(function(s){
+    rh += '<tr><td class="mono">'+esc(s[0])+'</td><td class="sku-name">'+esc(s[1])+'</td><td class="numr"><b>'+fmt(s[12])+'</b></td><td class="numr">'+fmt(s[8])+'</td><td class="numr"><b>'+covText(s)+'</b></td></tr>';
+  });
+  rh += '</tbody></table></div>';
+  var redRest = st.reds.slice(12);
+  if(redRest.length){
+    rh += '<p class="small" style="margin:10px 0 0">'+redRest.length+' mã đỏ còn lại (tồn '+fmt(redRest[redRest.length-1][12])+'–'+fmt(redRest[0][12])+' chai): '+redRest.map(function(s){ return esc(s[1])+" "+fmt(s[12]); }).join(", ")+'. Xem đủ '+fmt(st.reds.length)+' mã ở mục Tra cứu SKU với bộ lọc “Chỉ hàng bán chậm / cần clear”.</p>';
+  }
+  rc.innerHTML = rh;
+  var oc = document.getElementById("slow-orange-card");
+  var oh = '<h3>Nhóm cam — bán chậm, cần đẩy bán</h3><p class="desc">Tồn đủ bán 90–180 ngày theo tốc độ xuất hiện tại.</p><div class="table-wrap"><table><thead><tr><th>Mã SP</th><th>Sản phẩm</th><th class="numr">Tồn sau CU</th><th class="numr">Tồn đủ bán</th></tr></thead><tbody>';
+  st.oranges.slice(0,10).forEach(function(s){
+    oh += '<tr><td class="mono">'+esc(s[0])+'</td><td class="sku-name">'+esc(s[1])+'</td><td class="numr"><b>'+fmt(s[12])+'</b></td><td class="numr"><b>'+covText(s)+'</b></td></tr>';
+  });
+  oh += '</tbody></table></div>';
+  var orRest = st.oranges.slice(10);
+  if(orRest.length){
+    oh += '<p class="small" style="margin:10px 0 0">'+orRest.length+' mã cam còn lại: '+orRest.map(function(s){ return esc(s[1])+" "+fmt(s[12]); }).join(", ")+'.</p>';
+  }
+  oc.innerHTML = oh;
+  var byLine = {};
+  st.reds.concat(st.oranges).forEach(function(s){ var lb = DONG_LABEL[s[2]]||s[2]; byLine[lb] = (byLine[lb]||0) + (+s[12]||0); });
+  var lineArr = Object.keys(byLine).map(function(k){ return {label:k, v:byLine[k]}; }).sort(function(a,b){ return b.v-a.v; }).slice(0,8);
+  var maxL = lineArr.length? lineArr[0].v : 1;
+  var lh = '<h3>Tồn chậm dồn ở dòng hàng nào</h3><p class="desc">Tổng tồn của '+fmt(st.slowCount)+' mã đỏ + cam theo dòng hàng (chai). Tổng hàng chậm bằng '+fmtPct(st.tonSau>0? st.slowTon/st.tonSau*100:0)+' tồn sau cung ứng của kho.</p>';
+  lineArr.forEach(function(g,i){
+    lh += '<div class="bar-row"><span>'+esc(g.label)+'</span><div class="bar-track"><div class="bar-fill" style="width:'+(g.v/maxL*100).toFixed(1)+'%;background:'+(i===0?'var(--red)':'var(--chart4)')+'"></div></div><b class="numr">'+fmt(g.v)+'</b></div>';
+  });
+  document.getElementById("slow-lines-card").innerHTML = lh;
+  var topLine = lineArr[0];
+  var shareTxt = "";
+  if(topLine){
+    var gtot = st.groupList.filter(function(g){ return g.label===topLine.label; })[0];
+    if(gtot && (gtot.ton+gtot.ve)>0) shareTxt = " Dòng đọng nặng nhất là <b>"+esc(topLine.label)+"</b>: "+fmt(topLine.v)+" chai hàng chậm, bằng "+fmtPct(topLine.v/(gtot.ton+gtot.ve)*100)+" tồn sau cung ứng của dòng.";
+  }
+  var lowFc = SKUS.filter(function(s){ return (+s[3]||0)>=300 && (+s[8]||0)<=25 && s[12]>=100; }).sort(function(a,b){ return b[3]-a[3]; }).slice(0,3);
+  var lowTxt = lowFc.length? " <b>"+lowFc.map(function(s){ return esc(s[1]); }).join(", ")+"</b> — FC tháng "+lowFc.map(function(s){ return fmt(s[3]); }).join(" / ")+" chai/mã nhưng đến "+META.asofShort+" mới xuất "+lowFc.map(function(s){ return fmt(s[8]); }).join(" / ")+" chai/mã: FC này không còn khả thi, cần hạ kỳ vọng và chốt kênh đẩy hàng thay vì chờ cuối tháng." : "";
+  document.getElementById("slow-insight").innerHTML = "<strong>Ba điểm phải quyết trước khi chốt FC tháng sau:</strong> (1) <b>Nhóm đỏ — "+fmt(st.reds.length)+" mã, "+fmt(st.reds.reduce(function(a,s){return a+s[12];},0))+" chai:</b> ngừng về thêm toàn bộ, đối chiếu hạn dùng từng mã trước khi quyết phương án clear."+shareTxt+" (2)"+lowTxt+" (3) <b>"+fmt(st.zeroOut.length)+" mã chưa xuất chai nào trong tháng</b> đang giữ "+fmt(st.zeroOutTon)+" chai — mỗi mã hoặc gắn vào một chương trình bán cụ thể có người phụ trách và hạn chót, hoặc đưa thẳng vào danh sách clear; hàng mùa vụ qua chu kỳ không để qua Tết thành tồn chết.";
+}
+var dongSel = document.getElementById("f-dong");
+function buildDongFilter(){
+  var cur = dongSel.value;
+  dongSel.innerHTML = '<option value="">Tất cả dòng hàng</option>';
+  var dongs = [];
+  SKUS.forEach(function(s){ if(dongs.indexOf(s[2])<0) dongs.push(s[2]); });
+  dongs.sort();
+  dongs.forEach(function(d){ var o=document.createElement("option"); o.value=d; o.textContent=DONG_LABEL[d]||d; dongSel.appendChild(o); });
+  dongSel.value = cur;
+}
+function renderSKU(){
+  var q = document.getElementById("q").value.trim().toLowerCase();
+  var fd = dongSel.value;
+  var fw = document.getElementById("f-warn").value;
+  var fve = document.getElementById("f-ve").checked;
+  var fact = document.getElementById("f-act").checked;
+  var fslow = document.getElementById("f-slow").checked;
+  var indexed = SKUS.map(function(s,i){ return {s:s, i:i}; });
+  var rows = indexed.filter(function(r){
+    var s = r.s;
+    if(q && (s[0]+" "+s[1]).toLowerCase().indexOf(q)<0) return false;
+    if(fd!=="" && s[2]!==fd) return false;
+    var l = lvl(s[15]);
+    if(fw && l!==fw) return false;
+    if(fve && !(s[10]>0)) return false;
+    if(fact && !(l==="1"||l==="2"||l==="4")) return false;
+    if(fslow && !slowInfo(s)) return false;
+    return true;
+  });
+  var html = rows.map(function(r){
+    var s = r.s, l = lvl(s[15]);
+    return "<tr><td class='mono'>"+esc(s[0])+"</td><td class='sku-name'>"+esc(s[1])+"</td><td class='opt'>"+esc(DONG_LABEL[s[2]]||s[2])+"</td>"+
+    "<td class='numr opt'>"+fmt(s[3])+"</td><td class='numr opt'>"+fmt(s[4])+"</td><td class='numr opt'>"+fmt(s[5])+"</td><td class='numr opt'>"+fmt(s[6])+"</td>"+
+    "<td class='numr'><input class='cell-edit' type='number' min='0' step='any' inputmode='decimal' value='"+(+s[7]||0)+"' data-i='"+r.i+"' data-f='7' aria-label='Tồn khả dụng "+esc(s[0])+"' title='Sửa tồn khả dụng — dashboard tự tính lại'></td>"+
+    "<td class='numr opt'>"+fmt(s[8])+"</td><td class='numr'><b>"+fmt(s[9])+"</b></td>"+
+    "<td class='numr'><input class='cell-edit' type='number' min='0' step='any' inputmode='decimal' value='"+(+s[10]||0)+"' data-i='"+r.i+"' data-f='10' aria-label='Lượng về kho "+esc(s[0])+"' title='Sửa lượng về kho — dashboard tự tính lại'></td>"+
+    "<td class='numr opt'>"+fmt(s[12])+"</td>"+
+    "<td><span class='pill "+pillClass(l)+"'>"+l+" · "+esc(shortWarn(s[15]))+"</span>"+(function(){ var si=slowInfo(s); return si? "<br><span class='pill "+si.cls+"' style='margin-top:4px'>"+si.label+"</span>" : ""; })()+"</td></tr>";
+  }).join("");
+  document.getElementById("sku-body").innerHTML = html || "<tr><td colspan='13'>Không có SKU nào khớp bộ lọc. Thử bỏ bớt điều kiện lọc.</td></tr>";
+  document.getElementById("sku-count").textContent = rows.length + " mã";
+  var veSum = rows.reduce(function(a,r){return a+(+r.s[10]||0);},0);
+  var nhuSum = rows.reduce(function(a,r){return a+(+r.s[9]||0);},0);
+  document.getElementById("sku-note").textContent = "Đang hiện " + rows.length + " / " + SKUS.length + " mã · Nhu cầu còn lại của nhóm đang lọc: " + fmt(nhuSum) + " · Lượng về " + META.shipShort + " của nhóm: " + fmt(veSum) + ". Nhu cầu còn lại = FC − đã xuất + FCBS (chỉ cộng phần dương theo từng SKU). Ô Tồn và ô Về kho sửa trực tiếp được.";
+}
+["q","f-dong","f-warn","f-ve","f-act","f-slow"].forEach(function(id){
+  var el = document.getElementById(id);
+  el.addEventListener("input", renderSKU); el.addEventListener("change", renderSKU);
+});
+document.getElementById("sku-body").addEventListener("change", function(ev){
+  var t = ev.target;
+  if(!t.classList || !t.classList.contains("cell-edit")) return;
+  var i = +t.getAttribute("data-i"), f = +t.getAttribute("data-f");
+  var v = parseFloat(t.value);
+  if(isNaN(v) || v<0){ t.value = +SKUS[i][f]||0; return; }
+  SKUS[i][f] = v;
+  META.edited = true;
+  renderAll(false);
+  showStatus("<b>Đã sửa tay số liệu trên trang</b> — toàn bộ dashboard đã tính lại theo số mới và bản sửa đã tự lưu trên thiết bị này. Cần bản hồ sơ chính thức, bấm “Tải xuống file Excel hiện tại” ở mục Cập nhật số liệu.", true);
+});
+function applyShipDate(iso){
+  var d = dateFromISO(iso);
+  if(!d){ syncDateInputs(); return; }
+  META.shipISO = isoFromDate(d); META.shipFull = fullFromDate(d); META.shipShort = shortFromDate(d);
+  META.edited = true;
+  renderAll(false);
+  showStatus("<b>Đã cập nhật ngày về kho thành " + META.shipFull + "</b> — mọi nhãn ngày trên trang (KPI, dòng chảy, cảnh báo, bảng dòng hàng, chuyến về kho, Tra cứu SKU) đã đổi theo và ngày mới đã tự lưu trên thiết bị này. Số lượng về kho không đổi: cần đổi lượng của chuyến mới thì sửa cột Về kho ở mục Tra cứu SKU hoặc tải file chuyến mới lên.", true);
+}
+function applyAsofDate(iso){
+  var d = dateFromISO(iso);
+  if(!d){ syncDateInputs(); return; }
+  META.asofISO = isoFromDate(d); META.asof = fullFromDate(d); META.asofShort = shortFromDate(d); META.asofDay = d.getDate();
+  META.month = d.getMonth()+1; META.year = d.getFullYear();
+  META.period = "Tháng " + META.month + "/" + META.year; META.periodLow = "tháng " + META.month + "/" + META.year; META.periodTag = "T" + META.month;
+  META.daysInMonth = new Date(d.getFullYear(), d.getMonth()+1, 0).getDate();
+  META.edited = true;
+  renderAll(false);
+  showStatus("<b>Đã cập nhật ngày chốt số liệu thành " + META.asof + "</b> — kỳ hiển thị, mốc “đã xuất đến…” và số ngày đã qua dùng để tính hàng bán chậm đã đổi theo; ngày mới đã tự lưu trên thiết bị này.", true);
+}
+document.querySelectorAll(".ship-date-input").forEach(function(el){
+  el.addEventListener("change", function(){ applyShipDate(el.value); });
+});
+var asofInput = document.getElementById("param-asof-date");
+if(asofInput) asofInput.addEventListener("change", function(){ applyAsofDate(asofInput.value); });
+function renderTasks(st){
+  var top2 = st.shortage.slice(0,2);
+  var li1 = [];
+  if(top2.length) li1.push("<span><b>Chốt chuyến về bổ sung cho "+(top2.length===2?"2 mã thiếu lớn nhất":"mã thiếu lớn nhất")+"</b> — "+top2.map(function(t){ return esc(t.s[1])+" (thiếu "+fmt(t.sh)+")"; }).join(" và ")+"; trình rõ khả năng đáp ứng của Nhà máy và ngày về, không để dồn sang tháng sau khi nhu cầu Tết tăng.</span>");
+  if(st.outStock.length) li1.push("<span><b>Xử lý "+fmt(st.outStock.length)+" mã hết tồn còn nhu cầu</b> — ưu tiên "+st.outStock.slice(0,3).map(function(s){ return esc(s[1])+" ("+fmt(s[9])+")"; }).join(", ")+": hoặc chốt ngày về, hoặc thông báo sớm cho Kinh doanh để khóa nhận đơn.</span>");
+  if(st.noVeProposed.length) li1.push("<span><b>Rà soát "+fmt(st.noVeProposed.length)+" mã có đề xuất nhưng chưa có chuyến về</b> ("+fmt(st.noVeProposed.reduce(function(a,s){return a+s[13];},0))+" chai) — phân loại dứt điểm: chờ sản xuất, chờ vật tư, hay nhu cầu không còn hiệu lực để gỡ cảnh báo giả.</span>");
+  li1.push("<span><b>Gửi FC tháng kế tiếp (FC n+1) trước ngày 25</b> theo quy định — đây là cơ sở để Nhà máy chuyển đổi bán thành phẩm thành thành phẩm cho cao điểm Tết.</span>");
+  var li2 = [];
+  li2.push("<span><b>Chốt phương án clear cho "+fmt(st.slowCount)+" mã bán chậm ("+fmt(st.slowTon)+" chai — "+fmtPct(st.tonSau>0? st.slowTon/st.tonSau*100:0)+" tồn sau cung ứng)</b> — ngừng về thêm toàn bộ "+fmt(st.reds.length)+" mã nhóm đỏ, đối chiếu hạn dùng từng mã trước khi quyết, ưu tiên đẩy qua TMĐT, showroom và combo quà Tết; hộp quà mùa cũ gắn hạn chót xử lý trước Tết, không để qua Tết thành tồn chết.</span>");
+  if(st.zeroOut.length) li2.push("<span><b>Quyết đầu ra cho "+fmt(st.zeroOut.length)+" mã chưa xuất chai nào trong tháng</b> ("+fmt(st.zeroOutTon)+" chai tồn) — mỗi mã hoặc gắn vào một chương trình bán cụ thể có người phụ trách, hoặc đưa vào danh sách clear; không để sang tháng sau mà vẫn không có chủ sở hữu.</span>");
+  var mostShort = st.groupList.slice().sort(function(a,b){ return b.thieuA-a.thieuA; })[0];
+  if(mostShort && mostShort.thieuA>0) li2.push("<span><b>Rà soát dòng "+esc(mostShort.label)+" theo từng mã</b> — "+fmt(mostShort.thieuA)+" mã còn thiếu sau cung ứng trong khi tồn tổng dòng vẫn "+fmt(mostShort.ton)+"; kiểm tra lệch cơ cấu giữa các mã trước mùa sale cuối năm.</span>");
+  li2.push("<span><b>Cập nhật dashboard theo chu kỳ chuyến về</b> — mỗi lần chốt một chuyến, tải lại file hoặc sửa số ở cột Về kho trong mục Tra cứu SKU rồi đọc lại cảnh báo sau cung ứng; mục tiêu kéo tỷ lệ mã đạt từ "+fmtPct(st.datPct)+" lên trước khi chốt số cuối tháng.</span>");
+  document.getElementById("tasks-wrap").innerHTML =
+  '<div class="card"><h3>Ưu tiên xử lý ngay</h3><ul class="checklist">'+li1.map(function(x){ return "<li>"+x+"</li>"; }).join("")+'</ul></div>'+
+  '<div class="card"><h3>Trong kỳ và chuẩn bị kỳ sau</h3><ul class="checklist">'+li2.map(function(x){ return "<li>"+x+"</li>"; }).join("")+'</ul></div>';
+}
+function renderAll(rebuildTasks){
+  SKUS.forEach(derive);
+  var st = computeStats();
+  renderMeta(st); if(window.__lsReady) lsSave(); renderKPIs(st); renderFlow(st); renderWarn(st); renderDong(st); renderVe(st); renderSlow(st);
+  buildDongFilter(); renderSKU();
+  if(rebuildTasks) renderTasks(st);
+  if(!META.isDefault){
+    document.getElementById("sku-source-note").textContent = "Số liệu đang hiển thị được tính trực tiếp từ sheet cung ứng của file vừa tải (“" + META.source + "”): tổng nhu cầu còn lại " + fmt(st.nhu) + " trên " + st.total + " mã. Khi rà soát từng mã, lấy số của chính mã đó ở bảng này.";
+  }
+  return st;
+}
+function showStatus(html, ok){
+  var el = document.getElementById("upload-status");
+  el.hidden = false;
+  el.className = "upload-status " + (ok? "ok":"err");
+  el.innerHTML = html;
+}
+function numCell(v){ if(v===null||v===undefined||v==="") return 0; var n = parseFloat(v); return isNaN(n)? 0 : n; }
+function cellText(v){ return v===null||v===undefined? "" : String(v).trim(); }
+function parseWorkbook(buf, fileName){
+  if(typeof XLSX === "undefined") throw new Error("Không tải được thư viện đọc Excel (cần kết nối mạng ở lần mở trang đầu tiên). Hãy kiểm tra mạng rồi tải lại trang.");
+  var wb = XLSX.read(buf, {type:"array", cellDates:true});
+  var sheetName = null;
+  wb.SheetNames.forEach(function(n){ var t = n.trim().toUpperCase(); if(!sheetName && t.indexOf("CUNG")>=0 && t.indexOf("HCM")>=0) sheetName = n; });
+  if(!sheetName) wb.SheetNames.forEach(function(n){ if(!sheetName && n.trim().toUpperCase().indexOf("CUNG")>=0) sheetName = n; });
+  if(!sheetName) throw new Error("Không tìm thấy sheet cung ứng trong file. File cần có sheet tên dạng “CUNG ỨNG VỀ KHO HCM…”. Các sheet đang có: " + wb.SheetNames.join(", ") + ".");
+  var ws = wb.Sheets[sheetName];
+  var aoa = XLSX.utils.sheet_to_json(ws, {header:1, raw:true, defval:null});
+  var hr = -1, i, j;
+  for(i=0;i<Math.min(aoa.length,20) && hr<0;i++){
+    var row = aoa[i]||[];
+    for(j=0;j<row.length;j++){ if(cellText(row[j]).toUpperCase()==="MSP"){ hr = i; break; } }
+  }
+  if(hr<0) throw new Error("Không tìm thấy hàng tiêu đề có cột “MSP” trong sheet “" + sheetName + "”. Hãy giữ nguyên cấu trúc file mẫu tháng 11.");
+  var hTop = aoa[hr-1]||[], hBot = aoa[hr]||[];
+  function findCol(topKeys, botKeys, fallback){
+    for(var c=0;c<Math.max(hTop.length,hBot.length);c++){
+      var t = cellText(hTop[c]).toUpperCase(), b = cellText(hBot[c]).toUpperCase();
+      var okT = !topKeys || topKeys.some(function(k){ return t.indexOf(k)>=0; });
+      var okB = !botKeys || botKeys.some(function(k){ return b.indexOf(k)>=0; });
+      if(okT && okB && (topKeys || botKeys)) return c;
+    }
+    return fallback;
+  }
+  var C = {};
+  C.code = findCol(null, ["MSP"], 2);
+  C.name = findCol(["DANH MỤC","SẢN PHẨM"], null, 3);
+  C.dong = findCol(null, ["DÒNG"], 1);
+  C.qc = findCol(null, ["QUY CÁCH"], 5);
+  C.ve = findCol(["VỀ KHO"], null, 14);
+  C.ton = findCol(["TỒN KHẢ DỤNG"], null, 11);
+  C.nhap = -1; C.xuat = -1;
+  for(var c2=0;c2<hTop.length;c2++){ var tt = cellText(hTop[c2]).toUpperCase(); if(tt==="NHẬP"||tt==="NHAP") C.nhap = c2; if(tt.indexOf("XUẤT")>=0||tt.indexOf("XUAT")>=0) C.xuat = c2; }
+  if(C.nhap<0) C.nhap = 12;
+  if(C.xuat<0) C.xuat = 13;
+  C.fc = -1; C.fcbs = -1; C.min = -1; C.rop = -1;
+  for(var c3=0;c3<hTop.length;c3++){ var t3 = cellText(hTop[c3]).toUpperCase(); if(t3.indexOf("FCBS")>=0) C.fcbs = c3; else if(t3.indexOf("FC")===0 && C.fc<0) C.fc = c3; if(t3.indexOf("MIN")===0) C.min = c3; if(t3.indexOf("ROP")>=0) C.rop = c3; }
+  if(C.fc<0) C.fc = 7; if(C.fcbs<0) C.fcbs = 8; if(C.min<0) C.min = 9; if(C.rop<0) C.rop = 10;
+  C.tt = -1;
+  for(var c4=0;c4<(aoa[hr]||[]).length;c4++){ var b4 = cellText((aoa[hr]||[])[c4]).toUpperCase(); if(b4.indexOf("TẢI")>=0 && c4<C.fc) C.tt = c4; }
+  if(C.tt<0) C.tt = 6;
+  var meta = JSON.parse(JSON.stringify(DEFAULT_META));
+  meta.isDefault = false; meta.edited = false; meta.source = fileName;
+  for(i=0;i<hr;i++){ var r0 = aoa[i]||[];
+    for(j=0;j<r0.length;j++){ var tx = cellText(r0[j]);
+      var m = tx.match(/THÁNG\s+(\d{1,2})[.\/\s]+(\d{2,4})/i);
+      if(m){ var mo = +m[1], yr = +m[2]; if(yr<100) yr += 2000; meta.month = mo; meta.year = yr; }
+      if(tx.toUpperCase().indexOf("THỜI GIAN CUNG ỨNG")>=0){ for(var k=j+1;k<r0.length;k++){ if(typeof r0[k]==="number" && r0[k]>0){ meta.leadTime = r0[k]; break; } } }
+    }
+  }
+  meta.period = "Tháng " + meta.month + "/" + meta.year;
+  meta.periodLow = "tháng " + meta.month + "/" + meta.year;
+  meta.periodTag = "T" + meta.month;
+  var asofDate = null;
+  for(i=0;i<hr && !asofDate;i++){ var r1 = aoa[i]||[];
+    for(j=0;j<r1.length;j++){ var v1 = r1[j];
+      if(v1 instanceof Date && !isNaN(v1)) { asofDate = v1; break; }
+      if(typeof v1==="string"){ var dm = v1.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/); if(dm){ asofDate = new Date(+dm[3], +dm[2]-1, +dm[1]); break; } }
+    }
+  }
+  if(!asofDate) asofDate = new Date(meta.year, meta.month-1, 19);
+  function dstr(d){ return (d.getDate()<10?"0":"")+d.getDate()+"/"+((d.getMonth()+1)<10?"0":"")+(d.getMonth()+1)+"/"+d.getFullYear(); }
+  function dshort(d){ return d.getDate()+"/"+(d.getMonth()+1); }
+  meta.asof = dstr(asofDate); meta.asofShort = dshort(asofDate); meta.asofDay = asofDate.getDate(); meta.asofISO = isoFromDate(asofDate);
+  meta.daysInMonth = new Date(asofDate.getFullYear(), asofDate.getMonth()+1, 0).getDate();
+  var shipDate = null;
+  var veHead = cellText(hTop[C.ve]);
+  var sm = veHead.match(/(\d{1,2})[.\/](\d{1,2})[.\/](\d{2,4})/);
+  if(sm){ var sy = +sm[3]; if(sy<100) sy += 2000; shipDate = new Date(sy, +sm[2]-1, +sm[1]); }
+  if(!shipDate){ var sm2 = veHead.match(/(\d{1,2})[.\/](\d{1,2})/); if(sm2) shipDate = new Date(meta.year, +sm2[2]-1, +sm2[1]); }
+  if(!shipDate){ shipDate = new Date(asofDate.getTime() + 86400000); }
+  meta.shipShort = dshort(shipDate); meta.shipFull = dstr(shipDate); meta.shipISO = isoFromDate(shipDate);
+  var skus = [];
+  for(i=hr+1;i<aoa.length;i++){
+    var r = aoa[i]||[];
+    var code = cellText(r[C.code]);
+    if(!/^[A-Za-z][A-Za-z0-9]{3,}$/.test(code)) continue;
+    var name = cellText(r[C.name]);
+    if(!name || name.toUpperCase().indexOf("TỔNG")===0) continue;
+    var qc = numCell(r[C.qc]); if(qc<=0) qc = 1;
+    skus.push([code, name, cellText(r[C.dong]), numCell(r[C.fc]), numCell(r[C.fcbs]), numCell(r[C.min]), 0,
+      numCell(r[C.ton]), numCell(r[C.xuat]), 0, 0, 0, 0, 0, "", "", numCell(r[C.nhap]), qc, numCell(r[C.tt]), 0]);
+    skus[skus.length-1][10] = numCell(r[C.ve]);
+  }
+  if(skus.length<20) throw new Error("Chỉ đọc được " + skus.length + " mã SKU từ sheet “" + sheetName + "” — ít hơn nhiều so với mẫu 189 mã. Kiểm tra lại: có đúng file cung ứng kho HCM và giữ nguyên cấu trúc cột không?");
+  return {skus:skus, meta:meta, sheetName:sheetName};
+}
+function handleFile(file){
+  if(!file) return;
+  if(!/\.(xlsx|xls)$/i.test(file.name)){ showStatus("<b>File chưa đúng định dạng.</b> Hãy chọn file Excel .xlsx hoặc .xls (file cung ứng kho HCM).", false); return; }
+  showStatus("Đang đọc file <b>" + esc(file.name) + "</b>…", true);
+  var reader = new FileReader();
+  reader.onload = function(e){
+    try {
+      var parsed = parseWorkbook(e.target.result, file.name);
+      SKUS = parsed.skus;
+      META = parsed.meta;
+      var st = renderAll(true);
+      showStatus("<b>Đã nạp file “" + esc(file.name) + "”</b> — sheet “" + esc(parsed.sheetName) + "”: đọc được <b>" + st.total + " mã</b>, kỳ <b>" + META.period + "</b>, chốt số liệu <b>" + META.asof + "</b>, chuyến về ngày <b>" + META.shipFull + "</b>. Toàn bộ dashboard đã tính lại: " + fmt(st.maCoNhuCau) + " mã có nhu cầu, nhu cầu còn lại " + fmt(st.nhu) + ", còn " + fmt(st.thieu) + " mã thiếu sau cung ứng, " + fmt(st.slowCount) + " mã bán chậm / cần clear.", true);
+      document.getElementById("tong-quan").scrollIntoView({behavior:"smooth"});
+    } catch(err){
+      showStatus("<b>Chưa đọc được file.</b> " + esc(err && err.message? err.message : err), false);
+    }
+  };
+  reader.onerror = function(){ showStatus("<b>Chưa đọc được file.</b> Trình duyệt không mở được file này — thử tải lại file từ email/Zalo rồi chọn lại.", false); };
+  reader.readAsArrayBuffer(file);
+}
+function exportExcel(){
+  if(typeof XLSX === "undefined"){ showStatus("<b>Chưa tải xuống được.</b> Thư viện Excel chưa sẵn sàng — kiểm tra mạng rồi tải lại trang.", false); return; }
+  var aoa = [["KẾ HOẠCH SKU " + META.period.toUpperCase() + " — KHO HCM01 (xuất từ Dashboard Quản trị Hàng hóa — Cung ứng)"],
+    ["STT","DÒNG","MSP","DANH MỤC SẢN PHẨM","ĐVT","Quy cách","Tải trọng","FC","FCBS","MIN","ROP","Tồn khả dụng","Nhập","Xuất","Về kho","Thùng","Tải trọng (kg)","","Tồn sau cung ứng","Cảnh báo trước cung ứng","Cảnh báo sau cung ứng","Đề xuất (CT)"]];
+  SKUS.forEach(function(s,i){
+    aoa.push([i+1, s[2], s[0], s[1], "Chai", +s[17]||1, +s[18]||0, +s[3]||0, +s[4]||0, +s[5]||0, +s[6]||0, +s[7]||0, +s[16]||0, +s[8]||0, +s[10]||0, Math.round((+s[11]||0)*100)/100, Math.round((+s[19]||0)*10)/10, "", +s[12]||0, s[14], s[15], +s[13]||0]);
+  });
+  var ws = XLSX.utils.aoa_to_sheet(aoa);
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "CUNG ỨNG VỀ KHO HCM");
+  XLSX.writeFile(wb, "CUNG_UNG_KHO_HCM_" + META.periodTag + "_" + META.year + ".xlsx");
+  showStatus("<b>Đã tải xuống file Excel</b> với số liệu đang hiển thị trên trang (" + SKUS.length + " mã, " + META.period + "). File này tải lên lại được ở chính ô này.", true);
+}
+var fileInput = document.getElementById("file-input");
+fileInput.addEventListener("change", function(){ handleFile(fileInput.files && fileInput.files[0]); fileInput.value = ""; });
+var dz = document.getElementById("dropzone");
+["dragenter","dragover"].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.add("drag"); }); });
+["dragleave","drop"].forEach(function(ev){ dz.addEventListener(ev, function(e){ e.preventDefault(); dz.classList.remove("drag"); }); });
+dz.addEventListener("drop", function(e){ var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; handleFile(f); });
+document.getElementById("btn-export").addEventListener("click", exportExcel);
+document.getElementById("btn-reset").addEventListener("click", function(){
+  SKUS = JSON.parse(JSON.stringify(DEFAULT_SKUS));
+  META = JSON.parse(JSON.stringify(DEFAULT_META));
+  document.getElementById("tasks-wrap").innerHTML = TASKS_HTML0;
+  renderAll(false);
+  document.getElementById("sku-source-note").textContent = "Lưu ý đối chiếu: cộng dồn nhu cầu còn lại theo từng SKU ở sheet “CUNG ỨNG VỀ KHO HCM T11” được 42.309,5, trong khi tổng quản trị ở sheet “DASHBOARD CUNG ỨNG T11” là 42.623 — chênh 313,5 do sheet tổng hợp phân nhóm lại một số mã (Hộp quà, TMĐT, Vivazz mở rộng). Trang này dùng 42.623 làm con số quản trị chính; khi rà soát từng mã, lấy số của chính mã đó ở bảng này.";
+  lsClear(); updateStorageNote(); showStatus("<b>Đã khôi phục số liệu gốc tháng 11/2026</b> (189 mã, chốt 19/11/2026) và xóa bản lưu tùy chỉnh trên thiết bị này.", true);
+});
+var bcs = document.getElementById("btn-clear-storage");
+if(bcs) bcs.addEventListener("click", function(){
+  lsClear(); updateStorageNote();
+  showStatus("<b>Đã xóa dữ liệu đã lưu trên thiết bị này.</b> Số đang hiển thị trên trang không đổi, nhưng lần mở trang sau sẽ quay về số gốc tháng 11/2026. Muốn giữ số hiện tại làm hồ sơ, hãy tải xuống file Excel trước khi đóng trang.", true);
+});
+var bdh = document.getElementById("btn-download-html");
+if(bdh) bdh.addEventListener("click", function(){
+  try{
+    var blob = new Blob(["<!doctype html>\n" + document.documentElement.outerHTML], {type:"text/html;charset=utf-8"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "sop-quan-tri-hang-hoa-cung-ung.html";
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 400);
+    showStatus("<b>Đã tải file HTML của trang.</b> Đây là file tĩnh duy nhất để tải lên host trong bước triển khai app nội bộ — xem mục “Lưu trữ dữ liệu và triển khai thành app nội bộ”.", true);
+  }catch(e){
+    showStatus("<b>Chưa tải được file HTML.</b> Trình duyệt đã chặn thao tác tải xuống — thử lại trên trình duyệt máy tính.", false);
+  }
+});
+lsLoad();
+TASKS_HTML0 = document.getElementById("tasks-wrap").innerHTML;
+renderAll(false);
+window.__lsReady = true;
+updateStorageNote();
+if(LS_LOADED){
+  showStatus("<b>Đã khôi phục số liệu đã lưu trên thiết bị này</b> — kỳ <b>" + META.period + "</b>, nguồn: " + esc(META.source) + ". Không cần tải lại file. Muốn quay về số mẫu, bấm “Khôi phục số gốc T11/2026” ở mục Cập nhật số liệu.", true);
+}
+
+
+</script>
+</body>
+</html>
